@@ -1,6 +1,9 @@
 name: Refresh market data
 on:
   workflow_dispatch:
+  push:
+    branches-ignore: [main]
+    paths: [common/edgar.py, .github/workflows/refresh-data.yml]
   schedule:
     - cron: "0 5 * * 1"   # Mondays 05:00 UTC
 permissions:
