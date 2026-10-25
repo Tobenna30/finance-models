@@ -41,3 +41,14 @@ def test_excel_forecasts_are_formulas(tmp_path):
     m = wb["Model"]
     formulas = [c.value for row in m.iter_rows(min_row=6, min_col=5, max_col=9) for c in row if c.value is not None]
     assert formulas and all(isinstance(v, str) and v.startswith("=") for v in formulas)
+
+
+def test_model_within_5pct_of_consensus_on_ebitda():
+    r = run(2)["r"]
+    for y in (2026, 2027, 2028):
+        assert abs(r["ebitda"][y] / A.CONSENSUS["Adjusted EBITDA"][y] - 1) < 0.05
+
+
+def test_comps_table_complete():
+    assert len(A.COMPS) >= 8
+    assert all(len(row) == 9 and 5 < row[6] < 60 for row in A.COMPS)

@@ -103,3 +103,36 @@ SCEN = {
     "tv_growth":   {1: 0.025,  2: 0.030, 3: 0.035},
 }
 SCEN_NAMES = {1: "Bear", 2: "Base", 3: "Bull"}
+
+# ---------- Trading comps (S: stockanalysis.com statistics pages, accessed 25 Oct 2026; prices 20–23 Oct 2026) ----------
+# Forward P/E = consensus next-year EPS basis; EV/EBITDA is trailing and on the data provider's own EBITDA
+# definition (not always adjusted) -> use forward P/E as the primary metric.
+COMPS_DATE = "Prices 20–23 Oct 2026; stockanalysis.com, accessed 25 Oct 2026"
+COMPS = [
+    # name, ticker, group, ccy, mkt cap (bn, local), EV (bn), fwd P/E, EV/EBITDA TTM, EBITDA margin
+    ("S&P Global", "SPGI", "Data & analytics", "USD", 130.54, 142.16, 23.99, 17.46, 0.5051),
+    ("Moody's", "MCO", "Data & analytics", "USD", 83.36, 89.36, 26.83, 22.07, 0.4952),
+    ("MSCI", "MSCI", "Data & analytics", "USD", 44.02, 50.65, 28.41, 25.09, 0.5881),
+    ("FactSet", "FDS", "Data & analytics", "USD", 11.68, 12.96, 16.89, 14.39, 0.3636),
+    ("RELX", "REL.L", "Data & analytics", "GBP", 52.87, 61.57, 20.33, 18.26, 0.3387),
+    ("Experian", "EXPN.L", "Data & analytics", "GBP", 26.78, 30.79, 20.48, 15.84, 0.3008),
+    ("Intercontinental Exchange", "ICE", "Exchanges & infrastructure", "USD", 91.36, 110.82, 19.58, 16.51, 0.6359),
+    ("Nasdaq", "NDAQ", "Exchanges & infrastructure", "USD", 57.33, 66.03, 22.45, 18.92, 0.6036),
+    ("CME Group", "CME", "Exchanges & infrastructure", "USD", 109.42, 110.95, 23.62, 22.46, 0.7103),
+    ("Deutsche Börse", "DB1.DE", "Exchanges & infrastructure", "EUR", 55.60, 60.39, 23.49, 17.50, 0.4319),
+    ("Euronext", "ENX.PA", "Exchanges & infrastructure", "EUR", 17.71, 19.55, 18.93, 15.59, 0.5906),
+]
+LSEG_SAME_SOURCE = {"price": 9490.0, "mkt_cap": 45.57, "ev": 57.25, "fwd_pe": 18.39, "ev_ebitda": 17.40}
+
+# ---------- Company-compiled analyst consensus (S: LSEG IR consensus page, compiled 13 Oct 2026, 12 analysts;
+# pre-dates the Octus announcement and the Q3 guidance upgrade) ----------
+CONSENSUS = {
+    "Data & Analytics": {2026: 4143, 2027: 4394, 2028: 4649},
+    "FTSE Russell": {2026: 1035, 2027: 1130, 2028: 1226},
+    "Risk Intelligence": {2026: 632, 2027: 701, 2028: 775},
+    "Markets": {2026: 3804, 2027: 4091, 2028: 4380},
+    "Total income excl. recoveries": {2026: 9622, 2027: 10324, 2028: 11038},
+    "Adjusted EBITDA": {2026: 4972, 2027: 5388, 2028: 5821},
+    "Adjusted EPS (p)": {2026: 480.6, 2027: 550.9, 2028: 615.5},
+    "DPS (p)": {2026: 167.3, 2027: 189.4, 2028: 209.9},
+}
