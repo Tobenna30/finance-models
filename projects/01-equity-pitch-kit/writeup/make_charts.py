@@ -46,3 +46,14 @@ for i, v in enumerate(vals): ax.text(i, v + 0.05, f"{v:.1f}%", ha="center", font
 ax.set_ylim(89, 93.6); ax.set_title("Revenue retention: reported vs priced in", fontsize=8, loc="left", color=NAVY, fontweight="bold")
 fig.tight_layout(); fig.savefig(OUT / "retention.png"); plt.close(fig)
 print("charts written", sorted(p.name for p in OUT.iterdir()))
+
+# 4. Tradeweb stake as % of LSEG market cap (weekly)
+from lseg.trackers import weekly
+w = weekly()
+fig, ax = plt.subplots(figsize=(3.6, 2.2), dpi=200)
+ax.plot(range(len(w)), [x["stake_pct"] * 100 for x in w], color=NAVY, lw=1.4)
+ticks = [i for i, x in enumerate(w) if x["date"][5:7] == "01" and int(x["date"][8:10]) <= 7]
+ax.set_xticks(ticks); ax.set_xticklabels([w[i]["date"][:4] for i in ticks])
+ax.set_ylabel("%"); ax.set_title("Tradeweb stake as % of LSEG market cap", fontsize=8, loc="left", color=NAVY, fontweight="bold")
+fig.tight_layout(); fig.savefig(OUT / "stake_share.png"); plt.close(fig)
+print("stake chart written")

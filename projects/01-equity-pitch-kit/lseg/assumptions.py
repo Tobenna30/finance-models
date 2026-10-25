@@ -236,3 +236,22 @@ CONSENSUS = {
     "Adjusted EPS (p)": {2026: 480.6, 2027: 550.9, 2028: 615.5},
     "DPS (p)": {2026: 167.3, 2027: 189.4, 2028: 209.9},
 }
+
+# ---------- Third-party industry evidence on AI and market data demand (S) ----------
+EVIDENCE = [
+    ("Burton-Taylor (TP ICAP), via FOW", "8 Apr 2026", "Industry spend data",
+     "Global financial market data spend reached $49.2bn in 2025, up 6.5%; AI, automated trading and volatility outweighed cost pressure.",
+     "Demand for data is still growing.", "https://www.fow.com/insights/market-data-spend-hits-usd49-2bn-as-ai-volatility-and-algos-drive-growth"),
+    ("Expand Research (BCG), via A-Team Insight", "20 Oct 2026", "Industry spend data",
+     "Market and reference data spend passed $50bn; a further 7% rise expected in 2026. Data teams manage 34% more vendors than four years ago.",
+     "Spend growth is broadening, not shrinking.", "https://a-teaminsight.com/blog/substantive-research-finds-ai-driving-market-data-costs-higher-as-investment-research-budgets-stall/"),
+    ("Crisil Coalition Greenwich and SIX, Market Data Study", "13 Oct 2026", "73 buy- and sell-side institutions",
+     "Market data spending could rise by more than 50% by 2027, driven largely by AI adoption; licences built for human users are mismatched to AI use.",
+     "AI increases data consumption and gives data owners pricing power.", "https://fintech.garden/news/2026-10-13-ai-expected-to-push-market-data-costs-up-more-than-50-by-2027-study-finds/"),
+    ("Substantive Research, via A-Team Insight", "20 Oct 2026", "50 asset managers, c.$20trn AUM",
+     "AI-related charges in 2026 vendor proposals ranged from $30k to $1m; some agreements could rise up to 50% in 2027. Research budgets rose only 0.4% in H1 2026; AI research tooling spend rose 40%.",
+     "Budgets are tight, so money moves from people and screens to data and AI tooling.", "https://a-teaminsight.com/blog/substantive-research-finds-ai-driving-market-data-costs-higher-as-investment-research-budgets-stall/"),
+    ("FactSet Q4 FY2026 results (8-K)", "30 Sep 2026", "Company filing",
+     "Organic ASV +7.0% to $2.57bn; ASV retention above 95%; AI solutions ASV more than doubled. FY27 guide: organic ASV +5.0% to 6.5%.",
+     "Even the purest 'AI loser' is not losing customers. Also a reason not to short it.", "https://www.sec.gov/Archives/edgar/data/0001013237/000162828026063888/fdsq42026earningsrelease.htm"),
+]

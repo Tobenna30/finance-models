@@ -29,7 +29,8 @@ Final direction is set by the model, not assumed.
 - **Divisional EBITDA** from LSEG's segment disclosure → group P&L, cash flow, buybacks, economic balance sheet (balances every year).
 - **Valuation:** DCF with live WACC × g grid; Tradeweb minority deducted at market P/E; SOTP on peer forward P/E; reverse DCF (retention, volumes, margins, terminal growth implied by the price); Bear/Base/Bull switch that flexes every driver.
 - **PM-proofing:** Tradeweb stub valuation (listed sub at market value); beta box (observed 0.41, Blume 0.60, used 0.85, with value sensitivity); 5-year trailing P/E history with chart; peak-volume normalisation in 2027; SEC EDGAR audited fundamentals for US peers, refreshed weekly by GitHub Actions.
-- **Checks:** model vs company-compiled consensus; long LSEG / short FactSet pair sizing.
+- **Evidence & trackers:** third-party industry studies on AI and data demand (Burton-Taylor, Expand/BCG, Coalition Greenwich & SIX, Substantive Research, FactSet filings); weekly hiring tracker (LSEG vs FactSet open roles by function, from Workday career sites); weekly Tradeweb-stake and LSEG-vs-FactSet tracker. All refreshed every Monday by GitHub Actions.
+- **Checks:** model vs company-compiled consensus; pair trade against FactSet considered and rejected (reasoning in the workbook).
 - **Engine parity:** `lseg/engine.py` reproduces every Excel number to the penny (tested after LibreOffice recalculation, including the scenario switch). CI tests: balance sheet, cash tie-out, history ties to reported totals, 2026 inside guidance, consensus proximity, formulas-only forecasts.
 
 **Limitations:** 2023 history at group level only (sub-lines not disclosed on today's basis); peer multiples from a third-party site; Octus margin and close date are assumptions.

@@ -7,6 +7,8 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter as CL
 from . import assumptions as A
 from .engine import run, sotp, solve, stub, pe_history, beta_sensitivity, KEYS, DIV_OF
+from .trackers import hiring, weekly
+from openpyxl.chart import BarChart
 import csv
 from openpyxl.chart import LineChart, Reference
 
@@ -25,7 +27,8 @@ inp = wb.create_sheet("Inputs"); dv = wb.create_sheet("Divisions"); qs = wb.crea
 mdl = wb.create_sheet("Model"); dcf = wb.create_sheet("DCF"); sot = wb.create_sheet("SOTP")
 cmp_ = wb.create_sheet("Comps"); cs = wb.create_sheet("vs Consensus"); rev = wb.create_sheet("Reverse DCF")
 scn = wb.create_sheet("Scenarios"); pair = wb.create_sheet("Pair trade"); stb = wb.create_sheet("Stub ex-Tradeweb", 7)
-hist = wb.create_sheet("Valuation history", 8); src = wb.create_sheet("Sources")
+hist = wb.create_sheet("Valuation history", 8); ev = wb.create_sheet("Industry evidence", 9); trk = wb.create_sheet("Trackers", 10)
+src = wb.create_sheet("Sources")
 
 def title(ws, t, sub=None):
     ws["A1"] = t; ws["A1"].font = Font(bold=True, size=14)
@@ -512,7 +515,7 @@ scn.column_dimensions["A"].width = 34
 
 # =============== Pair trade ===============
 P_ = A.PAIR
-title(pair, "Trade expression: long LSEG / short FactSet", "Isolates the 'market prices LSEG like FactSet' view and removes most market and sector beta.")
+title(pair, "Trade expression: long LSEG / short FactSet (considered and rejected)", "Would isolate the AI-discount view and remove market beta. See the read below for why the outright long is preferred.")
 prow = [("LSEG beta (5y)", P_["lseg_beta"], "0.00"), ("FactSet beta (5y)", P_["fds_beta"], "0.00"),
         ("Beta-neutral hedge: £ FactSet short per £1 LSEG long", "=B5/B6", "0.00"),
         ("LSEG forward P/E", P_["lseg_fwd_pe"], X), ("FactSet forward P/E", P_["fds_fwd_pe"], X),
@@ -521,8 +524,8 @@ prow = [("LSEG beta (5y)", P_["lseg_beta"], "0.00"), ("FactSet beta (5y)", P_["f
 for i, (lab, v, fmt) in enumerate(prow, start=5):
     pair.cell(i, 1, lab); c = pair.cell(i, 2, v); c.number_format = fmt
     if not str(v).startswith("="): c.font = BLUE
-pair["A15"] = "Read: LSEG trades only c.9% above FactSet although over half its income is exchange, index and risk-data revenue."
-pair["A16"] = "Risk: FactSet short interest is c.9% of float, a crowded short. Size small and set a stop on the price ratio."
+pair["A15"] = "Read: the pair has already worked. Since Jan 2024 LSEG has beaten FactSet by c.53% in GBP (Trackers sheet), and FactSet ASV grew 7% with retention above 95%."
+pair["A16"] = "Conclusion: prefer the outright long. FactSet short interest is c.9% of float, so the short leg carries squeeze risk with little valuation support left."
 pair.column_dimensions["A"].width = 56
 
 # =============== Stub ex-Tradeweb (live) ===============
@@ -582,6 +585,52 @@ if edgar_path.exists():
                 if j == 7: c.number_format = "0.00"
             cmp_.cell(i, 5, f"=D{i}/C{i}").number_format = PCT
     cmp_.cell(i + 1, 1, "Source: data.sec.gov XBRL company facts, refreshed weekly by GitHub Actions (common/edgar.py). D&A not used: XBRL tagging differs across filers.")
+
+# =============== Industry evidence ===============
+title(ev, "What third-party data says about AI and market-data demand", "Credible industry studies and filings, Apr–Oct 2026. These inform the retention and scenario assumptions; they are not inputs to formulas.")
+for j, h in enumerate(["Source", "Date", "Sample", "Finding", "Read for LSEG", "Link"], start=1): hdr(ev, 4, j, h)
+for i, row_ in enumerate(A.EVIDENCE, start=5):
+    for j, v in enumerate(row_, start=1):
+        c = ev.cell(i, j, v); c.alignment = Alignment(wrap_text=True, vertical="top")
+for col, wdt in zip("ABCDEF", [30, 12, 22, 70, 40, 40]): ev.column_dimensions[col].width = wdt
+
+# =============== Trackers (refreshed weekly by GitHub Actions) ===============
+hg = hiring(); wk = weekly()
+title(trk, "Trackers: hiring mix and the Tradeweb stub", "Data in /data, refreshed every Monday by .github/workflows/refresh-data.yml (Workday career sites; weekly prices).")
+trk["A4"] = f"Open roles by function, snapshot {hg['date']}"; trk["A4"].font = BOLD
+cos = list(hg["snap"])
+hdr(trk, 5, 1, "Function")
+for j, co in enumerate(cos):
+    hdr(trk, 5, 2 + 2 * j, co); hdr(trk, 5, 3 + 2 * j, f"{co} %")
+for i, cat in enumerate(hg["cats"], start=6):
+    trk.cell(i, 1, cat)
+    for j, co in enumerate(cos):
+        n = hg["snap"][co].get(cat, 0); c1 = trk.cell(i, 2 + 2 * j, n)
+        tot_r = 6 + len(hg["cats"])
+        trk.cell(i, 3 + 2 * j, f"={CL(2+2*j)}{i}/{CL(2+2*j)}{tot_r}").number_format = PCT
+tot_r = 6 + len(hg["cats"]); trk.cell(tot_r, 1, "Total").font = BOLD
+for j, _ in enumerate(cos):
+    trk.cell(tot_r, 2 + 2 * j, f"=SUM({CL(2+2*j)}6:{CL(2+2*j)}{tot_r-1})").font = BOLD
+bc = BarChart(); bc.type = "bar"; bc.title = "Share of open roles by function"; bc.height, bc.width = 8, 14
+for j, _ in enumerate(cos):
+    bc.add_data(Reference(trk, min_col=3 + 2 * j, min_row=5, max_row=tot_r - 1), titles_from_data=True)
+bc.set_categories(Reference(trk, min_col=1, min_row=6, max_row=tot_r - 1)); trk.add_chart(bc, "H4")
+w0 = tot_r + 3
+trk.cell(w0 - 1, 1, "Weekly: Tradeweb stake as % of LSEG market cap, and LSEG vs FactSet relative price in GBP (Jan 2024 = 100)").font = BOLD
+for j, h in enumerate(["Week", "LSEG (p)", "Tradeweb ($)", "FactSet ($)", "GBPUSD", "Tradeweb stake % of LSEG", "LSEG vs FactSet (rebased)"], start=1): hdr(trk, w0, j, h)
+for i, x in enumerate(wk, start=w0 + 1):
+    vals = [x["date"], x["lseg"], x["tw"], x["fds"], x["gbpusd"], x["stake_pct"], x["rel"]]
+    for j, v in enumerate(vals, start=1):
+        c = trk.cell(i, j, v); c.number_format = ["@", P0, "0.00", "0.00", "0.0000", PCT, "0.0"][j - 1]
+wl = w0 + len(wk)
+lc1 = LineChart(); lc1.title = "Tradeweb stake as % of LSEG market cap"; lc1.height, lc1.width = 7, 14
+lc1.add_data(Reference(trk, min_col=6, min_row=w0, max_row=wl), titles_from_data=True); lc1.set_categories(Reference(trk, min_col=1, min_row=w0 + 1, max_row=wl))
+trk.add_chart(lc1, f"I{w0}")
+lc2 = LineChart(); lc2.title = "LSEG vs FactSet, GBP, Jan 2024 = 100"; lc2.height, lc2.width = 7, 14
+lc2.add_data(Reference(trk, min_col=7, min_row=w0, max_row=wl), titles_from_data=True); lc2.set_categories(Reference(trk, min_col=1, min_row=w0 + 1, max_row=wl))
+trk.add_chart(lc2, f"I{w0+16}")
+trk.cell(wl + 2, 1, "Tradeweb share count held at the latest 10-Q; LSEG share count interpolated between disclosed points. Prices: Yahoo Finance chart endpoint.")
+trk.column_dimensions["A"].width = 22
 
 # =============== Sources & Cover ===============
 title(src, "Sources")

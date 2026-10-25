@@ -16,12 +16,13 @@ COMPANIES = {   # name: list of candidate Workday (host, tenant, site); first th
                 ("factset.wd108.myworkdayjobs.com", "factset", "FactSetCareers")],
 }
 CATEGORIES = [   # first match wins, so order matters
-    ("AI & data science", r"\b(ai|artificial intelligence|machine learning|ml|genai|llm|data scien|nlp|prompt)\b"),
-    ("Engineering", r"engineer|developer|software|devops|sre|architect|cloud|platform|technolog|security|qa\b|test"),
-    ("Sales & client", r"sales|account (manager|executive|director)|client|business development|relationship|customer success|pre-?sales|specialist sales"),
-    ("Content & data ops", r"content|data analyst|data operations|research|editor|journalist|analyst"),
+    ("AI & data science", r"\bai\b|artificial intelligence|machine learning|\bml\b|genai|\bllm|data scien|\bnlp\b|prompt"),
+    ("Sales & client", r"sales|account (manager|executive|director)|client|business development|relationship|customer s|go-to-market|\bgtm\b|business director"),
+    ("Engineering", r"engineer|developer|software|devops|\bsre\b|architect|cloud|platform|technolog|security|\bqa\b|test|c\+\+|servicenow|oracle|development manager"),
+    ("Content & data ops", r"content|data analyst|data operations|research|editor|journalist|reporter|data steward|pricing|valuation|quantitative"),
     ("Product", r"product"),
-    ("Corporate", r"finance|legal|hr\b|human resources|recruit|compliance|risk|audit|tax|treasury|procurement|marketing|communications"),
+    ("Operations", r"operations|clearing|onboarding|service|support|billing|kyc|supervision|resilience|live service|delivery|pmo|project|migration|integration"),
+    ("Corporate", r"financ|accounting|controller|legal|\bhr\b|human resources|people|recruit|compliance|risk|audit|tax|treasury|procurement|marketing|communications|secretariat|reporting|vendor|records"),
 ]
 
 
