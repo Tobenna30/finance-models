@@ -336,6 +336,76 @@ scn["A18"] = "Bear: AI substitutes for terminal/workflow seats → D&A growth st
 scn["A19"] = "Bull: AI-ready data licensing (LSEG Everywhere, MCP) re-accelerates D&A; Octus + Markets compound; margin expansion continues."
 scn.column_dimensions["A"].width = 40
 
+# ---------------- Comps ----------------
+cmp_ = wb.create_sheet("Comps", 4)
+cmp_["A1"] = "LSEG – Trading comparables"; cmp_["A1"].font = Font(bold=True, size=14)
+cmp_["A2"] = A.COMPS_DATE + ". Forward P/E is the primary metric (consistent consensus basis); EV/EBITDA is trailing, provider-defined."
+hd = ["Company", "Ticker", "Peer group", "Ccy", "Mkt cap (bn)", "EV (bn)", "Fwd P/E", "EV/EBITDA TTM", "EBITDA margin"]
+for j, h in enumerate(hd, start=1):
+    c = cmp_.cell(4, j, h); c.font = HDRF; c.fill = HDR
+fmts = [None, None, None, None, '0.0', '0.0', X, X, PCT]
+for i, rowv in enumerate(A.COMPS, start=5):
+    for j, v in enumerate(rowv, start=1):
+        c = cmp_.cell(i, j, v)
+        if j >= 5: c.font = BLUE; c.number_format = fmts[j - 1]
+last = 4 + len(A.COMPS)
+rng = lambda col: f"{col}5:{col}{last}"
+stats = [("Median – all peers", "MEDIAN"), ("Mean – all peers", "AVERAGE"), ("Max", "MAX"), ("Min", "MIN")]
+r0 = last + 2
+for k, (lab, fn) in enumerate(stats):
+    cmp_.cell(r0 + k, 1, lab).font = BOLD
+    for col in "GHI":
+        c = cmp_[f"{col}{r0+k}"]; c.value = f"={fn}({rng(col)})"; c.number_format = PCT if col == "I" else X
+g = r0 + len(stats)
+for k, grp in enumerate(["Data & analytics", "Exchanges & infrastructure"]):
+    cmp_.cell(g + k, 1, f"Median – {grp}").font = BOLD
+    for col in "GH":
+        # MEDIAN(IF()) array formula
+        rows_g = [i for i, rv in enumerate(A.COMPS, start=5) if rv[2] == grp]
+        cmp_[f"{col}{g+k}"] = f"=MEDIAN({col}{min(rows_g)}:{col}{max(rows_g)})"   # peers listed grouped
+        cmp_[f"{col}{g+k}"].number_format = X
+lr = g + 3
+L_ = A.LSEG_SAME_SOURCE
+cmp_.cell(lr, 1, "LSEG (same source)").font = BOLD
+for col, v, f in [("E", L_["mkt_cap"], '0.0'), ("F", L_["ev"], '0.0'), ("G", L_["fwd_pe"], X), ("H", L_["ev_ebitda"], X)]:
+    c = cmp_[f"{col}{lr}"]; c.value = v; c.font = BLUE; c.number_format = f
+cmp_.cell(lr, 4, "GBP")
+cmp_.cell(lr + 1, 1, "LSEG discount to peer median (fwd P/E)")
+cmp_[f"G{lr+1}"] = f"=G{lr}/G{r0}-1"; cmp_[f"G{lr+1}"].number_format = PCT
+cmp_.cell(lr + 3, 1, "Implied LSEG value per share (p)").font = BOLD
+cmp_.cell(lr + 4, 1, "  LSEG price on same source (p)"); cmp_[f"B{lr+4}"] = L_["price"]; cmp_[f"B{lr+4}"].font = BLUE; cmp_[f"B{lr+4}"].number_format = P0
+impl = [("  at all-peer median fwd P/E", f"=B{lr+4}*G{r0}/G{lr}"),
+        ("  at data & analytics median", f"=B{lr+4}*G{g}/G{lr}"),
+        ("  at exchanges median", f"=B{lr+4}*G{g+1}/G{lr}"),
+        ("  at peer minimum (bear cross-check)", f"=B{lr+4}*G{r0+3}/G{lr}")]
+for k, (lab, f) in enumerate(impl):
+    cmp_.cell(lr + 5 + k, 1, lab); cmp_[f"B{lr+5+k}"] = f; cmp_[f"B{lr+5+k}"].number_format = P0
+cmp_.cell(lr + 10, 1, "Read: LSEG trades at a discount to both data and exchange peers, closest to FactSet – the market is pricing it as an AI-exposed terminal business, although c.half of income is Markets, FTSE Russell and Risk Intelligence.")
+cmp_.column_dimensions["A"].width = 40; cmp_.column_dimensions["C"].width = 26
+for col in "EFGHI": cmp_.column_dimensions[col].width = 13
+
+# ---------------- Model vs consensus ----------------
+cs = wb.create_sheet("vs Consensus", 5)
+cs["A1"] = "LSEG – Model vs company-compiled consensus"; cs["A1"].font = Font(bold=True, size=14)
+cs["A2"] = "Consensus: LSEG IR, compiled 13 Oct 2026 (12 analysts) – before the Octus deal and Q3 guidance upgrade. Model figures are live links."
+CY = [2026, 2027, 2028]
+hdr = ["Line"] + [f"Model {y}" for y in CY] + [f"Cons {y}" for y in CY] + [f"Diff {y}" for y in CY]
+for j, h in enumerate(hdr, start=1):
+    c = cs.cell(4, j, h); c.font = HDRF; c.fill = HDR
+mp = [("Data & Analytics", "Data & Analytics", M), ("FTSE Russell", "FTSE Russell", M),
+      ("Risk Intelligence", "Risk Intelligence", M), ("Markets", "Markets", M),
+      ("Total income excl. recoveries", "tot", M), ("Adjusted EBITDA", "ebitda", M),
+      ("Adjusted EPS (p)", "eps", P1), ("DPS (p)", "dps", P1)]
+for i, (lab, key, fmt) in enumerate(mp, start=5):
+    cs.cell(i, 1, lab)
+    for j, y in enumerate(CY):
+        m_ = cs.cell(i, 2 + j, f"=Model!{COLS[y]}{R[key]}"); m_.font = GREEN; m_.number_format = fmt
+        c_ = cs.cell(i, 5 + j, A.CONSENSUS[lab][y]); c_.font = BLUE; c_.number_format = fmt
+        d_ = cs.cell(i, 8 + j, f"={L(2+j)}{i}/{L(5+j)}{i}-1"); d_.number_format = PCT
+cs["A14"] = "Read: model sits close to consensus on income and EBITDA; EPS a little above (lower NCI drag, buyback timing). The variant view is in the multiple, not the numbers."
+cs.column_dimensions["A"].width = 32
+for k in range(2, 11): cs.column_dimensions[L(k)].width = 11
+
 # ---------------- Sources & Cover ----------------
 src["A1"] = "Sources"; src["A1"].font = Font(bold=True, size=14)
 for i, (k, v) in enumerate(A.SOURCES.items(), start=3): src[f"A{i}"], src[f"B{i}"] = k, v
@@ -352,6 +422,8 @@ items = [("Scenario selected", f"=CHOOSE({I['Scenario']},\"Bear\",\"Base\",\"Bul
          ("2026E adj EPS (p)", f"=Model!{COLS[2026]}{R['eps']}", P1),
          ("2027E P/E", "=DCF!B28", X),
          ("Net debt / EBITDA 2027E", f"=Model!{COLS[2027]}{R['lev']}", X),
+         ("Peer median fwd P/E", f"=Comps!G{r0}", X),
+         ("Implied value at peer median (p)", f"=Comps!B{lr+5}", P0),
          ("Balance sheet checks (sum, should be 0)", f"=SUM(Model!{COLS[2025]}{R['check']}:Model!{COLS[2030]}{R['check']})", '0.000')]
 for i, (lab, f, fmt) in enumerate(items, start=5):
     cover[f"A{i}"], cover[f"B{i}"] = lab, f; cover[f"B{i}"].font = GREEN

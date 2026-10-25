@@ -22,19 +22,22 @@ Final direction is set by the model, not assumed.
 | 2026E / 2027E adj EPS | 494p / 563p |
 | 2027E P/E at current price | 16.9x |
 | Net debt / EBITDA 2027E (post-Octus) | 2.1x |
+| Peer median forward P/E vs LSEG | 22.5x vs 18.4x (**18% discount**) |
+| Implied value at peer median | ~11,590p (+22%) |
+| Model vs consensus (2026–28 EBITDA) | within ±2% |
 
-**Structure:** Inputs (every number tagged sourced / assumption / derived) → divisional revenue build (Data & Analytics, FTSE Russell, Risk Intelligence, Markets, Octus) → adjusted P&L with reported bridge → cash flow → share count & buybacks → economic balance sheet (clearing balances excluded) → DCF with live WACC × terminal-growth sensitivity → Bear/Base/Bull scenarios. Change `Inputs!Scenario` to flex the whole model.
+**Structure:** Inputs (every number tagged sourced / assumption / derived) → divisional revenue build (Data & Analytics, FTSE Russell, Risk Intelligence, Markets, Octus) → adjusted P&L with reported bridge → cash flow → share count & buybacks → economic balance sheet (clearing balances excluded) → DCF with live WACC × terminal-growth sensitivity → trading comps (11 data & exchange peers) → model vs company-compiled consensus → Bear/Base/Bull scenarios. Change `Inputs!Scenario` to flex the whole model.
 
 **Calibrated to company guidance:** 2026 equity FCF ≥ £2.8bn, EBITDA margin +100–120bp, capex c.9.5% of income, leverage at the upper end of 1.5–2.5x after Octus.
 
 **How it's built:** `lseg/assumptions.py` holds every input; `lseg/engine.py` is a pure-Python version of the model; `lseg/build_excel.py` writes the formula-driven workbook. CI checks that the balance sheet balances, cash ties, scenarios are ordered, and 2026 outputs sit inside guidance.
 
-**Known limitations (next iterations):** trading comps not yet populated; Tradeweb minority valued at a flat P/E rather than market value; Octus margin/close date are assumptions (not disclosed); no 2023 historicals yet.
+**Known limitations (next iterations):** comps use third-party multiples (forward P/E primary; trailing EV/EBITDA definitions vary); Tradeweb minority valued at a flat P/E rather than market value; Octus margin/close date are assumptions (not disclosed); no 2023 historicals yet.
 
 ## Status
 - [x] Data collection (FY25 results, H1 2026, Q3 2026 update, Octus deal)
 - [x] LSEG model
-- [ ] LSEG trading comps
+- [x] LSEG trading comps + consensus check
 - [ ] LSEG 2-page pitch
 - [ ] Rolls-Royce model
 - [ ] Rolls-Royce pitch
