@@ -1,0 +1,34 @@
+name: Refresh market data
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"   # Mondays 05:00 UTC
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  edgar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pull SEC EDGAR fundamentals for US peers
+        run: python -m common.edgar
+      - name: Commit refreshed data to a branch and open a PR if anything changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- data/; then echo "No data changes"; exit 0; fi
+          BR="data-refresh-$(date +%Y%m%d)"
+          if [ "${GITHUB_REF_NAME}" != "main" ]; then BR="${GITHUB_REF_NAME}"; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BR"
+          git add data/
+          git commit -m "Refresh SEC EDGAR peer fundamentals"
+          git push origin "$BR"
+          if [ "$BR" != "${GITHUB_REF_NAME}" ]; then
+            gh pr create --base main --head "$BR" --title "Weekly data refresh $(date +%Y-%m-%d)" --body "Automated refresh of SEC EDGAR fundamentals. Review the diff, then merge." || true
+          fi
