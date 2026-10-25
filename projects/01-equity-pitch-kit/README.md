@@ -38,6 +38,6 @@ Final direction is set by the model, not assumed.
 - [x] Data collection (FY25 results, H1 2026, Q3 2026 update, Octus deal)
 - [x] LSEG model
 - [x] LSEG trading comps + consensus check
-- [ ] LSEG 2-page pitch
+- [x] LSEG 2-page pitch ([PDF](writeup/LSEG_pitch.pdf), [text](writeup/LSEG_pitch.md))
 - [ ] Rolls-Royce model
 - [ ] Rolls-Royce pitch
