@@ -16,17 +16,21 @@ Final direction is set by the model, not assumed.
 
 | Price 9,510p (23 Oct 2026) | Value | vs price |
 |---|---:|---:|
-| Price target (50% DCF / 50% SOTP) | 10,870p | +14% |
-| DCF base / bear / bull | 10,250p / 7,580p / 12,610p | +8% / −20% / +33% |
-| Sum of the parts (peer forward P/E by division) | 11,480p | +21% |
-| Retention implied by the share price | 89.8% | vs 92.8% reported |
+| Price target (50% DCF / 50% SOTP) | 10,680p | +12% |
+| SOTP (peer forward P/E by division) | 11,480p | +21% |
+| DCF base / bear / bull | 9,880p / 7,260p / 12,180p | +4% / −24% / +28% |
+| LSEG ex-Tradeweb forward P/E | 16.6x | vs FactSet 16.9x |
+| Trailing P/E vs 5-year average | 19.8x | vs 25.3x |
+| Retention implied by the share price | 91.3% | vs 92.8% reported |
 
 **What makes it a professional build**
 - **Quarterly anchor:** 14 income lines, Q1 2025 to Q3 2026 actuals; 2026E = 9M actual + Q4E.
 - **Driver-based forecasts:** subscription income from ASV growth = gross sales + price − churn (retention); FTSE Russell asset-based = ETF AUM × yield; FIDO = Tradeweb ADV × capture; OTC = SwapClear notional × capture; NTI = cash collateral × spread.
 - **Divisional EBITDA** from LSEG's segment disclosure → group P&L, cash flow, buybacks, economic balance sheet (balances every year).
 - **Valuation:** DCF with live WACC × g grid; Tradeweb minority deducted at market P/E; SOTP on peer forward P/E; reverse DCF (retention, volumes, margins, terminal growth implied by the price); Bear/Base/Bull switch that flexes every driver.
-- **Checks:** model vs company-compiled consensus (within 3%); long LSEG / short FactSet pair sizing.
+- **PM-proofing:** Tradeweb stub valuation (listed sub at market value); beta box (observed 0.41, Blume 0.60, used 0.85, with value sensitivity); 5-year trailing P/E history with chart; peak-volume normalisation in 2027; SEC EDGAR audited fundamentals for US peers, refreshed weekly by GitHub Actions.
+- **Evidence & trackers:** third-party industry studies on AI and data demand (Burton-Taylor, Expand/BCG, Coalition Greenwich & SIX, Substantive Research, FactSet filings); weekly hiring tracker (LSEG vs FactSet open roles by function, from Workday career sites); weekly Tradeweb-stake and LSEG-vs-FactSet tracker. All refreshed every Monday by GitHub Actions.
+- **Checks:** model vs company-compiled consensus; pair trade against FactSet considered and rejected (reasoning in the workbook).
 - **Engine parity:** `lseg/engine.py` reproduces every Excel number to the penny (tested after LibreOffice recalculation, including the scenario switch). CI tests: balance sheet, cash tie-out, history ties to reported totals, 2026 inside guidance, consensus proximity, formulas-only forecasts.
 
 **Limitations:** 2023 history at group level only (sub-lines not disclosed on today's basis); peer multiples from a third-party site; Octus margin and close date are assumptions.

@@ -6,7 +6,11 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter as CL
 from . import assumptions as A
-from .engine import run, sotp, solve, KEYS, DIV_OF
+from .engine import run, sotp, solve, stub, pe_history, beta_sensitivity, KEYS, DIV_OF
+from .trackers import hiring, weekly
+from openpyxl.chart import BarChart
+import csv
+from openpyxl.chart import LineChart, Reference
 
 BLUE, GREEN, BOLD = Font(color="0000FF"), Font(color="008000"), Font(bold=True)
 HDR, HDRF = PatternFill("solid", fgColor="1F3864"), Font(bold=True, color="FFFFFF")
@@ -22,7 +26,9 @@ cover = wb.active; cover.title = "Cover"
 inp = wb.create_sheet("Inputs"); dv = wb.create_sheet("Divisions"); qs = wb.create_sheet("Quarterly")
 mdl = wb.create_sheet("Model"); dcf = wb.create_sheet("DCF"); sot = wb.create_sheet("SOTP")
 cmp_ = wb.create_sheet("Comps"); cs = wb.create_sheet("vs Consensus"); rev = wb.create_sheet("Reverse DCF")
-scn = wb.create_sheet("Scenarios"); pair = wb.create_sheet("Pair trade"); src = wb.create_sheet("Sources")
+scn = wb.create_sheet("Scenarios"); pair = wb.create_sheet("Pair trade"); stb = wb.create_sheet("Stub ex-Tradeweb", 7)
+hist = wb.create_sheet("Valuation history", 8); ev = wb.create_sheet("Industry evidence", 9); trk = wb.create_sheet("Trackers", 10)
+src = wb.create_sheet("Sources")
 
 def title(ws, t, sub=None):
     ws["A1"] = t; ws["A1"].font = Font(bold=True, size=14)
@@ -141,11 +147,19 @@ scalar("Octus debt rate", o["debt_rate"], "%", "A", "", PCT)
 section("Valuation")
 d_ = A.DCF
 scalar("Risk-free rate", d_["rf"], "%", "A", "UK 10y gilt area", PCT)
-scalar("Beta", d_["beta"], "x", "A", "", "0.00")
+scalar("Beta", d_["beta"], "x", "A", "Conservative: above observed 0.41 and Blume 0.60. See DCF sheet for sensitivity.", "0.00")
 scalar("Equity risk premium", d_["erp"], "%", "A", "", PCT)
 scalar("Pre-tax cost of debt", d_["kd_pre"], "%", "A", "", PCT)
 scalar("Debt weight", d_["debt_weight"], "%", "A", "Target D/(D+E)", PCT)
-scalar("Tradeweb forward P/E", d_["tw_fwd_pe"], "x", "S", "Applied to the NCI share of earnings (market value of the minority)", X)
+scalar("Beta (observed, 5y)", A.BETA_OBSERVED, "x", "S", "stockanalysis.com; shown for reference", "0.00")
+scalar("Beta (Blume-adjusted)", A.BETA_BLUME, "x", "D", "0.67 × observed + 0.33", "0.00")
+
+section("Tradeweb (listed subsidiary)")
+scalar("Tradeweb share price", A.TW_PRICE_USD, "$", "S", "Close 22 Oct 2026", "0.00")
+scalar("Tradeweb shares", A.TW_SHARES_M, "m", "S", "Class A+B+C+D, Tradeweb 10-Q filed 30 Jul 2026", "0.00")
+scalar("Tradeweb forward P/E", A.TW_FWD_PE, "x", "S", "stockanalysis.com", X)
+scalar("LSEG economic interest in Tradeweb", A.LSEG_TW_ECON, "%", "S", "Tradeweb 10-Q, 30 Jun 2026", PCT)
+scalar("LSEG shares outstanding", A.LSEG_MKT_SHARES, "m", "S", "stockanalysis.com", "0.00")
 inp.column_dimensions["A"].width = 44; inp.column_dimensions["E"].width = 72
 for c in "BCDFGHIJ": inp.column_dimensions[c].width = 11
 
@@ -361,7 +375,7 @@ lc = CL(1 + len(DY)); lm = COLS[DY[-1]]
 val = [("Sum of PV of FCF", f"=SUM(B12:{lc}12)", M), ("Terminal value (Gordon)", f"={lc}10*(1+B6)/(B5-B6)", M),
        ("PV of terminal value", f"=B16/(1+B5)^({lc}9-0.5)", M), ("Enterprise value", "=B15+B17", M),
        ("Less: net debt (end-2026)", f"=-Model!{COLS[2026]}{R['nd']}", M),
-       ("Less: Tradeweb minority at market P/E", f"=-Model!{COLS[2026]}{R['nci']}*{I['Tradeweb forward P/E']}", M),
+       ("Less: Tradeweb minority at market value", f"=-{I['Tradeweb share price']}*{I['Tradeweb shares']}*(1-{I['LSEG economic interest in Tradeweb']})/{I['GBPUSD']}", M),
        ("Equity value", "=B18+B19+B20", M), ("Shares (end-2026, m)", f"=Model!{COLS[2026]}{R['sh_close']}", "0.0"),
        ("Fair value per share (p)", "=B21/B22*100", P0), ("Current share price (p)", f"={I['Share price']}", P0),
        ("Upside / (downside)", "=B23/B24-1", PCT), ("TV as % of EV", "=B17/B18", PCT),
@@ -379,7 +393,17 @@ for i, w in enumerate(wsh):
         pvf = f"SUMPRODUCT($B$10:${lc}$10/(1+{wc})^($B$9:${lc}$9-0.5))"
         tv = f"${lc}$10*(1+{gc})/({wc}-{gc})/(1+{wc})^(${lc}$9-0.5)"
         dcf[f"{CL(5+j)}{rr}"] = f"=({pvf}+{tv}+$B$19+$B$20)/$B$22*100"; dcf[f"{CL(5+j)}{rr}"].number_format = P0
-dcf.column_dimensions["A"].width = 40; dcf.column_dimensions["B"].width = 12; dcf.column_dimensions["D"].width = 12
+bs = beta_sensitivity()
+dcf["D23"] = "Beta check"; dcf["D23"].font = BOLD
+dcf["D24"], dcf["E24"] = "Observed 5y beta", f"={I['Beta (observed, 5y)']}"
+dcf["D25"], dcf["E25"] = "Blume-adjusted", f"={I['Beta (Blume-adjusted)']}"
+dcf["D26"], dcf["E26"] = "Used in WACC", f"={I['Beta']}"
+for rr in (24, 25, 26): dcf[f"E{rr}"].number_format = "0.00"
+dcf["D28"] = "DCF value (p) by beta, base case (engine snapshot)"; dcf["D28"].font = BOLD
+for j, (b, v) in enumerate(bs.items()):
+    dcf.cell(29, 5 + j, b).number_format = "0.00"; dcf.cell(30, 5 + j, v).number_format = P0
+dcf["D29"], dcf["D30"] = "Beta", "Value (p)"
+dcf.column_dimensions["A"].width = 40; dcf.column_dimensions["B"].width = 12; dcf.column_dimensions["D"].width = 22
 
 # =============== Comps ===============
 title(cmp_, "LSEG – Trading comparables", A.COMPS_DATE + ". Forward P/E is the primary metric; trailing EV/EBITDA uses each provider's own EBITDA definition.")
@@ -392,7 +416,7 @@ for i, rv in enumerate(A.COMPS, start=5):
         c = cmp_.cell(i, j, v)
         if j >= 5: c.font = BLUE; c.number_format = fm[j - 1]
 last = 4 + len(A.COMPS); r0 = last + 2
-for k, (lab, fn) in enumerate([("Median – all peers", "MEDIAN"), ("Mean", "AVERAGE"), ("Max", "MAX"), ("Min", "MIN")]):
+for k, (lab, fn) in enumerate([("Median – all peers", "MEDIAN"), ("Mean", "AVERAGE"), ("Max", "MAX"), ("Min", "MIN")]):  # noqa
     cmp_.cell(r0 + k, 1, lab).font = BOLD
     for col in "GHI": cmp_[f"{col}{r0+k}"] = f"={fn}({col}5:{col}{last})"; cmp_[f"{col}{r0+k}"].number_format = PCT if col == "I" else X
 LS = A.LSEG_SAME_SOURCE; lr = r0 + 5
@@ -456,7 +480,7 @@ title(rev, "LSEG – What is priced in (reverse DCF)", "Snapshot from lseg/engin
 for j, h in enumerate(["Driver (2027–2030)", "Base case", "Implied by share price", "Change needed", "Context"], start=1): hdr(rev, 4, j, h)
 ra = solve("retention_adj", -0.06, 0.03); mv = solve("mkt_vol_adj", -0.20, 0.05); ma = solve("margin_adj", -0.03, 0.01); tg = solve("tv_growth", 0.0, 0.05)
 rows_ = [("Revenue retention", A.RETENTION[1], A.RETENTION[1] + ra, ra, "Lowest disclosed level is 92.4% (Dec 2025)"),
-         ("Tradeweb ADV growth (all volume drivers shift together)", A.TW_ADV_GROWTH[1], A.TW_ADV_GROWTH[1] + mv, mv, "Volumes broadly flat for four years"),
+         ("Markets volume growth, all drivers (shown on 2028 ADV growth)", A.TW_ADV_GROWTH[2], A.TW_ADV_GROWTH[2] + mv, mv, "Volumes shrink in real terms after a flat 2027"),
          ("Divisional margin change per year", 0.0, ma, ma, "Margins falling every year from here"),
          ("Terminal growth", A.SCEN["tv_growth"][2], tg, tg - A.SCEN["tv_growth"][2], "Below UK nominal GDP")]
 for i, (lab, b, im, ch, note) in enumerate(rows_, start=5):
@@ -491,7 +515,7 @@ scn.column_dimensions["A"].width = 34
 
 # =============== Pair trade ===============
 P_ = A.PAIR
-title(pair, "Trade expression: long LSEG / short FactSet", "Isolates the 'market prices LSEG like FactSet' view and removes most market and sector beta.")
+title(pair, "Trade expression: long LSEG / short FactSet (considered and rejected)", "Would isolate the AI-discount view and remove market beta. See the read below for why the outright long is preferred.")
 prow = [("LSEG beta (5y)", P_["lseg_beta"], "0.00"), ("FactSet beta (5y)", P_["fds_beta"], "0.00"),
         ("Beta-neutral hedge: £ FactSet short per £1 LSEG long", "=B5/B6", "0.00"),
         ("LSEG forward P/E", P_["lseg_fwd_pe"], X), ("FactSet forward P/E", P_["fds_fwd_pe"], X),
@@ -500,9 +524,113 @@ prow = [("LSEG beta (5y)", P_["lseg_beta"], "0.00"), ("FactSet beta (5y)", P_["f
 for i, (lab, v, fmt) in enumerate(prow, start=5):
     pair.cell(i, 1, lab); c = pair.cell(i, 2, v); c.number_format = fmt
     if not str(v).startswith("="): c.font = BLUE
-pair["A15"] = "Read: LSEG trades only c.9% above FactSet although over half its income is exchange, index and risk-data revenue."
-pair["A16"] = "Risk: FactSet short interest is c.9% of float, a crowded short. Size small and set a stop on the price ratio."
+pair["A15"] = "Read: the pair has already worked. Since Jan 2024 LSEG has beaten FactSet by c.53% in GBP (Trackers sheet), and FactSet ASV grew 7% with retention above 95%."
+pair["A16"] = "Conclusion: prefer the outright long. FactSet short interest is c.9% of float, so the short leg carries squeeze risk with little valuation support left."
 pair.column_dimensions["A"].width = 56
+
+# =============== Stub ex-Tradeweb (live) ===============
+title(stb, "LSEG excluding its Tradeweb stake", "Tradeweb is listed. Remove LSEG's 51.2% stake at market value and see what the rest of the group costs, on the same forward-earnings source as the comps.")
+st_rows = [("LSEG market cap (£m)", f"=Comps!B{lr+2}*{I['LSEG shares outstanding']}/100", M),
+           ("Tradeweb market cap (£m)", f"={I['Tradeweb share price']}*{I['Tradeweb shares']}/{I['GBPUSD']}", M),
+           ("LSEG stake in Tradeweb (£m)", f"=B6*{I['LSEG economic interest in Tradeweb']}", M),
+           ("  as % of LSEG market cap", "=B7/B5", PCT),
+           ("Stub value: LSEG ex-Tradeweb (£m)", "=B5-B7", M),
+           ("LSEG forward earnings (£m)", f"=B5/Comps!G{lr}", M),
+           ("Tradeweb forward earnings attributable to LSEG (£m)", f"=B6/{I['Tradeweb forward P/E']}*{I['LSEG economic interest in Tradeweb']}", M),
+           ("Stub forward earnings (£m)", "=B10-B11", M),
+           ("Stub forward P/E", "=B9/B12", X),
+           ("LSEG group forward P/E", f"=Comps!G{lr}", X),
+           ("FactSet forward P/E", f"=Comps!G{CR['FDS']}", X),
+           ("Data & analytics peer median", "=SOTP!K5", X),
+           ("Stub discount to data & analytics peers", "=B13/B16-1", PCT)]
+for i, (lab, f, fmt) in enumerate(st_rows, start=5):
+    stb[f"A{i}"], stb[f"B{i}"] = lab, f; stb[f"B{i}"].number_format = fmt
+for a in ("A13", "B13"): stb[a].font = BOLD
+stb["A19"] = "Read: the rest of LSEG (Data & Analytics, FTSE Russell, Risk Intelligence, LCH, equities) costs less than FactSet on forward earnings."
+stb.column_dimensions["A"].width = 52; stb.column_dimensions["B"].width = 14
+
+# =============== Valuation history ===============
+ph = pe_history()
+title(hist, "LSEG trailing P/E, Jan 2022 – Oct 2026", "Month-end price ÷ LTM adjusted EPS (interpolated between reported half and full years; Dec 2026 = model). Prices: Alpha Vantage.")
+for j, h in enumerate(["Month", "Price (p)", "LTM adj EPS (p)", "Trailing P/E", "5y average"], start=1): hdr(hist, 4, j, h)
+for i, (mth, px, eps, pe) in enumerate(ph["rows"], start=5):
+    hist.cell(i, 1, mth); hist.cell(i, 2, px).number_format = P0; hist.cell(i, 3, eps).number_format = P1
+    hist.cell(i, 4, f"=B{i}/C{i}").number_format = X
+    hist.cell(i, 5, f"=AVERAGE($D$5:$D${4+len(ph['rows'])})").number_format = X
+n = 4 + len(ph["rows"])
+for k, (lab, f) in enumerate([("Current", f"=D{n}"), ("5y average", f"=AVERAGE(D5:D{n})"), ("5y low", f"=MIN(D5:D{n})"), ("5y high", f"=MAX(D5:D{n})"),
+                              ("Percentile of current", f"=PERCENTRANK(D5:D{n},D{n})")]):
+    hist.cell(4 + k, 8, lab).font = BOLD; c = hist.cell(4 + k, 9, f); c.number_format = PCT if "Percentile" in lab else X
+ch = LineChart(); ch.title = "LSEG trailing P/E"; ch.height, ch.width = 8, 18; ch.y_axis.title = "x"
+ch.add_data(Reference(hist, min_col=4, min_row=4, max_col=5, max_row=n), titles_from_data=True)
+ch.set_categories(Reference(hist, min_col=1, min_row=5, max_row=n))
+hist.add_chart(ch, "H11")
+hist.column_dimensions["A"].width = 10; hist.column_dimensions["H"].width = 22
+
+# =============== SEC EDGAR cross-check on Comps ===============
+edgar_path = Path(__file__).resolve().parents[3] / "data" / "edgar_us_peers.csv"
+if edgar_path.exists():
+    e0 = lr + 6
+    cmp_.cell(e0, 1, "SEC EDGAR cross-check (US peers, latest 10-K, audited GAAP)").font = BOLD
+    for j, h in enumerate(["Ticker", "FY end", "Revenue ($m)", "Operating income ($m)", "Operating margin", "Net income ($m)", "Diluted EPS ($)", "Cash ($m)", "Debt ($m)"], start=1): hdr(cmp_, e0 + 1, j, h)
+    with edgar_path.open() as fh:
+        for i, rw in enumerate(csv.DictReader(fh), start=e0 + 2):
+            num = lambda k: float(rw[k]) / 1e6 if rw.get(k) else None
+            debt = (num("debt_long") or 0) + (num("debt_current") or 0)
+            vals = [rw["ticker"], rw["revenue_period_end"], num("revenue"), num("operating_income"), None, num("net_income"),
+                    float(rw["eps_diluted"]) if rw["eps_diluted"] else None, num("cash"), debt or None]
+            for j, v in enumerate(vals, start=1):
+                c = cmp_.cell(i, j, v)
+                if j in (3, 4, 6, 8, 9): c.number_format = M
+                if j == 7: c.number_format = "0.00"
+            cmp_.cell(i, 5, f"=D{i}/C{i}").number_format = PCT
+    cmp_.cell(i + 1, 1, "Source: data.sec.gov XBRL company facts, refreshed weekly by GitHub Actions (common/edgar.py). D&A not used: XBRL tagging differs across filers.")
+
+# =============== Industry evidence ===============
+title(ev, "What third-party data says about AI and market-data demand", "Credible industry studies and filings, Apr–Oct 2026. These inform the retention and scenario assumptions; they are not inputs to formulas.")
+for j, h in enumerate(["Source", "Date", "Sample", "Finding", "Read for LSEG", "Link"], start=1): hdr(ev, 4, j, h)
+for i, row_ in enumerate(A.EVIDENCE, start=5):
+    for j, v in enumerate(row_, start=1):
+        c = ev.cell(i, j, v); c.alignment = Alignment(wrap_text=True, vertical="top")
+for col, wdt in zip("ABCDEF", [30, 12, 22, 70, 40, 40]): ev.column_dimensions[col].width = wdt
+
+# =============== Trackers (refreshed weekly by GitHub Actions) ===============
+hg = hiring(); wk = weekly()
+title(trk, "Trackers: hiring mix and the Tradeweb stub", "Data in /data, refreshed every Monday by .github/workflows/refresh-data.yml (Workday career sites; weekly prices).")
+trk["A4"] = f"Open roles by function, snapshot {hg['date']}"; trk["A4"].font = BOLD
+cos = list(hg["snap"])
+hdr(trk, 5, 1, "Function")
+for j, co in enumerate(cos):
+    hdr(trk, 5, 2 + 2 * j, co); hdr(trk, 5, 3 + 2 * j, f"{co} %")
+for i, cat in enumerate(hg["cats"], start=6):
+    trk.cell(i, 1, cat)
+    for j, co in enumerate(cos):
+        n = hg["snap"][co].get(cat, 0); c1 = trk.cell(i, 2 + 2 * j, n)
+        tot_r = 6 + len(hg["cats"])
+        trk.cell(i, 3 + 2 * j, f"={CL(2+2*j)}{i}/{CL(2+2*j)}{tot_r}").number_format = PCT
+tot_r = 6 + len(hg["cats"]); trk.cell(tot_r, 1, "Total").font = BOLD
+for j, _ in enumerate(cos):
+    trk.cell(tot_r, 2 + 2 * j, f"=SUM({CL(2+2*j)}6:{CL(2+2*j)}{tot_r-1})").font = BOLD
+bc = BarChart(); bc.type = "bar"; bc.title = "Share of open roles by function"; bc.height, bc.width = 8, 14
+for j, _ in enumerate(cos):
+    bc.add_data(Reference(trk, min_col=3 + 2 * j, min_row=5, max_row=tot_r - 1), titles_from_data=True)
+bc.set_categories(Reference(trk, min_col=1, min_row=6, max_row=tot_r - 1)); trk.add_chart(bc, "H4")
+w0 = tot_r + 3
+trk.cell(w0 - 1, 1, "Weekly: Tradeweb stake as % of LSEG market cap, and LSEG vs FactSet relative price in GBP (Jan 2024 = 100)").font = BOLD
+for j, h in enumerate(["Week", "LSEG (p)", "Tradeweb ($)", "FactSet ($)", "GBPUSD", "Tradeweb stake % of LSEG", "LSEG vs FactSet (rebased)"], start=1): hdr(trk, w0, j, h)
+for i, x in enumerate(wk, start=w0 + 1):
+    vals = [x["date"], x["lseg"], x["tw"], x["fds"], x["gbpusd"], x["stake_pct"], x["rel"]]
+    for j, v in enumerate(vals, start=1):
+        c = trk.cell(i, j, v); c.number_format = ["@", P0, "0.00", "0.00", "0.0000", PCT, "0.0"][j - 1]
+wl = w0 + len(wk)
+lc1 = LineChart(); lc1.title = "Tradeweb stake as % of LSEG market cap"; lc1.height, lc1.width = 7, 14
+lc1.add_data(Reference(trk, min_col=6, min_row=w0, max_row=wl), titles_from_data=True); lc1.set_categories(Reference(trk, min_col=1, min_row=w0 + 1, max_row=wl))
+trk.add_chart(lc1, f"I{w0}")
+lc2 = LineChart(); lc2.title = "LSEG vs FactSet, GBP, Jan 2024 = 100"; lc2.height, lc2.width = 7, 14
+lc2.add_data(Reference(trk, min_col=7, min_row=w0, max_row=wl), titles_from_data=True); lc2.set_categories(Reference(trk, min_col=1, min_row=w0 + 1, max_row=wl))
+trk.add_chart(lc2, f"I{w0+16}")
+trk.cell(wl + 2, 1, "Tradeweb share count held at the latest 10-Q; LSEG share count interpolated between disclosed points. Prices: Yahoo Finance chart endpoint.")
+trk.column_dimensions["A"].width = 22
 
 # =============== Sources & Cover ===============
 title(src, "Sources")
@@ -517,6 +645,8 @@ items = [("Scenario selected", f"=CHOOSE({I['Scenario']},\"Bear\",\"Base\",\"Bul
          ("Probability-weighted DCF (p)", f"=Scenarios!B{pw}", P0), ("2026E adj EPS (p)", f"=Model!{COLS[2026]}{R['eps']}", P1),
          ("2027E P/E", "=DCF!B28", X), ("Net debt / EBITDA 2027E", f"=Model!{COLS[2027]}{R['lev']}", X),
          ("Retention implied by share price", "='Reverse DCF'!C5", PCT),
+         ("Stub (ex-Tradeweb) forward P/E", "='Stub ex-Tradeweb'!B13", X),
+         ("Trailing P/E vs 5y average", "='Valuation history'!I4", X),
          ("Balance sheet checks (sum, should be 0)", f"=SUM(Model!{COLS[2025]}{R['check']}:Model!{COLS[2030]}{R['check']})", '0.000')]
 for i, (lab, f, fmt) in enumerate(items, start=5):
     cover[f"A{i}"], cover[f"B{i}"] = lab, f; cover[f"B{i}"].font = GREEN

@@ -115,14 +115,14 @@ ETF_AUM_GROWTH = [None, 0.10, 0.10, 0.09, 0.09]             # A: market return +
 ETF_YIELD_CHANGE = [None, -0.02, -0.02, -0.02, -0.02]       # A: fee compression
 # Markets drivers
 TW_ADV_2026 = 3150.0                                         # A ($bn/day; H1 26 3,180)
-TW_ADV_GROWTH = [None, 0.06, 0.07, 0.07, 0.07]              # A
+TW_ADV_GROWTH = [None, 0.00, 0.05, 0.06, 0.06]              # A: 2026 is a peak year (H1 ADV +24.8%), so flat in 2027
 FIDO_CAPTURE_CHANGE = [None, -0.02, -0.02, -0.02, -0.02]    # A
-SWAPCLEAR_GROWTH = [None, 0.05, 0.06, 0.06, 0.06]           # A (notional cleared)
+SWAPCLEAR_GROWTH = [None, 0.02, 0.05, 0.06, 0.06]           # A (notional cleared; H1 26 +29.4%, so 2027 normalises)
 OTC_CAPTURE_CHANGE = [None, -0.01, -0.01, -0.01, -0.01]     # A
 COLLATERAL_2026 = 109.0                                      # A (EURbn avg; H1 26 110.2)
 COLLATERAL_GROWTH = [None, 0.03, 0.03, 0.03, 0.03]          # A
 NTI_SPREAD_CHANGE = [None, -0.05, 0.0, 0.0, 0.0]            # A: rate cuts compress spread in 2027
-OTHER_GROWTH = {"eq": [None, 0.05, 0.05, 0.05, 0.05], "fx": [None, 0.04, 0.04, 0.04, 0.04],
+OTHER_GROWTH = {"eq": [None, 0.00, 0.04, 0.05, 0.05], "fx": [None, 0.02, 0.04, 0.04, 0.04],
                 "sr": [None, 0.04, 0.04, 0.04, 0.04], "ncc": [None, 0.03, 0.03, 0.03, 0.03],
                 "oth": [None, 0.0, 0.0, 0.0, 0.0]}
 RECOVERIES_GROWTH = 0.03
@@ -151,8 +151,36 @@ BUYBACK_PRICE_GROWTH = 0.08
 OCTUS = {"price_usd_m": 3535.0, "close_year": 2027, "rev_2026_usd_m": 310.0, "growth": 0.12,
          "ebitda_margin": 0.40, "purch_amort": 110.0, "debt_rate": 0.050}
 
-DCF = {"rf": 0.049, "beta": 0.85, "erp": 0.050, "kd_pre": 0.050, "debt_weight": 0.15,
-       "tw_fwd_pe": 28.06}   # Tradeweb forward P/E (S, SA) applied to the NCI share of earnings
+DCF = {"rf": 0.049, "beta": 0.85, "erp": 0.050, "kd_pre": 0.050, "debt_weight": 0.15}
+# Beta: observed 5y beta is 0.41 (S, SA); Blume-adjusted 0.60 (D). I use 0.85 (A) as a conservative choice:
+# a low raw beta against a FTSE 100 heavy in energy, miners and banks understates LSEG's exposure to
+# global financial-market activity. Sensitivity is shown on the DCF sheet.
+BETA_OBSERVED = 0.41
+BETA_BLUME = round(0.67 * BETA_OBSERVED + 0.33, 2)
+
+# ---------- Tradeweb (listed subsidiary) ----------
+TW_PRICE_USD = 121.89          # S: close 22 Oct 2026 (SA)
+TW_SHARES_M = 234.03           # S: Class A+B+C+D shares, Tradeweb 10-Q filed 30 Jul 2026
+TW_FWD_PE = 28.06              # S: SA
+LSEG_TW_ECON = 0.512           # S: LSEG economic interest in Tradeweb, Tradeweb 10-Q, 30 Jun 2026
+LSEG_MKT_SHARES = 480.22       # S: LSEG shares outstanding (SA); model end-2026E 479.6m
+
+# ---------- Valuation history (S: Alpha Vantage monthly closes; LSEG adjusted EPS from annual results) ----------
+ADJ_EPS_FY = {2021: 272.4, 2022: 317.8, 2023: 323.9, 2024: 363.5, 2025: 420.6}
+H1_EPS = {2025: 208.9, 2026: 244.9}
+MONTHLY_CLOSE = {  # month-end close, pence
+    "2022-01": 7220, "2022-02": 6574, "2022-03": 7966, "2022-04": 7916, "2022-05": 7402, "2022-06": 7632,
+    "2022-07": 7998, "2022-08": 8102, "2022-09": 7628, "2022-10": 7566, "2022-11": 8248, "2022-12": 7136,
+    "2023-01": 7406, "2023-02": 7432, "2023-03": 7868, "2023-04": 8346, "2023-05": 8550, "2023-06": 8366,
+    "2023-07": 8462, "2023-08": 8178, "2023-09": 8234, "2023-10": 8280, "2023-11": 8906, "2023-12": 9274,
+    "2024-01": 8942, "2024-02": 8876, "2024-03": 9490, "2024-04": 8846, "2024-05": 9162, "2024-06": 9400,
+    "2024-07": 9470, "2024-08": 10250, "2024-09": 10220, "2024-10": 10515, "2024-11": 11270, "2024-12": 11285,
+    "2025-01": 12035, "2025-02": 11845, "2025-03": 11460, "2025-04": 11625, "2025-05": 11275, "2025-06": 10635,
+    "2025-07": 9260, "2025-08": 9168, "2025-09": 8516, "2025-10": 9486, "2025-11": 8908, "2025-12": 8952,
+    "2026-01": 8122, "2026-02": 8860, "2026-03": 8864, "2026-04": 9550, "2026-05": 9022, "2026-06": 8162,
+    "2026-07": 8398, "2026-08": 9000, "2026-09": 8160, "2026-10": 9510,
+}
+RETENTION_HISTORY = {"H1 2025": 0.926, "FY 2025": 0.924, "H1 2026": 0.928}
 
 # ---------- Scenarios: 1 = Bear, 2 = Base, 3 = Bull. Deltas applied to 2027-2030 ----------
 SCENARIO = 2
@@ -208,3 +236,22 @@ CONSENSUS = {
     "Adjusted EPS (p)": {2026: 480.6, 2027: 550.9, 2028: 615.5},
     "DPS (p)": {2026: 167.3, 2027: 189.4, 2028: 209.9},
 }
+
+# ---------- Third-party industry evidence on AI and market data demand (S) ----------
+EVIDENCE = [
+    ("Burton-Taylor (TP ICAP), via FOW", "8 Apr 2026", "Industry spend data",
+     "Global financial market data spend reached $49.2bn in 2025, up 6.5%; AI, automated trading and volatility outweighed cost pressure.",
+     "Demand for data is still growing.", "https://www.fow.com/insights/market-data-spend-hits-usd49-2bn-as-ai-volatility-and-algos-drive-growth"),
+    ("Expand Research (BCG), via A-Team Insight", "20 Oct 2026", "Industry spend data",
+     "Market and reference data spend passed $50bn; a further 7% rise expected in 2026. Data teams manage 34% more vendors than four years ago.",
+     "Spend growth is broadening, not shrinking.", "https://a-teaminsight.com/blog/substantive-research-finds-ai-driving-market-data-costs-higher-as-investment-research-budgets-stall/"),
+    ("Crisil Coalition Greenwich and SIX, Market Data Study", "13 Oct 2026", "73 buy- and sell-side institutions",
+     "Market data spending could rise by more than 50% by 2027, driven largely by AI adoption; licences built for human users are mismatched to AI use.",
+     "AI increases data consumption and gives data owners pricing power.", "https://fintech.garden/news/2026-10-13-ai-expected-to-push-market-data-costs-up-more-than-50-by-2027-study-finds/"),
+    ("Substantive Research, via A-Team Insight", "20 Oct 2026", "50 asset managers, c.$20trn AUM",
+     "AI-related charges in 2026 vendor proposals ranged from $30k to $1m; some agreements could rise up to 50% in 2027. Research budgets rose only 0.4% in H1 2026; AI research tooling spend rose 40%.",
+     "Budgets are tight, so money moves from people and screens to data and AI tooling.", "https://a-teaminsight.com/blog/substantive-research-finds-ai-driving-market-data-costs-higher-as-investment-research-budgets-stall/"),
+    ("FactSet Q4 FY2026 results (8-K)", "30 Sep 2026", "Company filing",
+     "Organic ASV +7.0% to $2.57bn; ASV retention above 95%; AI solutions ASV more than doubled. FY27 guide: organic ASV +5.0% to 6.5%.",
+     "Even the purest 'AI loser' is not losing customers. Also a reason not to short it.", "https://www.sec.gov/Archives/edgar/data/0001013237/000162828026063888/fdsq42026earningsrelease.htm"),
+]

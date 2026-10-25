@@ -66,3 +66,22 @@ def test_excel_forecasts_are_formulas():
     for name in ("Model", "Divisions"):
         vals = [c.value for row in wb[name].iter_rows(min_row=6, min_col=6, max_col=10) for c in row if c.value is not None]
         assert vals and all(isinstance(v, str) and v.startswith("=") for v in vals), name
+
+
+def test_stub_and_history():
+    from lseg.engine import stub, pe_history
+    st = stub()
+    assert 0.15 < st["stake_pct"] < 0.35 and st["stub_pe"] < st["group_pe"]
+    ph = pe_history()
+    assert len(ph["rows"]) == len(A.MONTHLY_CLOSE) and ph["lo"] <= ph["now"] <= ph["hi"]
+
+
+def test_trackers_and_evidence():
+    from lseg.trackers import hiring, weekly
+    import sys as _s; _s.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from common.jobs import classify
+    assert classify("Senior AI Engineer") == "AI & data science" and classify("Account Executive") == "Sales & client"
+    w = weekly()
+    if w:  # data present once the weekly refresh has run
+        assert all(0.05 < x["stake_pct"] < 0.6 for x in w)
+    assert all(len(e) == 6 and e[-1].startswith("https://") for e in A.EVIDENCE)
