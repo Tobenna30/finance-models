@@ -1,112 +1,159 @@
-"""Pure-Python LSEG model. Mirrors the Excel formulas exactly; used for scenario outputs and CI tests."""
+"""Pure-Python LSEG model (v2, driver-based). Mirrors the Excel formulas; used for scenarios, reverse DCF and CI."""
+from statistics import median
 from . import assumptions as A
 
-DIVS = ["Data & Analytics", "FTSE Russell", "Risk Intelligence", "Markets", "Other"]
+KEYS = [k for k, _, _ in A.LINES]
+DIV_OF = {k: d for k, _, d in A.LINES}
 
 
-def run(scenario: int = A.SCENARIO) -> dict:
+def run(scenario: int = A.SCENARIO, overrides: dict | None = None) -> dict:
+    sc = {k: v[scenario] for k, v in A.SCEN.items()}
+    if overrides: sc.update(overrides)
     Y = A.YEARS_FCST
-    g_adj = A.SCEN["growth_adj"][scenario]
-    m_adj = A.SCEN["margin_adj"][scenario]
-    tvg = A.SCEN["tv_growth"][scenario]
+    r = {}
+    def put(k, y, v): r.setdefault(k, {})[y] = v
+    prev = {k: A.HIST_LINES[k][2025] for k in KEYS}
     o = A.OCTUS
-    r = {k: {} for k in ["div", "inc", "rec", "oct_rev", "tot", "ebitda", "da", "pa", "ebit",
-                         "fin", "pbt", "tax", "ni", "nci", "ni_sh", "eps", "rep_ni_sh",
-                         "capex", "other", "eqfcf", "acq", "debt_add", "div_cash", "nci_div",
-                         "bb", "px", "sh_open", "sh_close", "sh_avg", "dps",
-                         "cash", "intang", "debt", "equity", "net_debt", "lev", "check", "ufcf"]}
-    prev = {d: A.HIST[d][2025] for d in DIVS}
     cash, intang = A.OPENING_BS["Cash"], A.OPENING_BS["Goodwill & intangibles"]
     debt, equity = A.OPENING_BS["Borrowings incl leases"], A.OPENING_BS["Total equity"]
-    other_net = equity + debt - cash - intang          # other net assets (plug, held constant)
-    sh = A.OPENING_SHARES
-    rec = A.HIST["Recoveries"][2025]
-    pa_core = A.PURCH_AMORT_2026
-    oct_rev = 0.0
+    other_net = equity + debt - cash - intang
+    sh, rec, pa_core, oct_rev = A.OPENING_SHARES, A.HIST["Recoveries"][2025], A.PURCH_AMORT_2026, 0.0
+    aum = adv = coll = yld = capt = spr = None
     for i, y in enumerate(Y):
-        divs = {d: prev[d] * (1 + A.GROWTH[d][i] + (g_adj if d != "Other" else 0)) for d in DIVS}
-        prev = divs
-        inc = sum(divs.values())
+        L = {}
+        if y == 2026:
+            for k in KEYS:
+                L[k] = sum(A.Q[k][4:7]) + A.Q[k][3] * (1 + A.Q4_GROWTH[k])
+            aum, adv, coll = A.ETF_AUM_AVG_2026, A.TW_ADV_2026, A.COLLATERAL_2026
+            yld = L["fa"] * A.GBPUSD / (aum * 1000) * 1e4          # bps
+            capt = L["fido"] / adv                                  # £m per $bn ADV
+            spr = L["nti"] * A.EURGBP / (coll * 1000) * 1e4         # bps
+            asv = None
+        else:
+            ret = A.RETENTION[i] + sc["retention_adj"]
+            asv = A.GROSS_SALES_PCT[i] + A.PRICE_OTHER[i] - (1 - ret)
+            put("ret", y, ret)
+            L["wf"] = prev["wf"] * (1 + asv + A.SPREAD["wf"][i] + sc["wf_spread_adj"])
+            for k in ("df", "an", "fs", "ri"):
+                L[k] = prev[k] * (1 + asv + A.SPREAD[k][i])
+            aum = aum * (1 + A.ETF_AUM_GROWTH[i] + sc["aum_adj"]); yld = yld * (1 + A.ETF_YIELD_CHANGE[i])
+            L["fa"] = aum * 1000 * yld / 1e4 / A.GBPUSD
+            adv = adv * (1 + A.TW_ADV_GROWTH[i] + sc["mkt_vol_adj"]); capt = capt * (1 + A.FIDO_CAPTURE_CHANGE[i])
+            L["fido"] = adv * capt
+            L["otc"] = prev["otc"] * (1 + A.SWAPCLEAR_GROWTH[i] + sc["mkt_vol_adj"]) * (1 + A.OTC_CAPTURE_CHANGE[i])
+            coll = coll * (1 + A.COLLATERAL_GROWTH[i])
+            spr = spr * (1 + A.NTI_SPREAD_CHANGE[i] + (sc["nti_adj"] if y == 2027 else 0))
+            L["nti"] = coll * 1000 * spr / 1e4 / A.EURGBP
+            for k in ("eq", "fx"):
+                L[k] = prev[k] * (1 + A.OTHER_GROWTH[k][i] + sc["mkt_vol_adj"])
+            for k in ("sr", "ncc", "oth"):
+                L[k] = prev[k] * (1 + A.OTHER_GROWTH[k][i])
+        for k in KEYS: put(k, y, L[k])
+        put("asv", y, asv); put("aum", y, aum); put("yld", y, yld); put("adv", y, adv); put("capt", y, capt)
+        put("coll", y, coll); put("spr", y, spr)
+        prev = L
         if y == o["close_year"]:
             oct_rev = o["rev_2026_usd_m"] / A.GBPUSD * (1 + o["growth"]) ** (y - 2026)
         elif y > o["close_year"]:
-            oct_rev = oct_rev * (1 + o["growth"])
-        inc_tot = inc + oct_rev
-        rec = rec * (1 + A.RECOVERIES_GROWTH)
-        margin = A.EBITDA_MARGIN[i] + (m_adj if y >= 2027 else 0)
-        ebitda = inc * margin + oct_rev * o["ebitda_margin"]
-        da = inc_tot * A.ADJ_DA_PCT[i]
+            oct_rev *= 1 + o["growth"]
+        put("oct", y, oct_rev)
+        div_rev = {d: sum(L[k] for k in KEYS if DIV_OF[k] == d) for d, _ in A.DIVISIONS}
+        div_rev["D&A"] += oct_rev
+        ebitda = A.OTHER_EBITDA + oct_rev * o["ebitda_margin"]
+        for d in ("D&A", "FTSE", "RI", "MKT"):
+            m = A.DIV_MARGIN[d][i] + (sc["margin_adj"] * (y - 2026) if y >= 2027 else 0)
+            core = div_rev[d] - (oct_rev if d == "D&A" else 0)
+            put("m_" + d, y, m); put("e_" + d, y, core * m)
+            ebitda += core * m
+        for d, _ in A.DIVISIONS: put("rev_" + d, y, div_rev[d])
+        tot = sum(div_rev.values())
+        rec *= 1 + A.RECOVERIES_GROWTH
+        da = tot * A.ADJ_DA_PCT[i]
         pa = pa_core + (o["purch_amort"] if y >= o["close_year"] else 0)
         ebit = ebitda - da
-        net_debt_open = debt - cash
         acq = o["price_usd_m"] / A.GBPUSD if y == o["close_year"] else 0.0
-        fin = net_debt_open * A.NET_FIN_RATE + ((o["price_usd_m"] / A.GBPUSD) * (o["debt_rate"] - A.NET_FIN_RATE) if y >= o["close_year"] else 0)
-        pbt = ebit - fin
-        tax = pbt * A.TAX_RATE
-        ni = pbt - tax
-        nci = ni * A.NCI_SHARE
-        ni_sh = ni - nci
+        fin = (debt - cash) * A.NET_FIN_RATE + ((o["price_usd_m"] / A.GBPUSD) * (o["debt_rate"] - A.NET_FIN_RATE) if y >= o["close_year"] else 0)
+        pbt = ebit - fin; tax = pbt * A.TAX_RATE; ni = pbt - tax
+        nci = ni * A.NCI_SHARE; ni_sh = ni - nci
         rep_ni = (pbt - pa) * (1 - A.TAX_RATE)
-        rep_ni_sh = rep_ni * (1 - A.NCI_SHARE)
-        capex = inc_tot * A.CAPEX_PCT[i]
-        other = ebitda * A.OTHER_CASH_PCT
+        capex = tot * A.CAPEX_PCT[i]; other = ebitda * A.OTHER_CASH_PCT
         eqfcf = ebitda - capex - fin - tax - other
         px = A.SHARE_PRICE * (1 + A.BUYBACK_PRICE_GROWTH) ** (i + 0.5)
-        # dividends on prior-year-style payout of this year's EPS (uses opening shares to avoid circularity)
-        eps_pre = ni_sh / sh * 100
-        dps = eps_pre * A.DIV_PAYOUT
-        div_cash = dps * sh / 100
-        nci_div = nci * A.NCI_PAYOUT
+        dps = ni_sh / sh * 100 * A.DIV_PAYOUT; div_cash = dps * sh / 100; nci_div = nci * A.NCI_PAYOUT
         bb = A.BUYBACKS_FIXED.get(y, max(0.0, (eqfcf - div_cash - nci_div) * A.BUYBACK_SHARE_OF_SURPLUS))
-        sh_close = sh - bb / px * 100
-        sh_avg = (sh + sh_close) / 2
-        eps = ni_sh / sh_avg * 100
-        # balance sheet roll
-        debt = debt + acq
-        cash = cash + eqfcf - acq + acq - div_cash - nci_div - bb      # acquisition debt-funded
-        intang = intang + capex + acq - da - pa
-        equity = equity + rep_ni - div_cash - nci_div - bb
-        # other net assets: other cash items settle liabilities (leases, provisions); deferred tax
-        # liability on purchased intangibles unwinds as they amortise
-        other_net = other_net + other + pa * A.TAX_RATE
-        check = cash + intang + other_net - debt - equity
+        sh_close = sh - bb / px * 100; sh_avg = (sh + sh_close) / 2; eps = ni_sh / sh_avg * 100
+        debt += acq
+        cash += eqfcf - div_cash - nci_div - bb
+        intang += capex + acq - da - pa
+        equity += rep_ni - div_cash - nci_div - bb
+        other_net += other + pa * A.TAX_RATE
         ufcf = ebitda - capex - ebit * A.TAX_RATE - other
-        for k, v in dict(div=divs, inc=inc, rec=rec, oct_rev=oct_rev, tot=inc_tot, ebitda=ebitda, da=da, pa=pa,
-                         ebit=ebit, fin=fin, pbt=pbt, tax=tax, ni=ni, nci=nci, ni_sh=ni_sh, eps=eps,
-                         rep_ni_sh=rep_ni_sh, capex=capex, other=other, eqfcf=eqfcf, acq=acq,
-                         debt_add=acq, div_cash=div_cash, nci_div=nci_div, bb=bb, px=px, sh_open=sh,
+        for k, v in dict(tot=tot, rec=rec, ebitda=ebitda, da=da, pa=pa, ebit=ebit, fin=fin, pbt=pbt, tax=tax,
+                         ni=ni, nci=nci, ni_sh=ni_sh, eps=eps, rep_ni=rep_ni, capex=capex, other=other,
+                         eqfcf=eqfcf, acq=acq, div_cash=div_cash, nci_div=nci_div, bb=bb, px=px, sh_open=sh,
                          sh_close=sh_close, sh_avg=sh_avg, dps=dps, cash=cash, intang=intang, debt=debt,
-                         equity=equity, net_debt=debt - cash, lev=(debt - cash) / ebitda, check=check,
-                         ufcf=ufcf).items():
-            r[k][y] = v
-        sh = sh_close
-        pa_core = pa_core * (1 - A.PURCH_AMORT_DECLINE)
-    # ---------- DCF at 31 Dec 2026 ----------
+                         equity=equity, othnet=other_net, net_debt=debt - cash, lev=(debt - cash) / ebitda,
+                         check=cash + intang + other_net - debt - equity, ufcf=ufcf).items():
+            put(k, y, v)
+        sh = sh_close; pa_core *= 1 - A.PURCH_AMORT_DECLINE
+    # DCF at 31 Dec 2026, mid-year convention
     d = A.DCF
     ke = d["rf"] + d["beta"] * d["erp"]
     wacc = (1 - d["debt_weight"]) * ke + d["debt_weight"] * d["kd_pre"] * (1 - A.TAX_RATE)
-    pv = 0.0
-    dyears = [y for y in Y if y > 2026]
-    for t, y in enumerate(dyears, start=1):
-        pv += r["ufcf"][y] / (1 + wacc) ** (t - 0.5)
-    last = dyears[-1]
-    tv = r["ufcf"][last] * (1 + tvg) / (wacc - tvg)
-    pv_tv = tv / (1 + wacc) ** (len(dyears) - 0.5)
+    tvg = sc["tv_growth"]
+    dy = [y for y in Y if y > 2026]
+    pv = sum(r["ufcf"][y] / (1 + wacc) ** (t - 0.5) for t, y in enumerate(dy, start=1))
+    tv = r["ufcf"][dy[-1]] * (1 + tvg) / (wacc - tvg)
+    pv_tv = tv / (1 + wacc) ** (len(dy) - 0.5)
     ev = pv + pv_tv
-    nci_val = r["nci"][2027] * d["nci_multiple"]
+    nci_val = r["nci"][2026] * d["tw_fwd_pe"]
     eq = ev - r["net_debt"][2026] - nci_val
     fv = eq / r["sh_close"][2026] * 100
-    return dict(r=r, ke=ke, wacc=wacc, pv_fcf=pv, tv=tv, pv_tv=pv_tv, ev=ev, nci_val=nci_val,
-                equity_value=eq, fair_value=fv, upside=fv / A.SHARE_PRICE - 1,
-                tv_share=pv_tv / ev, tv_ebitda=tv / r["ebitda"][last],
-                pe_2027=A.SHARE_PRICE / r["eps"][2027])
+    return dict(r=r, ke=ke, wacc=wacc, pv_fcf=pv, tv=tv, pv_tv=pv_tv, ev=ev, nci_val=nci_val, equity_value=eq,
+                fair_value=fv, upside=fv / A.SHARE_PRICE - 1, tv_share=pv_tv / ev, tv_ebitda=tv / r["ebitda"][dy[-1]])
+
+
+def solve(key: str, lo: float, hi: float, target: float = A.SHARE_PRICE) -> float:
+    """Value of a scenario delta (base case otherwise) at which DCF fair value equals the share price."""
+    f = lambda x: run(2, {key: x})["fair_value"] - target
+    flo = f(lo)
+    for _ in range(80):
+        mid = (lo + hi) / 2
+        if (f(mid) > 0) == (flo > 0): lo, flo = mid, f(mid)
+        else: hi = mid
+    return (lo + hi) / 2
+
+
+def comps_by_ticker():
+    return {row[1]: row for row in A.COMPS}
+
+
+def sotp(res: dict | None = None, year: int = 2026) -> dict:
+    res = res or run(2)
+    r, cb = res["r"], comps_by_ticker()
+    da_tot = sum(A.DIV_DA_2025.values())
+    ebit = {d: r["e_" + d][year] - r["da"][year] * A.DIV_DA_2025[d] / da_tot for d in A.SOTP_PEERS}
+    ebit_sum = sum(ebit.values())
+    earn = {d: (ebit[d] - r["fin"][year] * ebit[d] / ebit_sum) * (1 - A.TAX_RATE) for d in ebit}
+    earn["MKT"] -= r["nci"][year]
+    tot = sum(earn.values())
+    parts, blended = {}, 0.0
+    for d, tick in A.SOTP_PEERS.items():
+        pe = median(cb[t][6] for t in tick); w = earn[d] / tot
+        parts[d] = dict(earnings=earn[d], weight=w, pe=pe); blended += w * pe
+    ntm_eps = A.LSEG_SAME_SOURCE["price"] / A.LSEG_SAME_SOURCE["fwd_pe"]
+    value = blended * ntm_eps
+    return dict(parts=parts, blended_pe=blended, ntm_eps=ntm_eps, per_share=value,
+                upside=value / A.LSEG_SAME_SOURCE["price"] - 1)
 
 
 if __name__ == "__main__":
     for s in (1, 2, 3):
-        o = run(s)
-        r = o["r"]
-        print(A.SCEN_NAMES[s], f"FV {o['fair_value']:.0f}p upside {o['upside']:+.1%} WACC {o['wacc']:.2%} TV% {o['tv_share']:.0%} TV/EBITDA {o['tv_ebitda']:.1f}x")
-        if s == 2:
-            for y in A.YEARS_FCST:
-                print(y, f"inc {r['inc'][y]:.0f} g {r['tot'][y]/(r['tot'][y-1] if y>2026 else 8986)-1:+.1%} EBITDA {r['ebitda'][y]:.0f} EPS {r['eps'][y]:.1f} DPS {r['dps'][y]:.1f} EqFCF {r['eqfcf'][y]:.0f} BB {r['bb'][y]:.0f} sh {r['sh_close'][y]:.1f} ND {r['net_debt'][y]:.0f} lev {r['lev'][y]:.2f} chk {r['check'][y]:.6f}")
+        o = run(s); r = o["r"]
+        print(A.SCEN_NAMES[s], f"FV {o['fair_value']:.0f}p {o['upside']:+.1%} TV% {o['tv_share']:.0%} TV/EBITDA {o['tv_ebitda']:.1f}x")
+    o = run(2); r = o["r"]
+    for y in A.YEARS_FCST:
+        print(y, f"tot {r['tot'][y]:.0f} g {r['tot'][y]/(r['tot'][y-1] if y>2026 else 8986)-1:+.1%} ASV {r['asv'][y] if r['asv'][y] else 0:.1%} EBITDA {r['ebitda'][y]:.0f} m {r['ebitda'][y]/r['tot'][y]:.1%} EPS {r['eps'][y]:.1f} FCF {r['eqfcf'][y]:.0f} lev {r['lev'][y]:.2f} chk {r['check'][y]:.6f}")
+    print({d: round(r['rev_'+d][2026]) for d,_ in A.DIVISIONS}, {d: round(r['rev_'+d][2027]) for d,_ in A.DIVISIONS})
+    so = sotp(o); print("NCI val", round(o["nci_val"]), "SOTP", {k: (round(v['weight'],3), v['pe']) for k,v in so['parts'].items()}, round(so['blended_pe'],2), round(so['per_share']), f"{so['upside']:+.1%}")
+    print("implied retention adj", round(solve('retention_adj', -0.05, 0.02), 4), "implied mkt vol adj", round(solve('mkt_vol_adj', -0.15, 0.05), 4))
