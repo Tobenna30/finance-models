@@ -23,7 +23,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet -- data/; then echo "No data changes"; exit 0; fi
+          if [ -z "$(git status --porcelain data/)" ]; then echo "No data changes"; exit 0; fi
           BR="data-refresh-$(date +%Y%m%d)"
           if [ "${GITHUB_REF_NAME}" != "main" ]; then BR="${GITHUB_REF_NAME}"; fi
           git config user.name "github-actions[bot]"
