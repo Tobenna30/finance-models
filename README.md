@@ -11,11 +11,11 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 01 | [Long/Short Equity Pitch Kit — LSEG & Rolls-Royce](projects/01-equity-pitch-kit) | Hedge funds / AM / ER | Hybrid | 🟡 LSEG model built |
 | 02 | Earnings & Catalyst Tracker | Hedge funds | Hybrid | ⚪ Planned |
 | 03 | Factor & Portfolio Construction Toolkit | Systematic / AM | Python | ⚪ Planned |
-| 04 | Darktrace / Thoma Bravo Sell-Side M&A Model | IB advisory | Excel | ⚪ Planned |
+| 04 | [Darktrace / Thoma Bravo Sell-Side M&A Model](projects/04-08-darktrace) | IB advisory | Excel | 🟢 Built (fairness note) |
 | 05 | Strategic Merger Model (Accretion/Dilution) | IB | Excel | ⚪ Planned |
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |
 | 07 | Restructuring & Liability Management | Debt advisory | Excel | ⚪ Planned |
-| 08 | LBO & Leveraged Finance Model | PE / LevFin | Excel | ⚪ Planned |
+| 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo) |
 | 09 | Private Credit Underwriting Pack | Private credit | Excel | ⚪ Planned |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |
