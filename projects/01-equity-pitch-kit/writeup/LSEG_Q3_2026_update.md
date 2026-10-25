@@ -16,7 +16,7 @@ Tobenna Agubuche | 25 October 2026 | Price 9,510p | Module: react to results
 
 My pre-results estimate grew each of LSEG's 14 income lines at its H1 2026 rate. Q3 came in 1.4% above that. Markets beat by 1.7%, led by Fixed Income, Derivatives & Other (+£11m vs my estimate), OTC derivatives (+£5m) and net treasury income (+£5m). FTSE Russell subscriptions beat by 4.0% and Risk Intelligence by 2.9%. Data & Analytics was in line (+0.6%). Equities and non-cash collateral were below.
 
-Guidance went up on every line: organic income growth of at least 8% (from 7% to 7.5%), a margin gain of 100 to 120bp (from about 100bp), and equity free cash flow of at least £2.8bn (from £2.7bn).
+Guidance went up three times over: organic income growth of at least 8% (from 7% to 7.5%), a margin gain of 100 to 120bp (from about 100bp), and equity free cash flow of at least £2.8bn (from £2.7bn).
 
 ## Octus
 
