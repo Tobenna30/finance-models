@@ -14,29 +14,26 @@ Final direction is set by the model, not assumed.
 
 ## LSEG model — [`models/LSEG_Model.xlsx`](models/LSEG_Model.xlsx)
 
-| Base case (price 9,510p, 23 Oct 2026) | |
-|---|---|
-| DCF fair value | **~10,990p (+16%)** |
-| Bear / Bull | ~8,320p (−13%) / ~13,570p (+43%) |
-| Probability-weighted (25/50/25) | ~10,970p (+15%) |
-| 2026E / 2027E adj EPS | 494p / 563p |
-| 2027E P/E at current price | 16.9x |
-| Net debt / EBITDA 2027E (post-Octus) | 2.1x |
-| Peer median forward P/E vs LSEG | 22.5x vs 18.4x (**18% discount**) |
-| Implied value at peer median | ~11,590p (+22%) |
-| Model vs consensus (2026–28 EBITDA) | within ±2% |
+| Price 9,510p (23 Oct 2026) | Value | vs price |
+|---|---:|---:|
+| Price target (50% DCF / 50% SOTP) | 10,870p | +14% |
+| DCF base / bear / bull | 10,250p / 7,580p / 12,610p | +8% / −20% / +33% |
+| Sum of the parts (peer forward P/E by division) | 11,480p | +21% |
+| Retention implied by the share price | 89.8% | vs 92.8% reported |
 
-**Structure:** Inputs (every number tagged sourced / assumption / derived) → divisional revenue build (Data & Analytics, FTSE Russell, Risk Intelligence, Markets, Octus) → adjusted P&L with reported bridge → cash flow → share count & buybacks → economic balance sheet (clearing balances excluded) → DCF with live WACC × terminal-growth sensitivity → trading comps (11 data & exchange peers) → model vs company-compiled consensus → Bear/Base/Bull scenarios. Change `Inputs!Scenario` to flex the whole model.
+**What makes it a professional build**
+- **Quarterly anchor:** 14 income lines, Q1 2025 to Q3 2026 actuals; 2026E = 9M actual + Q4E.
+- **Driver-based forecasts:** subscription income from ASV growth = gross sales + price − churn (retention); FTSE Russell asset-based = ETF AUM × yield; FIDO = Tradeweb ADV × capture; OTC = SwapClear notional × capture; NTI = cash collateral × spread.
+- **Divisional EBITDA** from LSEG's segment disclosure → group P&L, cash flow, buybacks, economic balance sheet (balances every year).
+- **Valuation:** DCF with live WACC × g grid; Tradeweb minority deducted at market P/E; SOTP on peer forward P/E; reverse DCF (retention, volumes, margins, terminal growth implied by the price); Bear/Base/Bull switch that flexes every driver.
+- **Checks:** model vs company-compiled consensus (within 3%); long LSEG / short FactSet pair sizing.
+- **Engine parity:** `lseg/engine.py` reproduces every Excel number to the penny (tested after LibreOffice recalculation, including the scenario switch). CI tests: balance sheet, cash tie-out, history ties to reported totals, 2026 inside guidance, consensus proximity, formulas-only forecasts.
 
-**Calibrated to company guidance:** 2026 equity FCF ≥ £2.8bn, EBITDA margin +100–120bp, capex c.9.5% of income, leverage at the upper end of 1.5–2.5x after Octus.
-
-**How it's built:** `lseg/assumptions.py` holds every input; `lseg/engine.py` is a pure-Python version of the model; `lseg/build_excel.py` writes the formula-driven workbook. CI checks that the balance sheet balances, cash ties, scenarios are ordered, and 2026 outputs sit inside guidance.
-
-**Known limitations (next iterations):** comps use third-party multiples (forward P/E primary; trailing EV/EBITDA definitions vary); Tradeweb minority valued at a flat P/E rather than market value; Octus margin/close date are assumptions (not disclosed); no 2023 historicals yet.
+**Limitations:** 2023 history at group level only (sub-lines not disclosed on today's basis); peer multiples from a third-party site; Octus margin and close date are assumptions.
 
 ## Status
 - [x] Data collection (FY25 results, H1 2026, Q3 2026 update, Octus deal)
-- [x] LSEG model
+- [x] LSEG model (v2: driver-based, quarterly, SOTP, reverse DCF)
 - [x] LSEG trading comps + consensus check
 - [x] LSEG 2-page pitch ([PDF](writeup/LSEG_pitch.pdf), [text](writeup/LSEG_pitch.md))
 - [ ] Rolls-Royce model
