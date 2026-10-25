@@ -56,6 +56,13 @@ while i < len(lines):
         block = []
         while i < len(lines) and lines[i].startswith("|"): block.append(lines[i]); i += 1
         table(block); continue
+    if ln.startswith("!!"):
+        paths = [md.parent / x.strip() for x in ln[2:].split("|")]
+        t = d.add_table(rows=1, cols=len(paths)); t.autofit = False
+        for j, pth in enumerate(paths):
+            cpar = t.cell(0, j).paragraphs[0]; cpar.paragraph_format.space_after = Pt(0)
+            cpar.add_run().add_picture(str(pth), width=Cm(8.5))
+        i += 1; continue
     if ln.startswith("# "):
         p = d.add_paragraph(); r = p.add_run(ln[2:]); r.bold = True; r.font.size = Pt(16); r.font.color.rgb = NAVY
         p.paragraph_format.space_after = Pt(2)

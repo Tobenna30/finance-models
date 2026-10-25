@@ -66,3 +66,11 @@ def test_excel_forecasts_are_formulas():
     for name in ("Model", "Divisions"):
         vals = [c.value for row in wb[name].iter_rows(min_row=6, min_col=6, max_col=10) for c in row if c.value is not None]
         assert vals and all(isinstance(v, str) and v.startswith("=") for v in vals), name
+
+
+def test_stub_and_history():
+    from lseg.engine import stub, pe_history
+    st = stub()
+    assert 0.15 < st["stake_pct"] < 0.35 and st["stub_pe"] < st["group_pe"]
+    ph = pe_history()
+    assert len(ph["rows"]) == len(A.MONTHLY_CLOSE) and ph["lo"] <= ph["now"] <= ph["hi"]

@@ -106,7 +106,7 @@ def run(scenario: int = A.SCENARIO, overrides: dict | None = None) -> dict:
     tv = r["ufcf"][dy[-1]] * (1 + tvg) / (wacc - tvg)
     pv_tv = tv / (1 + wacc) ** (len(dy) - 0.5)
     ev = pv + pv_tv
-    nci_val = r["nci"][2026] * d["tw_fwd_pe"]
+    nci_val = A.TW_PRICE_USD * A.TW_SHARES_M * (1 - A.LSEG_TW_ECON) / A.GBPUSD   # £m, minority at market value
     eq = ev - r["net_debt"][2026] - nci_val
     fv = eq / r["sh_close"][2026] * 100
     return dict(r=r, ke=ke, wacc=wacc, pv_fcf=pv, tv=tv, pv_tv=pv_tv, ev=ev, nci_val=nci_val, equity_value=eq,
@@ -122,6 +122,52 @@ def solve(key: str, lo: float, hi: float, target: float = A.SHARE_PRICE) -> floa
         if (f(mid) > 0) == (flo > 0): lo, flo = mid, f(mid)
         else: hi = mid
     return (lo + hi) / 2
+
+
+def stub() -> dict:
+    """LSEG excluding its Tradeweb stake at market value, on the same forward-earnings source as the comps."""
+    ls = A.LSEG_SAME_SOURCE
+    mcap = ls["price"] * A.LSEG_MKT_SHARES / 100                      # £m
+    tw_mcap = A.TW_PRICE_USD * A.TW_SHARES_M / A.GBPUSD               # £m
+    stake = tw_mcap * A.LSEG_TW_ECON
+    lseg_earn = mcap / ls["fwd_pe"]
+    tw_share_earn = tw_mcap / A.TW_FWD_PE * A.LSEG_TW_ECON
+    stub_val, stub_earn = mcap - stake, lseg_earn - tw_share_earn
+    return dict(mcap=mcap, tw_mcap=tw_mcap, stake=stake, stake_pct=stake / mcap, stub_value=stub_val,
+                stub_earnings=stub_earn, stub_pe=stub_val / stub_earn, group_pe=ls["fwd_pe"])
+
+
+def ltm_eps(month: str) -> float:
+    """LTM adjusted EPS at a month-end: linear between fiscal year-ends, using H1 figures where available."""
+    y, m = int(month[:4]), int(month[5:])
+    pts = {f"{yy}-12": e for yy, e in A.ADJ_EPS_FY.items()}
+    for yy, h in A.H1_EPS.items():
+        if yy - 1 in A.ADJ_EPS_FY and yy - 1 in A.H1_EPS:
+            pts[f"{yy}-06"] = A.ADJ_EPS_FY[yy - 1] - A.H1_EPS[yy - 1] + h
+    pts[f"2026-12"] = run(2)["r"]["eps"][2026]
+    keys = sorted(pts, key=lambda k: (int(k[:4]), int(k[5:])))
+    idx = lambda k: int(k[:4]) * 12 + int(k[5:])
+    t = y * 12 + m
+    for a, b in zip(keys, keys[1:]):
+        if idx(a) <= t <= idx(b):
+            w = (t - idx(a)) / (idx(b) - idx(a)); return pts[a] * (1 - w) + pts[b] * w
+    raise ValueError(month)
+
+
+def pe_history() -> dict:
+    rows = [(mth, px, ltm_eps(mth), px / ltm_eps(mth)) for mth, px in A.MONTHLY_CLOSE.items()]
+    pes = [x[3] for x in rows]
+    return dict(rows=rows, avg=sum(pes) / len(pes), lo=min(pes), hi=max(pes), now=pes[-1],
+                pct_rank=sum(p <= pes[-1] for p in pes) / len(pes))
+
+
+def beta_sensitivity(betas=(0.60, 0.85, 1.00)) -> dict:
+    out = {}
+    base = A.DCF["beta"]
+    for b in betas:
+        A.DCF["beta"] = b; out[b] = run(2)["fair_value"]
+    A.DCF["beta"] = base
+    return out
 
 
 def comps_by_ticker():
@@ -155,5 +201,6 @@ if __name__ == "__main__":
     for y in A.YEARS_FCST:
         print(y, f"tot {r['tot'][y]:.0f} g {r['tot'][y]/(r['tot'][y-1] if y>2026 else 8986)-1:+.1%} ASV {r['asv'][y] if r['asv'][y] else 0:.1%} EBITDA {r['ebitda'][y]:.0f} m {r['ebitda'][y]/r['tot'][y]:.1%} EPS {r['eps'][y]:.1f} FCF {r['eqfcf'][y]:.0f} lev {r['lev'][y]:.2f} chk {r['check'][y]:.6f}")
     print({d: round(r['rev_'+d][2026]) for d,_ in A.DIVISIONS}, {d: round(r['rev_'+d][2027]) for d,_ in A.DIVISIONS})
+    st = stub(); ph = pe_history(); print("stub", {k: round(v, 2) for k, v in st.items()}); print("PE hist now/avg/lo/hi/rank", round(ph["now"],1), round(ph["avg"],1), round(ph["lo"],1), round(ph["hi"],1), round(ph["pct_rank"],2)); print("beta sens", {k: round(v) for k, v in beta_sensitivity().items()})
     so = sotp(o); print("NCI val", round(o["nci_val"]), "SOTP", {k: (round(v['weight'],3), v['pe']) for k,v in so['parts'].items()}, round(so['blended_pe'],2), round(so['per_share']), f"{so['upside']:+.1%}")
     print("implied retention adj", round(solve('retention_adj', -0.05, 0.02), 4), "implied mkt vol adj", round(solve('mkt_vol_adj', -0.15, 0.05), 4))
