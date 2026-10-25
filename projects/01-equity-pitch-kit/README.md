@@ -16,12 +16,15 @@ Final direction is set by the model, not assumed.
 
 | Price 9,510p (23 Oct 2026) | Value | vs price |
 |---|---:|---:|
-| Price target (50% DCF / 50% SOTP) | 10,680p | +12% |
+| DCF base / bear / bull (Octus purchase now deducted) | 9,343p / 6,724p / 11,643p | −2% / −29% / +22% |
 | SOTP (peer forward P/E by division) | 11,480p | +21% |
-| DCF base / bear / bull | 9,880p / 7,260p / 12,180p | +4% / −24% / +28% |
 | LSEG ex-Tradeweb forward P/E | 16.6x | vs FactSet 16.9x |
 | Trailing P/E vs 5-year average | 19.8x | vs 25.3x |
-| Retention implied by the share price | 91.3% | vs 92.8% reported |
+| Retention implied by the share price | 93.4% | vs 92.8% reported |
+
+> **Pitch under revision.** A DCF fix (the Octus purchase price was not deducted) moved the DCF from 9,880p to 9,343p. The two-page pitch still shows the old figures; do not send it until it is updated.
+
+**Modules built:** initiate coverage ✅ · react to results (Q3 2026 update, [note](writeup/LSEG_Q3_2026_update.pdf)) ✅
 
 **What makes it a professional build**
 - **Quarterly anchor:** 14 income lines, Q1 2025 to Q3 2026 actuals; 2026E = 9M actual + Q4E.

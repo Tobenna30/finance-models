@@ -6,7 +6,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter as CL
 from . import assumptions as A
-from .engine import run, sotp, solve, stub, pe_history, beta_sensitivity, KEYS, DIV_OF
+from .engine import run, sotp, solve, stub, pe_history, beta_sensitivity, q3_estimate, KEYS, DIV_OF
 from .trackers import hiring, weekly
 from openpyxl.chart import BarChart
 import csv
@@ -28,6 +28,7 @@ mdl = wb.create_sheet("Model"); dcf = wb.create_sheet("DCF"); sot = wb.create_sh
 cmp_ = wb.create_sheet("Comps"); cs = wb.create_sheet("vs Consensus"); rev = wb.create_sheet("Reverse DCF")
 scn = wb.create_sheet("Scenarios"); pair = wb.create_sheet("Pair trade"); stb = wb.create_sheet("Stub ex-Tradeweb", 7)
 hist = wb.create_sheet("Valuation history", 8); ev = wb.create_sheet("Industry evidence", 9); trk = wb.create_sheet("Trackers", 10)
+q3s = wb.create_sheet("Q3 2026 update", 4)
 src = wb.create_sheet("Sources")
 
 def title(ws, t, sub=None):
@@ -349,7 +350,7 @@ c25 = COLS[2025]
 mdl[f"{c25}{R['othnet']}"] = f"={c25}{R['equity']}+{c25}{R['debt']}-{c25}{R['cash']}-{c25}{R['intang']}"; mdl[f"{c25}{R['othnet']}"].number_format = M
 mdl[f"{c25}{R['check']}"] = f"=ROUND({c25}{R['cash']}+{c25}{R['intang']}+{c25}{R['othnet']}-{c25}{R['debt']}-{c25}{R['equity']},3)"
 head(mdl, "Unlevered free cash flow (for DCF)")
-line(mdl, R, "ufcf", "Unlevered FCF", fc=lambda y, c: f"{c}{R['ebitda']}-{c}{R['capex']}-{c}{R['ebit']}*{I['Tax rate']}-{c}{R['other']}", bold=True)
+line(mdl, R, "ufcf", "Unlevered FCF (after acquisitions)", fc=lambda y, c: f"{c}{R['ebitda']}-{c}{R['capex']}-{c}{R['ebit']}*{I['Tax rate']}-{c}{R['other']}-{c}{R['acq']}", bold=True)
 for row_ in mdl.iter_rows():
     for cell in row_:
         if isinstance(cell.value, str) and "{" in cell.value: cell.value = cell.value.format(**R)
@@ -631,6 +632,39 @@ lc2.add_data(Reference(trk, min_col=7, min_row=w0, max_row=wl), titles_from_data
 trk.add_chart(lc2, f"I{w0+16}")
 trk.cell(wl + 2, 1, "Tradeweb share count held at the latest 10-Q; LSEG share count interpolated between disclosed points. Prices: Yahoo Finance chart endpoint.")
 trk.column_dimensions["A"].width = 22
+
+# =============== Module: Q3 2026 results reaction (engine snapshot) ===============
+title(q3s, "Module: react to results – LSEG Q3 2026 trading update", "Pre-results model = Q3 estimated from each line's H1 2026 growth, no Octus. Post-results = Q3 actuals plus Octus. Snapshot from lseg/engine.py.")
+for j, h in enumerate(["Line", "Q3 26 expected", "Q3 26 actual", "Surprise £m", "Surprise %"], start=1): hdr(q3s, 4, j, h)
+rr = 5
+for k, lab, _ in A.LINES:
+    e, a = q3_estimate(k), A.Q[k][6]
+    for j, v in enumerate([lab, e, a, a - e, a / e - 1], start=1):
+        c = q3s.cell(rr, j, v); c.number_format = PCT if j == 5 else M
+    rr += 1
+q3s.cell(rr, 1, "Total").font = BOLD
+for j, col in ((2, "B"), (3, "C"), (4, "D")):
+    q3s.cell(rr, j, f"=SUM({col}5:{col}{rr-1})").number_format = M
+q3s.cell(rr, 5, f"=C{rr}/B{rr}-1").number_format = PCT
+pre, mid_, post = run(2, q3_known=False, octus=False), run(2, octus=False), run(2)
+r0 = rr + 3
+for j, h in enumerate(["Estimate revision", "Pre-results", "Post-results", "Change"], start=1): hdr(q3s, r0, j, h)
+rows_q = []
+for y in (2026, 2027, 2028):
+    rows_q += [(f"{y}E income excl. recoveries", pre["r"]["tot"][y], post["r"]["tot"][y], M),
+               (f"{y}E adjusted EBITDA", pre["r"]["ebitda"][y], post["r"]["ebitda"][y], M),
+               (f"{y}E adjusted EPS (p)", pre["r"]["eps"][y], post["r"]["eps"][y], P1)]
+rows_q.append(("DCF value (p)", pre["fair_value"], post["fair_value"], P0))
+for i, (lab, a, b, fmt) in enumerate(rows_q, start=r0 + 1):
+    q3s.cell(i, 1, lab); q3s.cell(i, 2, a).number_format = fmt; q3s.cell(i, 3, b).number_format = fmt
+    q3s.cell(i, 4, f"=C{i}/B{i}-1").number_format = PCT
+b0 = r0 + len(rows_q) + 3
+q3s.cell(b0, 1, "DCF value bridge (p)").font = BOLD
+for i, (lab, v) in enumerate([("Pre-results", pre["fair_value"]), ("Q3 beat and guidance", mid_["fair_value"] - pre["fair_value"]),
+                              ("Octus at $3.5bn (40% margin, 12% growth assumed)", post["fair_value"] - mid_["fair_value"]), ("Post-results", post["fair_value"])], start=b0 + 1):
+    q3s.cell(i, 1, lab); q3s.cell(i, 2, v).number_format = P0
+q3s.column_dimensions["A"].width = 52
+for col in "BCDE": q3s.column_dimensions[col].width = 14
 
 # =============== Sources & Cover ===============
 title(src, "Sources")

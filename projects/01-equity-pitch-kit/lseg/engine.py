@@ -3,17 +3,27 @@ from statistics import median
 from . import assumptions as A
 
 KEYS = [k for k, _, _ in A.LINES]
+
+
+def q3_estimate(k: str) -> float:
+    """Pre-results expectation for Q3 2026: Q3 2025 grown at the line's H1 2026 year-on-year rate."""
+    h1_26, h1_25 = A.Q[k][4] + A.Q[k][5], A.Q[k][0] + A.Q[k][1]
+    return A.Q[k][2] * h1_26 / h1_25
 DIV_OF = {k: d for k, _, d in A.LINES}
 
 
-def run(scenario: int = A.SCENARIO, overrides: dict | None = None) -> dict:
+def run(scenario: int = A.SCENARIO, overrides: dict | None = None, q3_known: bool = True, octus: bool = True) -> dict:
+    """q3_known=False rebuilds the model as it stood before the Q3 2026 update: Q3 is estimated from H1 growth per line,
+    and Octus (announced with Q3) is excluded."""
     sc = {k: v[scenario] for k, v in A.SCEN.items()}
     if overrides: sc.update(overrides)
     Y = A.YEARS_FCST
     r = {}
     def put(k, y, v): r.setdefault(k, {})[y] = v
     prev = {k: A.HIST_LINES[k][2025] for k in KEYS}
-    o = A.OCTUS
+    o = dict(A.OCTUS)
+    if not octus:
+        o["close_year"] = 9999
     cash, intang = A.OPENING_BS["Cash"], A.OPENING_BS["Goodwill & intangibles"]
     debt, equity = A.OPENING_BS["Borrowings incl leases"], A.OPENING_BS["Total equity"]
     other_net = equity + debt - cash - intang
@@ -23,7 +33,8 @@ def run(scenario: int = A.SCENARIO, overrides: dict | None = None) -> dict:
         L = {}
         if y == 2026:
             for k in KEYS:
-                L[k] = sum(A.Q[k][4:7]) + A.Q[k][3] * (1 + A.Q4_GROWTH[k])
+                q3 = A.Q[k][6] if q3_known else q3_estimate(k)
+                L[k] = A.Q[k][4] + A.Q[k][5] + q3 + A.Q[k][3] * (1 + A.Q4_GROWTH[k])
             aum, adv, coll = A.ETF_AUM_AVG_2026, A.TW_ADV_2026, A.COLLATERAL_2026
             yld = L["fa"] * A.GBPUSD / (aum * 1000) * 1e4          # bps
             capt = L["fido"] / adv                                  # £m per $bn ADV
@@ -52,7 +63,9 @@ def run(scenario: int = A.SCENARIO, overrides: dict | None = None) -> dict:
         put("asv", y, asv); put("aum", y, aum); put("yld", y, yld); put("adv", y, adv); put("capt", y, capt)
         put("coll", y, coll); put("spr", y, spr)
         prev = L
-        if y == o["close_year"]:
+        if not octus:
+            oct_rev = 0.0
+        elif y == o["close_year"]:
             oct_rev = o["rev_2026_usd_m"] / A.GBPUSD * (1 + o["growth"]) ** (y - 2026)
         elif y > o["close_year"]:
             oct_rev *= 1 + o["growth"]
@@ -87,7 +100,7 @@ def run(scenario: int = A.SCENARIO, overrides: dict | None = None) -> dict:
         intang += capex + acq - da - pa
         equity += rep_ni - div_cash - nci_div - bb
         other_net += other + pa * A.TAX_RATE
-        ufcf = ebitda - capex - ebit * A.TAX_RATE - other
+        ufcf = ebitda - capex - ebit * A.TAX_RATE - other - acq   # acquisitions are paid for in the DCF
         for k, v in dict(tot=tot, rec=rec, ebitda=ebitda, da=da, pa=pa, ebit=ebit, fin=fin, pbt=pbt, tax=tax,
                          ni=ni, nci=nci, ni_sh=ni_sh, eps=eps, rep_ni=rep_ni, capex=capex, other=other,
                          eqfcf=eqfcf, acq=acq, div_cash=div_cash, nci_div=nci_div, bb=bb, px=px, sh_open=sh,
