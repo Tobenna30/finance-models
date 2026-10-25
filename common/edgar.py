@@ -12,9 +12,9 @@ PEERS = {  # ticker: CIK
     "ICE": 1571949, "NDAQ": 1120193, "CME": 1156375, "TW": 1758730,
 }
 CONCEPTS = {  # first tag found wins
-    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax"],
+    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "RevenuesNetOfInterestExpense"],
     "operating_income": ["OperatingIncomeLoss"],
-    "d_and_a": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet"],
+    "d_and_a": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet", "AmortizationOfIntangibleAssets"],
     "net_income": ["NetIncomeLoss"],
     "eps_diluted": ["EarningsPerShareDiluted"],
     "cash": ["CashAndCashEquivalentsAtCarryingValue"],
@@ -31,17 +31,22 @@ def get(url):
 
 
 def latest_annual(facts, tags, unit="USD", instant=False):
-    for tag in tags:
+    """Latest fiscal-year value across all candidate tags (companies switch tags over time).
+    Ties on period end are broken by tag order, then by latest filing."""
+    best = None
+    for rank, tag in enumerate(tags):
         node = facts.get("us-gaap", {}).get(tag)
         if not node or unit not in node["units"]:
             continue
-        rows = [x for x in node["units"][unit] if x.get("form") == "10-K" and x.get("fp") == "FY"]
-        if not instant:
-            rows = [x for x in rows if "start" in x and 350 <= (_days(x["start"], x["end"])) <= 380]
-        if rows:
-            best = max(rows, key=lambda x: (x["end"], x.get("filed", "")))
-            return best["val"], best["end"], tag
-    return None, None, None
+        for x in node["units"][unit]:
+            if x.get("form") != "10-K" or x.get("fp") != "FY":
+                continue
+            if not instant and not ("start" in x and 350 <= _days(x["start"], x["end"]) <= 380):
+                continue
+            key = (x["end"], -rank, x.get("filed", ""))
+            if best is None or key > best[0]:
+                best = (key, x["val"], x["end"], tag)
+    return (best[1], best[2], best[3]) if best else (None, None, None)
 
 
 def _days(a, b):
