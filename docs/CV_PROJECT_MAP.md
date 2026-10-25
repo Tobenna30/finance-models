@@ -1,6 +1,6 @@
 # CV project map
 
-Every project named on a CV must point to a module in one of the 14 projects below. When a new job description asks for something no module shows, add a module to the closest project (one company, one more task) rather than inventing a new project.
+Every project named on a CV must point to a module in one of the 16 projects below. When a new job description asks for something no module shows, add a module to the closest project (one company, one more task) rather than inventing a new project.
 
 Source: all 250 tailored CVs in `Job Applications/CVs and Cover Letters`, scanned 25 Oct 2026. About 310 distinct project titles, 453 uses. Variants of the same project are grouped.
 
@@ -17,7 +17,7 @@ Source: all 250 tailored CVs in `Job Applications/CVs and Cover Letters`, scanne
 |---|---|---|---|---|---|
 | 01 | Equity research | **LSEG** (long); Dutch Bros (short) | LSEG initiation done | Dutch Bros investment case (7); Bloomsbury long-term research (2); Sector basket & RV equity (2); Management quality & capital allocation (1); EM digital payments (3); Rightmove, Greggs strategy (3) | Results reaction; earnings quality; capital allocation; bear case; Dutch Bros short (port your real model) |
 | 02 | Earnings & catalyst tracking | LSEG + coverage list | Trackers started (hiring, stub) | Event-driven equity research (5); AI research & thesis-monitoring platform (3); Sector intelligence platform (2); Cerillion earnings reappraisal (5); Bloomsbury earnings quality (3) | Quarterly results ingest and revision note; catalyst calendar; news/announcement tagging |
-| 03 | Systematic, quant & execution | US/UK equities; NASDAQ order book | Not started | NASDAQ order-book & market impact (5); Pre-trade execution risk (2); Shell execution & TCA (1); Adaptive execution routing (1); Cross-sectional momentum (2); Signal combination (1); HNW / family wealth portfolio construction (4) | Momentum/factor backtest; execution cost model (LSEG buyback as the case); portfolio construction for a private client |
+| 03 | Systematic, quant & execution | US/UK equities; NASDAQ order book | Not started | NASDAQ order-book & market impact (5); Pre-trade execution risk (2); Shell execution & TCA (1); Adaptive execution routing (1); Cross-sectional momentum (2); Signal combination (1) | Momentum/factor backtest; execution cost model (LSEG buyback as the case) |
 | 04 | Sell-side M&A & takeovers | **Darktrace** (Thoma Bravo take-private) | Not started | Darktrace sell-side M&A (9); Ricardo takeover (4); Harworth / Peel takeover & defence (4); Technology services sell-side (2) | Fairness view on offer; precedents; defence case; bid premium analysis |
 | 05 | Strategic M&A / merger model | **Rathbones / Raymond James** | Not started | M&A strategic advisory & valuation case (11); Raymond James / Rathbones (8); Network International buy-side (2); VodafoneThree integration (1); Software sector screening (1); Secure Trust Bank carve-out (1) | Accretion/dilution; synergies; offer price; integration plan; target screening |
 | 06 | ECM / DCM financing | **Whitbread** | Not started | Corporate financing & capital structure case (5); Whitbread capital markets financing (3); Raspberry Pi IPO (2); Heathrow DCM (2); Airtel Money IPO (1); Chesnara rights issue (1) | Bond pricing vs comparables; rights issue maths; IPO pricing (FTSE Russell carve-out as the LSEG link) |
@@ -29,10 +29,16 @@ Source: all 250 tailored CVs in `Job Applications/CVs and Cover Letters`, scanne
 | 12 | Rates & macro | **UK gilts / GBP** | Not started | GBP rates & FX macro strategy (6); Macro & fixed income platform, Python/Bloomberg (3); Cross-asset strategy platform (3); UK front-end rates RV (2); UK inflation shock (1); Swiss Re ALM reinvestment (1) | Curve, carry/roll, DV01; policy-path RV; trade log; ALM case |
 | 13 | Credit RV & structured credit | **European bank capital structure** | Not started | European / UK bank credit RV (10); EM sovereign rates, FX & credit (2); Aurium CLO XVII (3); UK auto ABS (2); RMBS funding (2); Repo & securities financing (1); Vodafone credit (1); Matterhorn Re cat bond (1); HSBC 2031 bond RFQ (1) | AT1 / senior spread RV; CLO tranche analysis; ABS structuring; RFQ dealer selection |
 | 14 | Derivatives, hedging & commodities | **FTSE 100 options; European gas** | Not started | FTSE 100 options hedging (4); S&P 500 hedging & market-making (3); Corporate energy & FX hedging incl. Rolls-Royce (7); European gas basis, storage & power (8); Commodity derivatives risk engine (2); LME copper (2); EUR/USD pricing & volatility (6); Lyft 2030 convertible (2) | Option pricing & Greeks; hedge structures; gas spreads & storage; FX forward pricing; convertible valuation |
+| 15 | Wealth & private client portfolios | **One family client** (entrepreneur after a liquidity event) | Not started | HNW entrepreneur strategic asset allocation (1); UHNW multi-asset portfolio & liquidity planning (1); Family wealth strategy (1); Private client rebalancing, drawdown & liquidity (1); Multi-custodian family portfolio reporting (1); Founder liquidity event lending & family wealth (1); UK intermediary fund selection (2) | Investment policy & strategic allocation; cash-flow and drawdown plan; Lombard / liquidity lending; fund selection; performance & client report |
+| 16 | Markets sales, prime & distribution | **One institutional client** (a UK pension or a new hedge fund) | Not started | Institutional FX sales & research (1); Emerging hedge fund prime services & cross-sell (1); Institutional client markets & hedging solutions (1); Institutional markets product dashboard (1); Corporate FX hedging client pitch (shared with 14) | Client hedging pitch (FX / rates); prime services onboarding & financing economics; fund distribution plan; client coverage dashboard |
+
+## Coverage of this map
+
+310 titles scanned: 171 mapped automatically, about 20 placed by hand, about 105 were fragments, leaked CV-writing rules or job titles, and 6 are personal-portfolio entries (dropped). Only project sections were scanned; projects described inside experience bullets are not counted.
 
 ## Dropped from CVs going forward
 
-Personal / self-directed portfolio entries (your own rule removes these), CV-writing rules that leaked into CV text, generic lines with no company or result, and non-front-office items (BA, reporting, data compliance), which belong under experience, not projects.
+Personal / self-directed portfolio entries (6 titles; your own rule removes these), CV-writing rules that leaked into CV text, generic lines with no company or result, and non-front-office items (BA, reporting, data compliance), which belong under experience, not projects.
 
 ## Consistency fixes needed
 
