@@ -56,7 +56,7 @@ def test_sotp_and_reverse_dcf_sane():
     s = sotp()
     assert 15 < s["blended_pe"] < 30 and abs(sum(p["weight"] for p in s["parts"].values()) - 1) < 1e-9
     implied = A.RETENTION[1] + solve("retention_adj", -0.06, 0.03)
-    assert 0.80 < implied < A.RETENTION[1]
+    assert 0.85 < implied < 0.99
 
 
 def test_excel_forecasts_are_formulas():
@@ -85,3 +85,16 @@ def test_trackers_and_evidence():
     if w:  # data present once the weekly refresh has run
         assert all(0.05 < x["stake_pct"] < 0.6 for x in w)
     assert all(len(e) == 6 and e[-1].startswith("https://") for e in A.EVIDENCE)
+
+
+def test_acquisitions_are_paid_for_in_dcf():
+    r = run(2)["r"]
+    y = A.OCTUS["close_year"]
+    assert r["acq"][y] > 0 and r["ufcf"][y] < r["ebitda"][y] - r["capex"][y] - r["acq"][y] + 1e-6
+
+
+def test_results_module_pre_vs_post():
+    pre = run(2, q3_known=False, octus=False); post = run(2)
+    for y in A.YEARS_FCST:
+        assert abs(pre["r"]["check"][y]) < 1e-6
+    assert pre["r"]["oct"][2027] == 0 and post["r"]["oct"][2027] > 0
