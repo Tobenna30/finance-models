@@ -1,0 +1,234 @@
+{
+  "accessed": "2026-10-27",
+  "sources": {
+    "SP26": [
+      "S&P rating action, 7 Sep 2026, Vital Holdco assigned B+; opening bullets and financial outlook. Agency forecasts, not audited actuals.",
+      "https://www.spglobal.com/ratings/en/regulatory/article/-/view/type/HTML/id/3623391"
+    ],
+    "CIN26": [
+      "Cinven, 2 Jul 2026, Vitamin Well Group to combine with EMPWR. Financial terms undisclosed; subject to approvals.",
+      "https://www.cinven.com/news-insights/vitamin-well-group-empwr/"
+    ],
+    "CIN24": [
+      "Cinven, 6 Aug 2024, agreement to become lead investor; Bridgepoint retains minority; financial terms undisclosed.",
+      "https://www.cinven.com/news-insights/cinven-to-become-lead-investor-in-vitamin-well/"
+    ],
+    "OBDC25": [
+      "Blue Owl 10-Q, 30 Sep 2025, Vital Bidco investment rows: legacy first lien S+450bp, Oct 2031. Lender holding, not total borrower debt.",
+      "https://www.sec.gov/Archives/edgar/data/1655888/000165588825000024/obdc-20250930.htm"
+    ]
+  },
+  "inputs": {
+    "tlb_eur": {
+      "label": "New term loan, EURm equivalent",
+      "value": 1900.0,
+      "tag": "S",
+      "unit": "EURm",
+      "basis": "SP26: agency reports issuance; final agreement unverified"
+    },
+    "rcf_eur": {
+      "label": "Revolver commitment, EURm equivalent",
+      "value": 200.0,
+      "tag": "S",
+      "unit": "EURm",
+      "basis": "SP26: reported undrawn commitment"
+    },
+    "maturity": {
+      "label": "Term loan maturity year",
+      "value": 2033,
+      "tag": "S",
+      "unit": "year",
+      "basis": "SP26; exact date unverified"
+    },
+    "fx": {
+      "label": "SEK per EUR, constant translation proxy",
+      "value": 11.0,
+      "tag": "A",
+      "unit": "SEK/EUR",
+      "basis": "Round common currency proxy; not an observed spot or FX hedge"
+    },
+    "ebitda_low": {
+      "label": "2026 agency EBITDA forecast low",
+      "value": 4000.0,
+      "tag": "S",
+      "unit": "SEKm",
+      "basis": "SP26: adjusted pro forma forecast"
+    },
+    "ebitda_high": {
+      "label": "2026 agency EBITDA forecast high",
+      "value": 4200.0,
+      "tag": "S",
+      "unit": "SEKm",
+      "basis": "SP26: adjusted pro forma forecast"
+    },
+    "margin": {
+      "label": "Starting EBITDA margin proxy",
+      "value": 0.26,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Middle of agency's 25-27% outlook; not reported margin"
+    },
+    "cash_haircut": {
+      "label": "Adjusted EBITDA to cash EBITDA haircut",
+      "value": 0.05,
+      "tag": "A",
+      "unit": "%",
+      "basis": "5% reserve for noncash/addback leakage; requires reconciliation"
+    },
+    "opening_cash": {
+      "label": "Opening cash proxy",
+      "value": 500.0,
+      "tag": "A",
+      "unit": "SEKm",
+      "basis": "Unverified opening liquidity; sensitise before any approval"
+    },
+    "minimum_cash": {
+      "label": "Minimum operating cash",
+      "value": 300.0,
+      "tag": "A",
+      "unit": "SEKm",
+      "basis": "Analyst buffer, not a covenant"
+    },
+    "base_rate": {
+      "label": "Reference rate proxy",
+      "value": 0.03,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Constant illustrative blended funding rate; not current EURIBOR/SOFR"
+    },
+    "spread": {
+      "label": "New term-loan spread proxy",
+      "value": 0.04,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Illustrative 400bp; not carried from the legacy loan or verified pricing"
+    },
+    "rcf_spread": {
+      "label": "Revolver spread proxy",
+      "value": 0.045,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Illustrative 450bp; not verified pricing"
+    },
+    "commit_fee": {
+      "label": "Undrawn revolver fee",
+      "value": 0.005,
+      "tag": "A",
+      "unit": "%",
+      "basis": "50bp annual assumed commitment fee"
+    },
+    "amort": {
+      "label": "Annual term-loan amortisation",
+      "value": 0.01,
+      "tag": "A",
+      "unit": "%",
+      "basis": "1% of original principal; loan documentation required"
+    },
+    "sweep": {
+      "label": "Excess cash sweep",
+      "value": 0.5,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Repay RCF first; sweep half residual above cash buffer to TLB"
+    },
+    "tax": {
+      "label": "Illustrative blended cash tax rate",
+      "value": 0.22,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Simplified 22% cash tax; not legal tax advice or group effective tax rate"
+    },
+    "da": {
+      "label": "D&A as percentage of revenue",
+      "value": 0.025,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Proxy for acquired manufacturing assets"
+    },
+    "capex_low": {
+      "label": "2026 agency capex forecast low",
+      "value": 1200.0,
+      "tag": "S",
+      "unit": "SEKm",
+      "basis": "SP26: capacity expansion forecast"
+    },
+    "capex_high": {
+      "label": "2026 agency capex forecast high",
+      "value": 1300.0,
+      "tag": "S",
+      "unit": "SEKm",
+      "basis": "SP26: capacity expansion forecast"
+    },
+    "capex_normal": {
+      "label": "Capex after expansion, revenue share",
+      "value": 0.035,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Normalised maintenance and growth investment"
+    },
+    "transaction_cost": {
+      "label": "2026 agency transaction-cost forecast",
+      "value": 824.0,
+      "tag": "S",
+      "unit": "SEKm",
+      "basis": "SP26: one-off costs; deducted once in 2026"
+    },
+    "nwc": {
+      "label": "Working capital investment / revenue change",
+      "value": 0.15,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Inventory/receivable funding; release allowed on falling sales"
+    },
+    "max_leverage": {
+      "label": "Underwriting gross leverage ceiling",
+      "value": 5.5,
+      "tag": "A",
+      "unit": "x",
+      "basis": "Credit policy proxy, not a contractual covenant"
+    },
+    "min_cover": {
+      "label": "Underwriting cash interest cover floor",
+      "value": 2.0,
+      "tag": "A",
+      "unit": "x",
+      "basis": "Cash EBITDA / interest plus commitment fee"
+    },
+    "recovery_haircut": {
+      "label": "Default EBITDA haircut",
+      "value": 0.35,
+      "tag": "A",
+      "unit": "%",
+      "basis": "35% stress to starting cash EBITDA, independent of sponsor forecasts"
+    },
+    "recovery_multiple": {
+      "label": "Default enterprise-value multiple",
+      "value": 6.0,
+      "tag": "A",
+      "unit": "x",
+      "basis": "6x stressed cash EBITDA; no clean trading comp set obtained"
+    },
+    "recovery_cost": {
+      "label": "Enforcement costs / stressed EV",
+      "value": 0.1,
+      "tag": "A",
+      "unit": "%",
+      "basis": "10% cost reserve, not a legal priority opinion"
+    },
+    "priority_claims": {
+      "label": "Other priority claims",
+      "value": 100.0,
+      "tag": "A",
+      "unit": "SEKm",
+      "basis": "Illustrative reserve; actual claims unverified"
+    },
+    "recovery_rcf_draw": {
+      "label": "Revolver drawn at default",
+      "value": 1.0,
+      "tag": "A",
+      "unit": "%",
+      "basis": "Full draw; assume pari passu with term loan"
+    }
+  },
+  "scope": "Manually recorded public source facts and analyst assumptions. No audited borrower accounts or executed agreement obtained."
+}
