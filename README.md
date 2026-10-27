@@ -21,7 +21,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |
 | 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python | ⚪ Planned |
 | 13 | Credit Relative Value (Banks, AT1, HY) | Credit | Hybrid | ⚪ Planned |
-| 14 | [Refinery derivatives & hedging](projects/14-derivatives-hedging) | Derivatives / Commodities | Excel + Python | 🟢 Built (collars, outage, FX) |
+| 14 | [Refinery derivatives & hedging](projects/14-derivatives-hedging) | Derivatives / Commodities | Excel + Python | 🟢 Built: refinery hedge (collars, outage, FX) |
 | 15 | Wealth & Private Client Portfolios | Wealth / private banking | Excel + Python | ⚪ Planned |
 | 16 | Markets Sales, Prime & Distribution | Sales / prime services / AM distribution | Excel + Python | ⚪ Planned |
 

@@ -1,11 +1,9 @@
-# Refinery margin hedge: hedge 80% of 2027 cracks with zero-cost collars
+# Refinery margin hedge: 80% cover for 2027
 
 *Illustrative 100,000 bbl/day South African coastal refinery. Teaching case, not a real asset or executable quotes. Market data read 27 Oct 2026.*
 
 ## Recommendation
-Hedge 80% of budgeted 2027 diesel, jet and petrol barrels with monthly zero-cost collars. Buy puts 5% below the forward crack and sell calls at the strike that makes the premiums net to zero. Sell dollars forward against the rand cost budget.
-
-At 80% cover, a 30% fall in 2027 cracks cuts refining margin by **10%** against **30%** unhedged. If a six-week outage hits while cracks rise 30%, the sold calls on the missing barrels cost **2.3%** of the **$875m** annual budget margin. 90% cover saves another 2.5 points in a fall, but its outage cost of 2.6% breaches the 2.5% appetite. 80% is the most protection inside that limit.
+Hedge 80% of budgeted diesel, jet and petrol barrels with monthly zero-cost collars: buy puts 5% below forward and sell calls at equal premium. A 30% crack fall cuts margin 10%, versus 30% unhedged. Six weeks of outage during a 30% spike costs 2.3% of the $875m budget on unbacked calls. At 90%, another 2.5 points of downside protection costs 2.6% in that outage, above the 2.5% appetite.
 
 | Cover | 30% crack fall | Outage cost on unbacked calls | Outage + 30% spike, total |
 |---|---|---|---|
@@ -15,27 +13,16 @@ At 80% cover, a 30% fall in 2027 cracks cuts refining margin by **10%** against 
 | **80%** | **-10.0%** | **2.3%** | **-5.0%** |
 | 90% | -7.5% | 2.6% | -7.5% |
 
-!! charts/payoff.png | charts/tradeoff.png
+## Inputs and pricing check
+On 20 Oct 2026, NYH diesel traded $105.91/bbl over Brent ($115.22), versus a trailing-year average of $56.89. Goldman expects 2027 diesel and jet cracks above $40, versus about $20 normally. Without a public forward curve, use $40 diesel and trailing-year petrol of $26.41. Annualised month-average crack volatility is $44.71/bbl diesel and $40.56/bbl petrol: crisis-year inputs, not forecasts.
 
-## Market inputs
-Spot cracks are extreme. On 20 Oct 2026 NYH diesel traded $105.91/bbl over Brent ($115.22), against a trailing-year average of $56.89. Goldman Sachs expects 2027 diesel and jet cracks above $40, against about $20 in a normal year. The model uses $40 for diesel and the trailing-year average of $26.41 for petrol, because no public crack forward curve was available. The brief is a refiner locking in unusually high 2027 margins before they fall back.
-
-Volatility is the annualised change in month-average cracks over the past year: $44.71/bbl for diesel and $40.56/bbl for petrol. That is a crisis-year figure. It sets premium size, not the headline percentages.
-
-## Model check: Bachelier against Black-76
-Bachelier prices the collar because cracks can go negative, as they did in 2020. Its zero-cost call sits exactly 5% above the forward ($42.00 for diesel), so the results hold at any crack level. Black-76 assumes a lognormal crack with upside skew, which pushes the December diesel call out to $45.68. Under Black-76 strikes the outage cost falls to 1.6%, while the 30% fall result is unchanged at 10%. The Bachelier figure is the cautious one, and the recommendation holds under either model.
+Bachelier allows negative cracks, as in 2020. Its zero-cost call is 5% above forward ($42.00 diesel). Black-76 upside skew moves December's diesel call to $45.68 and lowers outage cost to 1.6%; the crack-fall loss stays 10%. The recommendation holds under both models.
 
 ## FX overlay
-The refinery earns dollars and pays about R3.2bn of rand costs. Selling $189m forward at 16.78 to 17.28 ZAR per dollar (spot 16.64, Fed funds 3.88%, SARB repo 7.25%) locks those costs. If the rand strengthens 15%, rand margin after costs falls to R9.94bn hedged against R9.45bn unhedged.
+Sell $189m forward against R3.2bn of rand costs at 16.78 to 17.28 ZAR/USD (spot 16.64; Fed funds 3.88%; SARB repo 7.25%). With 15% rand appreciation, margin after costs is R9.94bn hedged versus R9.45bn unhedged.
 
-## Residual risk register (5x5, after controls)
-| Risk | L | I | Score | Owner | Control and trigger |
-|---|---|---|---|---|---|
-| Unplanned outage leaves sold calls unbacked | 3 | 5 | 15 | Refinery operations manager | Weekly run-plan update. Recut hedge volumes on any outage notice |
-| Basis: refinery slate and pricing differ from NYH cracks | 3 | 4 | 12 | Commercial risk manager | Weekly product-level reconciliation. Investigate >10% divergence |
-| Model and volatility: inputs from one crisis year | 3 | 4 | 12 | Independent market risk analyst | Replace with dealer quotes and monthly implied vols before trading |
-| OTC counterparty or collateral call on sold calls | 2 | 5 | 10 | Treasury and credit managers | Approved limits, CSA terms and a liquidity stress before execution |
-| Rand strength against the dollar margin | 2 | 4 | 8 | Treasury manager | Sell dollars only against the approved rand cost budget |
+## Residual risks and controls
+Scores use likelihood x impact on a 5x5 scale. Operations owns outage risk (3x5=15): update run plans weekly and recut hedges on notice. Commercial risk owns NYH basis (3x4=12): reconcile weekly and investigate >10% divergence. Independent risk owns model/volatility risk (3x4=12): obtain dealer curves and implied vols. Treasury/credit owns counterparty and collateral risk (2x5=10): limits, CSA and liquidity stress. Treasury owns FX risk (2x4=8): sell dollars only against approved costs.
 
-## Limits
-Refining margin is crack times barrels, with opex excluded, so it is not profit or cash flow. NYH cracks stand in for South African product prices. One forward per product replaces a monthly curve. The SARB rate and the Goldman forecast come from secondary reports. A Monte Carlo at crisis-year volatility puts the unhedged 5th percentile below zero margin and the 80% hedged case at -35%, so treat it as a stress picture, not a forecast.
+## Sources and limits
+FRED/EIA series and source links are in assumptions.py and the workbook. SARB 7.25% via eNCA and Goldman's forecast via IBTimes are secondary sources to confirm. NYH proxies replace local pricing; flat forwards replace monthly curves. Refining margin excludes opex and is not profit or cash flow. Crisis-volatility Monte Carlo puts unhedged 5th-percentile margin below zero and the 80% hedge at -35% versus budget: stress only. Payoff and trade-off charts accompany this memo in charts/.

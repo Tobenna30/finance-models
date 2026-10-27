@@ -52,7 +52,8 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 | 01 | Equity research | LSEG | Built. **On hold.** Pitch PDF marked "under revision, do not send". PR #8 (DCF acquisition fix, Q3 2026 results module) open |
 | 02 | Earnings & catalyst tracking | LSEG + coverage | Hiring and Tradeweb-stake trackers built |
 | 04 + 08 | Sell-side M&A + LBO | Darktrace (Thoma Bravo take-private) | **Next** |
-| 03, 05, 06, 07, 09–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
+| 14 | Derivatives, hedging & commodities | Illustrative South African refinery | Built: Bachelier collars, Black-76 check, outage stress and USD/ZAR overlay. 80% cover; 10% crack-fall loss; 2.3% outage cost. |
+| 03, 05, 06, 07, 09–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
 ## Next task: Darktrace (projects 04 and 08)
 
