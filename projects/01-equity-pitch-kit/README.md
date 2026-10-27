@@ -22,9 +22,13 @@ Final direction is set by the model, not assumed.
 | Trailing P/E vs 5-year average | 19.8x | vs 25.3x |
 | Retention implied by the share price | 93.4% | vs 92.8% reported |
 
-> **Pitch under revision.** A DCF fix (the Octus purchase price was not deducted) moved the DCF from 9,880p to 9,343p. The two-page pitch still shows the old figures; do not send it until it is updated.
+## Results
 
-**Modules built:** initiate coverage ✅ · react to results (Q3 2026 update, [note](writeup/LSEG_Q3_2026_update.pdf)) ✅
+**Long; published target 10,414p (+9.5% versus 9,510p at 23 October 2026).** Equal method weights: 50% corrected base DCF (9,343.48p), 50% peer SOTP (11,484.29p). No scenario-weight change. The peer discount supports the long; DCF alone is 1.8% below price.
+
+Reverse DCF implies 93.45% retention from 2027, versus 92.8% reported, holding other inputs fixed. This requires 0.65 percentage points of improvement, so the price does not imply AI-driven churn. The old 91.3% claim and 10,680p target are superseded.
+
+**Modules built:** initiate coverage ✅ · post-Octus pitch revision ✅ · react to results (Q3 2026 update, [note](writeup/LSEG_Q3_2026_update.pdf)) ✅
 
 **What makes it a professional build**
 - **Quarterly anchor:** 14 income lines, Q1 2025 to Q3 2026 actuals; 2026E = 9M actual + Q4E.
