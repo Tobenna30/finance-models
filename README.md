@@ -15,7 +15,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 05 | Strategic Merger Model (Accretion/Dilution) | IB | Excel | ⚪ Planned |
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |
 | 07 | Restructuring & Liability Management | Debt advisory | Excel | ⚪ Planned |
-| 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo) |
+| 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo; liquidity funding required) |
 | 09 | [Vitamin Well private-credit underwriting](projects/09-private-credit) | Private credit | Excel + Python | 🟢 Built (public-information credit model) |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |

@@ -8,8 +8,8 @@ USD millions unless stated. Per-share figures in USD or pence as labelled. Darkt
 SOURCES = {
     "R27": ("Rule 2.7 announcement, Recommended Cash Acquisition of Darktrace plc, 26 Apr 2024",
             "https://ir.darktrace.com/regulatory-news/2024/4/26/1813465"),
-    "SCH": ("Publication of Scheme Document, 23 May 2024",
-            "https://ir.darktrace.com/regulatory-news/2024/5/23/1823676"),
+    "SCH": ("Scheme document, 23 May 2024, pp. 15, 19, 28 and 87 (offer, undertakings, interim financing)",
+            "https://data.fca.org.uk/artefacts/NSM/Portal/NI-000097497/NI-000097497.pdf"),
     "VOTE": ("Results of Court Meeting and General Meeting, 18 Jun 2024",
              "https://www.investegate.co.uk/announcement/rns/darktrace--dark/result-of-meeting/8266218"),
     "REG": ("Regulatory approval and timetable update, 16 Sep 2024",
@@ -145,7 +145,7 @@ TAX = 0.25                   # S UKTAX
 CIR_CAP = 0.30               # S UKTAX: net interest deductible up to 30% of tax-EBITDA
 
 # =====================================================================================
-# 3. Project 04: standalone DCF (public-company view at the undisturbed date)
+# 3. Project 04: standalone DCF (retrospective: April market inputs, July FY24 revenue update)
 # =====================================================================================
 YEARS_DCF = [2025, 2026, 2027, 2028, 2029, 2030, 2031]
 DCF = {

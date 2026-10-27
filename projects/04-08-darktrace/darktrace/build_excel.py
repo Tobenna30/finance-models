@@ -522,7 +522,7 @@ rv.column_dimensions["A"].width = 62
 ff = S["Football field"]
 title(ff, "Valuation football field (pence per share)", "Offer 620p. Undisturbed close 517p.")
 for j, t in enumerate(["Method", "Low", "High", "Width", "Offer"], start=1): hdr(ff, 4, j, t)
-items = [("52-week trading (placing to 12m high)", f"={I['placing']}", f"={I['high12m']}"),
+items = [("March placing to 12-month high", f"={I['placing']}", f"={I['high12m']}"),
          ("DCF (WACC +/-1%, g +/-0.5%)", f"={DG['low']}", f"={DG['high']}"),
          ("Trading comps EV/NTM revenue (Q1-Q3)", f"={CMP['q1']}", f"={CMP['q3']}"),
          ("Growth-adjusted comps (regression +/-1x)", f"={CMP['reg_lo']}", f"={CMP['reg_hi']}"),
@@ -550,7 +550,7 @@ src.column_dimensions["B"].width = 80; src.column_dimensions["C"].width = 90
 
 title(cover, "Darktrace plc / Thoma Bravo take-private (2024)")
 cover["A2"] = ("Project 04: sell-side fairness view. Project 08: LBO and IC case. "
-               "Built from the Rule 2.7 announcement, scheme document and company releases.")
+               "Retrospective analysis: April market inputs, July FY24 update; not an April information set.")
 cover["A3"] = "Tobenna Agubuche | github.com/Tobenna30/finance-models | Not investment advice"
 cov = [("Offer price (p)", f"={I['offer_p']}", P0), ("Premium to undisturbed close", f"={OFR['Premium to undisturbed close (517p)']}", PCT),
        ("Premium to 3-month VWAP", f"={OFR['Premium to 3-month VWAP (429.9p)']}", PCT),
@@ -561,10 +561,13 @@ cov = [("Offer price (p)", f"={I['offer_p']}", P0), ("Premium to undisturbed clo
        ("LBO base IRR", "=" + BASE["out"][0]["irr"], PCT), ("LBO base MOIC", "=" + BASE["out"][0]["moic"], X),
        ("LBO downside IRR", "=" + DOWN["out"][0]["irr"], PCT), ("LBO downside MOIC", "=" + DOWN["out"][0]["moic"], X),
        ("Sponsor equity cheque ($m)", "=" + BASE["sponsor"], M), ("Debt / LTM EBITDA at close", "=" + BASE["lev_ltm"], X),
-       ("Downside liquidity low point ($m)", "=" + DOWN["low"], M1), ("Bridge check (should be 0)", "=" + BRIDGE, M1)]
+       ("Base liquidity low point ($m)", "=" + BASE["low"], M1),
+       ("Base shortfall to operating cash minimum ($m)", f"=MAX(0,{I['min_cash']}-{BASE['low']})", M1),
+       ("Downside liquidity low point ($m)", "=" + DOWN["low"], M1),
+       ("Downside shortfall to operating cash minimum ($m)", f"=MAX(0,{I['min_cash']}-{DOWN['low']})", M1), ("Bridge check (should be 0)", "=" + BRIDGE, M1)]
 for i, (lab_, f, fmt) in enumerate(cov, start=5):
     cover[f"A{i}"] = lab_; put(cover, f"B{i}", f, fmt)
-cover.column_dimensions["A"].width = 42; cover.column_dimensions["B"].width = 14
+cover.column_dimensions["A"].width = 58; cover.column_dimensions["B"].width = 14
 for ws in wb.worksheets: ws.sheet_view.showGridLines = False
 
 if __name__ == "__main__":
