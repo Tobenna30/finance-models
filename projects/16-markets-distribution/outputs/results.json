@@ -1,0 +1,22 @@
+{
+  "excess_bp": [
+    18.0,
+    -5.0,
+    -51.0,
+    -13.0,
+    -46.0,
+    34.0
+  ],
+  "sector_active_pp": {
+    "Global Treasuries": -13.0,
+    "Corporates": 13.5,
+    "Securitized": 0.1,
+    "Government Related": -4.2,
+    "Cash & Equivalents": 3.7
+  },
+  "fund_sector_total": 100.0,
+  "benchmark_sector_total": 99.9,
+  "open_requests": 5,
+  "total_requests": 8,
+  "call": "ESCALATE: quarterly outperformance is not evidence of persistent net outperformance; do not approve a mandate from this snapshot"
+}
