@@ -16,7 +16,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |
 | 07 | Restructuring & Liability Management | Debt advisory | Excel | ⚪ Planned |
 | 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo) |
-| 09 | Private Credit Underwriting Pack | Private credit | Excel | ⚪ Planned |
+| 09 | [Vitamin Well private-credit underwriting](projects/09-private-credit) | Private credit | Excel + Python | 🟢 Built (public-information credit model) |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |
 | 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python | ⚪ Planned |
