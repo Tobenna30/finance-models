@@ -8,7 +8,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 
 | # | Project | Area | Format | Status |
 |---|---|---|---|---|
-| 01 | [Long/Short Equity Pitch Kit — LSEG & Rolls-Royce](projects/01-equity-pitch-kit) | Hedge funds / AM / ER | Hybrid | 🟡 LSEG model built |
+| 01 | [Long/Short Equity Pitch Kit — LSEG & Rolls-Royce](projects/01-equity-pitch-kit) | Hedge funds / AM / ER | Hybrid | 🟢 LSEG model and revised pitch built |
 | 02 | Earnings & Catalyst Tracker | Hedge funds | Hybrid | ⚪ Planned |
 | 03 | Factor & Portfolio Construction Toolkit | Systematic / AM | Python | ⚪ Planned |
 | 04 | [Darktrace / Thoma Bravo Sell-Side M&A Model](projects/04-08-darktrace) | IB advisory | Excel | 🟢 Built (fairness note) |
@@ -16,14 +16,14 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |
 | 07 | Restructuring & Liability Management | Debt advisory | Excel | ⚪ Planned |
 | 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo) |
-| 09 | Private Credit Underwriting Pack | Private credit | Excel | ⚪ Planned |
+| 09 | [Vitamin Well private-credit underwriting](projects/09-private-credit) | Private credit | Excel + Python | 🟢 Built (public-information credit model) |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |
 | 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python | ⚪ Planned |
 | 13 | Credit Relative Value (Banks, AT1, HY) | Credit | Hybrid | ⚪ Planned |
 | 14 | Derivatives & Hedging Engine | Derivatives / Commodities | Python | ⚪ Planned |
 | 15 | [Wealth & Private Client: Fund Selection](projects/15-wealth-private-client) | Wealth / fund selection | Excel + Python | 🟢 Built (public-data case) |
-| 16 | Markets Sales, Prime & Distribution | Sales / prime services / AM distribution | Excel + Python | ⚪ Planned |
+| 16 | [Institutional Client Coverage & Consultant Review](projects/16-markets-distribution) | Institutional distribution | Excel + Python | 🟢 Built (public-data case) |
 
 See [docs/CV_PROJECT_MAP.md](docs/CV_PROJECT_MAP.md) for how every CV project maps to these.
 
