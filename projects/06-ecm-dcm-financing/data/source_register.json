@@ -1,0 +1,291 @@
+{
+  "as_of": "2026-10-27",
+  "expected_close": "2026-10-29",
+  "assumed_forward_settlement": "2027-11-19",
+  "initial_preferred_conversion": "2029-08-15",
+  "sources": {
+    "PRICING": {
+      "locator": "Meta, 27 Oct 2026 pricing release: offer sizes, prices, conversion limits, dividends and forward cash timing",
+      "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Pricing-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx"
+    },
+    "LAUNCH": {
+      "locator": "Meta, 26 Oct 2026 launch: financing plan, conditional ATM and AI investment",
+      "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Launch-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx"
+    },
+    "Q3": {
+      "locator": "Meta Q3 2026 release, 21 Oct: September balance sheet, nine-month cash flow, FY capex guidance, Class C discussion",
+      "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Third-Quarter-2026-Results/default.aspx"
+    },
+    "Q2SEC": {
+      "locator": "Meta June 2026 10-Q, Note 8: May notes coupon range 4.55%-6.45%; historical terms, not current yields",
+      "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/meta-20260630.htm"
+    }
+  },
+  "inputs": {
+    "deposits": {
+      "label": "Depositary shares offered",
+      "value": 250.0,
+      "tag": "S",
+      "unit": "m",
+      "source_or_reason": "PRICING: base offering, excludes option"
+    },
+    "deposit_price": {
+      "label": "Depositary share public price",
+      "value": 50.0,
+      "tag": "S",
+      "unit": "USD",
+      "source_or_reason": "PRICING"
+    },
+    "deposits_per_pref": {
+      "label": "Depositary interests per preferred share",
+      "value": 20.0,
+      "tag": "S",
+      "unit": "x",
+      "source_or_reason": "PRICING: each represents 1/20th"
+    },
+    "liquidation": {
+      "label": "Liquidation preference per preferred share",
+      "value": 1000.0,
+      "tag": "S",
+      "unit": "USD",
+      "source_or_reason": "PRICING"
+    },
+    "dividend": {
+      "label": "Preferred annual dividend",
+      "value": 0.065,
+      "tag": "S",
+      "unit": "%",
+      "source_or_reason": "PRICING: when declared, cash or shares permitted"
+    },
+    "min_rate": {
+      "label": "Minimum initial Class A conversion rate",
+      "value": 1.362,
+      "tag": "S",
+      "unit": "shares/pref",
+      "source_or_reason": "PRICING: subject to adjustments and Class C transition"
+    },
+    "max_rate": {
+      "label": "Maximum initial Class A conversion rate",
+      "value": 1.6,
+      "tag": "S",
+      "unit": "shares/pref",
+      "source_or_reason": "PRICING: subject to adjustments and Class C transition"
+    },
+    "common_shares": {
+      "label": "Forward common shares",
+      "value": 40.0,
+      "tag": "S",
+      "unit": "m",
+      "source_or_reason": "PRICING: base offer, physical settlement assumption below"
+    },
+    "offer_price": {
+      "label": "Common public offering price",
+      "value": 625.0,
+      "tag": "S",
+      "unit": "USD",
+      "source_or_reason": "PRICING: priced, not a live market quote"
+    },
+    "forward_price": {
+      "label": "Initial net forward price",
+      "value": 622.92,
+      "tag": "S",
+      "unit": "USD",
+      "source_or_reason": "PRICING: approximate, subject to contractual adjustments"
+    },
+    "atm": {
+      "label": "Planned future Class C ATM",
+      "value": 60000.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "LAUNCH: no signed programme; excluded from funded proceeds"
+    },
+    "cash": {
+      "label": "Reported cash and cash equivalents",
+      "value": 11222.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: 30 Sep 2026, excludes restricted cash"
+    },
+    "securities": {
+      "label": "Reported marketable securities",
+      "value": 71227.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: distinct from cash"
+    },
+    "assets": {
+      "label": "Reported total assets",
+      "value": 478836.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: 30 Sep 2026"
+    },
+    "liabilities": {
+      "label": "Reported total liabilities",
+      "value": 206450.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: 30 Sep 2026"
+    },
+    "equity": {
+      "label": "Reported stockholders equity",
+      "value": 272386.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: 30 Sep 2026"
+    },
+    "ocf9": {
+      "label": "Nine-month operating cash flow",
+      "value": 96873.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3 cash flow reconciliation"
+    },
+    "ppe9": {
+      "label": "Nine-month cash property/equipment purchases",
+      "value": 83055.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3 cash flow reconciliation"
+    },
+    "lease9": {
+      "label": "Nine-month finance-lease principal payments",
+      "value": 2769.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3 cash flow reconciliation"
+    },
+    "capex_low": {
+      "label": "FY2026 capex guidance low",
+      "value": 135000.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: includes finance-lease principal"
+    },
+    "capex_high": {
+      "label": "FY2026 capex guidance high",
+      "value": 145000.0,
+      "tag": "S",
+      "unit": "USDm",
+      "source_or_reason": "Q3: guidance, not capital commitment or financing need"
+    },
+    "pref_fee": {
+      "label": "Preferred issuance cost proxy",
+      "value": 0.002,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Unverified 20bp; company rounded net proceeds approximately USD12.5bn"
+    },
+    "forward_expense": {
+      "label": "Forward additional expense proxy",
+      "value": 10.0,
+      "tag": "A",
+      "unit": "USDm",
+      "source_or_reason": "After initial forward price discount, unverified fixed expense"
+    },
+    "forward_change": {
+      "label": "Net forward price adjustment stress",
+      "value": 0.0,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Zero base, not a claim that contractual carry/dividend/borrow adjustments are zero"
+    },
+    "equity_fee": {
+      "label": "Immediate common issuance cost proxy",
+      "value": 0.003328,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "33.28bp from (625-622.92)/625, applied as a comparison assumption"
+    },
+    "bond_fee": {
+      "label": "Straight-bond issuance cost proxy",
+      "value": 0.005,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "50bp; not an underwriting quote"
+    },
+    "bond_coupon": {
+      "label": "Hypothetical bond coupon",
+      "value": 0.055,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Illustrative five-year issue at par; historical own-note range cross-check only"
+    },
+    "bond_yield": {
+      "label": "Hypothetical bond valuation yield",
+      "value": 0.055,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Not current trading yield; vary separately from fixed coupon"
+    },
+    "bond_term": {
+      "label": "Hypothetical bond term",
+      "value": 5,
+      "tag": "A",
+      "unit": "years",
+      "source_or_reason": "Annual coupons, bullet repayment; no refinancing assumption"
+    },
+    "tax": {
+      "label": "Incremental debt tax shield",
+      "value": 0.21,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Illustrative immediately usable 21%; preferred dividends receive no shield"
+    },
+    "bridge_rate": {
+      "label": "Bridge interest rate",
+      "value": 0.055,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Simple ACT/365; available only as an analytical overlay, no facility verified"
+    },
+    "bridge_fee": {
+      "label": "Bridge fee",
+      "value": 0.005,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "50bp on funding gap, paid separately from proceeds"
+    },
+    "investor_hurdle": {
+      "label": "Preferred investor return hurdle",
+      "value": 0.08,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "Illustrative 8% annual required return, not a market-implied yield"
+    },
+    "case": {
+      "label": "Case: 1 Down / 2 Base / 3 Up",
+      "value": 2,
+      "tag": "A",
+      "unit": "index",
+      "source_or_reason": "Initial Class A conversion mechanics only"
+    },
+    "price_down": {
+      "label": "Down: final averaging price proxy",
+      "value": 400.0,
+      "tag": "A",
+      "unit": "USD",
+      "source_or_reason": "Not a target price or forecast"
+    },
+    "price_base": {
+      "label": "Base: final averaging price proxy",
+      "value": 625.0,
+      "tag": "A",
+      "unit": "USD",
+      "source_or_reason": "Reference offer price, not a forecast"
+    },
+    "price_up": {
+      "label": "Up: final averaging price proxy",
+      "value": 850.0,
+      "tag": "A",
+      "unit": "USD",
+      "source_or_reason": "Not a target price or forecast"
+    }
+  },
+  "method_assumptions": [
+    "Initial Class A piecewise conversion with four-decimal rounding; final prospectus confirmation required",
+    "30/360 dividend approximation; all declared and paid in cash",
+    "Physical forward settlement at deadline; zero base price adjustment, not a claim of zero contractual adjustments",
+    "Issue-only balance sheets: preferred treated as equity capital, fees netted against capital or debt carrying value"
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "down": {
+    "price": 400.0,
+    "pref_gross": 12500.0,
+    "pref_count": 12.5,
+    "pref_net": 12475.0,
+    "common_gross": 25000.0,
+    "gross_package": 37500.0,
+    "forward_net": 24906.8,
+    "net_total": 37381.8,
+    "initial_cash": 12475.0,
+    "deferred_share": 0.6662814524715235,
+    "annual_dividend": 812.5,
+    "dividends": [
+      {
+        "date": "2027-02-15",
+        "amount": 239.23611111111111
+      },
+      {
+        "date": "2027-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2027-08-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2027-11-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-02-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-08-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-11-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-02-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-08-15",
+        "amount": 203.125
+      }
+    ],
+    "dividend_total": 2270.4861111111113,
+    "min_price": 625.0,
+    "max_price": 734.2143906020558,
+    "conversion_rate": 1.6,
+    "conversion_shares": 20.0,
+    "total_new_initial_term_shares": 60.0,
+    "converted_value": 8000.0,
+    "pref_total_return": -0.17836111111111108,
+    "dividend_pv": 2022.558775432799,
+    "required_terminal_value": 12994.218842576458,
+    "investor_hurdle_price": 763.2433975081619,
+    "equity_gross": 37506.622038142945,
+    "equity_shares": 60.01059526102871,
+    "bond_face": 37569.648241206036,
+    "bond_coupon_cash": 2066.330653266332,
+    "bond_after_tax_coupon": 1632.4012160804023,
+    "bond_effective_yield": 0.05617465632584173,
+    "bond_price": 100.00000000000001,
+    "bond_schedule": [
+      {
+        "year": 1,
+        "opening": 37381.8,
+        "coupon": 2066.330653266332,
+        "interest": 2099.9097678413505,
+        "amortisation": 33.57911457501859,
+        "principal": 0,
+        "closing": 37415.37911457502
+      },
+      {
+        "year": 2,
+        "opening": 37415.37911457502,
+        "coupon": 2066.330653266332,
+        "interest": 2101.7960630623284,
+        "amortisation": 35.46540979599649,
+        "principal": 0,
+        "closing": 37450.844524371016
+      },
+      {
+        "year": 3,
+        "opening": 37450.844524371016,
+        "coupon": 2066.330653266332,
+        "interest": 2103.7883202690737,
+        "amortisation": 37.4576670027418,
+        "principal": 0,
+        "closing": 37488.30219137376
+      },
+      {
+        "year": 4,
+        "opening": 37488.30219137376,
+        "coupon": 2066.330653266332,
+        "interest": 2105.8924918397206,
+        "amortisation": 39.56183857338874,
+        "principal": 0,
+        "closing": 37527.86402994715
+      },
+      {
+        "year": 5,
+        "opening": 37527.86402994715,
+        "coupon": 2066.330653266332,
+        "interest": 2108.114864525199,
+        "amortisation": 41.784211258867344,
+        "principal": 37569.648241206036,
+        "closing": -1.4551915228366852e-11
+      }
+    ],
+    "bridge_interest": 1448.6886684931508,
+    "bridge_fee": 124.534,
+    "bridge_after_tax_cost": 1242.8459081095893,
+    "positions": {
+      "package_close": {
+        "cash": 23697.0,
+        "assets": 491311.0,
+        "liabilities": 206450.0,
+        "equity": 284861.0
+      },
+      "package_settled": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 206450.0,
+        "equity": 309767.8
+      },
+      "immediate_equity": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 206450.0,
+        "equity": 309767.8
+      },
+      "straight_debt": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 243831.8,
+        "equity": 272386.0
+      }
+    },
+    "historical_fcf": 11049.0,
+    "liquid_resources": 82449.0,
+    "capex_remaining_low": 49176.0,
+    "capex_remaining_high": 59176.0
+  },
+  "base": {
+    "price": 625.0,
+    "pref_gross": 12500.0,
+    "pref_count": 12.5,
+    "pref_net": 12475.0,
+    "common_gross": 25000.0,
+    "gross_package": 37500.0,
+    "forward_net": 24906.8,
+    "net_total": 37381.8,
+    "initial_cash": 12475.0,
+    "deferred_share": 0.6662814524715235,
+    "annual_dividend": 812.5,
+    "dividends": [
+      {
+        "date": "2027-02-15",
+        "amount": 239.23611111111111
+      },
+      {
+        "date": "2027-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2027-08-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2027-11-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-02-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-08-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-11-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-02-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-08-15",
+        "amount": 203.125
+      }
+    ],
+    "dividend_total": 2270.4861111111113,
+    "min_price": 625.0,
+    "max_price": 734.2143906020558,
+    "conversion_rate": 1.6,
+    "conversion_shares": 20.0,
+    "total_new_initial_term_shares": 60.0,
+    "converted_value": 12500.0,
+    "pref_total_return": 0.1816388888888889,
+    "dividend_pv": 2022.558775432799,
+    "required_terminal_value": 12994.218842576458,
+    "investor_hurdle_price": 763.2433975081619,
+    "equity_gross": 37506.622038142945,
+    "equity_shares": 60.01059526102871,
+    "bond_face": 37569.648241206036,
+    "bond_coupon_cash": 2066.330653266332,
+    "bond_after_tax_coupon": 1632.4012160804023,
+    "bond_effective_yield": 0.05617465632584173,
+    "bond_price": 100.00000000000001,
+    "bond_schedule": [
+      {
+        "year": 1,
+        "opening": 37381.8,
+        "coupon": 2066.330653266332,
+        "interest": 2099.9097678413505,
+        "amortisation": 33.57911457501859,
+        "principal": 0,
+        "closing": 37415.37911457502
+      },
+      {
+        "year": 2,
+        "opening": 37415.37911457502,
+        "coupon": 2066.330653266332,
+        "interest": 2101.7960630623284,
+        "amortisation": 35.46540979599649,
+        "principal": 0,
+        "closing": 37450.844524371016
+      },
+      {
+        "year": 3,
+        "opening": 37450.844524371016,
+        "coupon": 2066.330653266332,
+        "interest": 2103.7883202690737,
+        "amortisation": 37.4576670027418,
+        "principal": 0,
+        "closing": 37488.30219137376
+      },
+      {
+        "year": 4,
+        "opening": 37488.30219137376,
+        "coupon": 2066.330653266332,
+        "interest": 2105.8924918397206,
+        "amortisation": 39.56183857338874,
+        "principal": 0,
+        "closing": 37527.86402994715
+      },
+      {
+        "year": 5,
+        "opening": 37527.86402994715,
+        "coupon": 2066.330653266332,
+        "interest": 2108.114864525199,
+        "amortisation": 41.784211258867344,
+        "principal": 37569.648241206036,
+        "closing": -1.4551915228366852e-11
+      }
+    ],
+    "bridge_interest": 1448.6886684931508,
+    "bridge_fee": 124.534,
+    "bridge_after_tax_cost": 1242.8459081095893,
+    "positions": {
+      "package_close": {
+        "cash": 23697.0,
+        "assets": 491311.0,
+        "liabilities": 206450.0,
+        "equity": 284861.0
+      },
+      "package_settled": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 206450.0,
+        "equity": 309767.8
+      },
+      "immediate_equity": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 206450.0,
+        "equity": 309767.8
+      },
+      "straight_debt": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 243831.8,
+        "equity": 272386.0
+      }
+    },
+    "historical_fcf": 11049.0,
+    "liquid_resources": 82449.0,
+    "capex_remaining_low": 49176.0,
+    "capex_remaining_high": 59176.0
+  },
+  "up": {
+    "price": 850.0,
+    "pref_gross": 12500.0,
+    "pref_count": 12.5,
+    "pref_net": 12475.0,
+    "common_gross": 25000.0,
+    "gross_package": 37500.0,
+    "forward_net": 24906.8,
+    "net_total": 37381.8,
+    "initial_cash": 12475.0,
+    "deferred_share": 0.6662814524715235,
+    "annual_dividend": 812.5,
+    "dividends": [
+      {
+        "date": "2027-02-15",
+        "amount": 239.23611111111111
+      },
+      {
+        "date": "2027-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2027-08-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2027-11-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-02-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-08-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2028-11-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-02-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-05-15",
+        "amount": 203.125
+      },
+      {
+        "date": "2029-08-15",
+        "amount": 203.125
+      }
+    ],
+    "dividend_total": 2270.4861111111113,
+    "min_price": 625.0,
+    "max_price": 734.2143906020558,
+    "conversion_rate": 1.362,
+    "conversion_shares": 17.025000000000002,
+    "total_new_initial_term_shares": 57.025000000000006,
+    "converted_value": 14471.250000000002,
+    "pref_total_return": 0.3393388888888891,
+    "dividend_pv": 2022.558775432799,
+    "required_terminal_value": 12994.218842576458,
+    "investor_hurdle_price": 763.2433975081619,
+    "equity_gross": 37506.622038142945,
+    "equity_shares": 60.01059526102871,
+    "bond_face": 37569.648241206036,
+    "bond_coupon_cash": 2066.330653266332,
+    "bond_after_tax_coupon": 1632.4012160804023,
+    "bond_effective_yield": 0.05617465632584173,
+    "bond_price": 100.00000000000001,
+    "bond_schedule": [
+      {
+        "year": 1,
+        "opening": 37381.8,
+        "coupon": 2066.330653266332,
+        "interest": 2099.9097678413505,
+        "amortisation": 33.57911457501859,
+        "principal": 0,
+        "closing": 37415.37911457502
+      },
+      {
+        "year": 2,
+        "opening": 37415.37911457502,
+        "coupon": 2066.330653266332,
+        "interest": 2101.7960630623284,
+        "amortisation": 35.46540979599649,
+        "principal": 0,
+        "closing": 37450.844524371016
+      },
+      {
+        "year": 3,
+        "opening": 37450.844524371016,
+        "coupon": 2066.330653266332,
+        "interest": 2103.7883202690737,
+        "amortisation": 37.4576670027418,
+        "principal": 0,
+        "closing": 37488.30219137376
+      },
+      {
+        "year": 4,
+        "opening": 37488.30219137376,
+        "coupon": 2066.330653266332,
+        "interest": 2105.8924918397206,
+        "amortisation": 39.56183857338874,
+        "principal": 0,
+        "closing": 37527.86402994715
+      },
+      {
+        "year": 5,
+        "opening": 37527.86402994715,
+        "coupon": 2066.330653266332,
+        "interest": 2108.114864525199,
+        "amortisation": 41.784211258867344,
+        "principal": 37569.648241206036,
+        "closing": -1.4551915228366852e-11
+      }
+    ],
+    "bridge_interest": 1448.6886684931508,
+    "bridge_fee": 124.534,
+    "bridge_after_tax_cost": 1242.8459081095893,
+    "positions": {
+      "package_close": {
+        "cash": 23697.0,
+        "assets": 491311.0,
+        "liabilities": 206450.0,
+        "equity": 284861.0
+      },
+      "package_settled": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 206450.0,
+        "equity": 309767.8
+      },
+      "immediate_equity": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 206450.0,
+        "equity": 309767.8
+      },
+      "straight_debt": {
+        "cash": 48603.8,
+        "assets": 516217.8,
+        "liabilities": 243831.8,
+        "equity": 272386.0
+      }
+    },
+    "historical_fcf": 11049.0,
+    "liquid_resources": 82449.0,
+    "capex_remaining_low": 49176.0,
+    "capex_remaining_high": 59176.0
+  }
+}
