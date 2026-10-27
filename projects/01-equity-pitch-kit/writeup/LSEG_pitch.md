@@ -2,16 +2,18 @@
 
 **The rest of LSEG costs less than FactSet**
 
-Tobenna Agubuche | 25 October 2026 | Price 9,510p (close 23 Oct) | Market cap c.£46bn | Target 10,680p (+12%)
+Tobenna Agubuche | 27 October 2026 | Price 9,510p (close 23 Oct) | Market cap c.£46bn | Target 10,414p (+9.5%)
 
 | Method | Value per share | vs price |
 |---|---:|---:|
-| Price target (50% DCF, 50% sum of the parts) | 10,680p | +12% |
-| Sum of the parts, peer forward P/E by division | 11,480p | +21% |
-| DCF, base case (conservative beta, volumes normalised) | 9,880p | +4% |
-| Bear / bull case (DCF) | 7,260p / 12,180p | -24% / +28% |
+| Price target (50% DCF, 50% sum of the parts) | 10,414p | +9.5% |
+| Sum of the parts, peer forward P/E by division | 11,484p | +21% |
+| DCF, base case (conservative beta, volumes normalised) | 9,343p | -1.8% |
+| Bear / bull case (DCF) | 6,724p / 11,643p | -29% / +22% |
 
 ## The call
+
+Long at 10,414p, the equal-weight average of the corrected 9,343.48p base DCF and 11,484.29p peer SOTP. The 9.5% upside rests on the peer discount and stable data demand; DCF alone is 1.8% below the reference price. These are method weights, not scenario probabilities.
 
 LSEG owns 51.2% of Tradeweb, which is listed in New York. At market value that stake is worth about £11.0bn, or 24% of LSEG's market cap, up from 18% in January 2024. Take it out, along with Tradeweb's share of forward earnings, and the rest of the group trades on 16.6x forward earnings. That is below FactSet (16.9x), the stock most exposed to the idea that AI replaces terminals. The data and analytics peers trade on a median of 20.4x.
 
@@ -19,9 +21,9 @@ The market value of LSEG excluding Tradeweb has fallen about 12% since January 2
 
 !!charts/fwd_pe.png|charts/stake_share.png
 
-## Why the market is wrong
+## The valuation case and its limits
 
-**Retention is going up.** The bear case is that AI tools cancel subscriptions. LSEG's revenue retention was 92.6% at June 2025, 92.4% at December 2025 and 92.8% at June 2026. My DCF needs it to fall to 91.3% from 2027 to justify today's price.
+**The price requires better retention.** Reported retention rose from 92.4% in December 2025 to 92.8% in June 2026. The corrected reverse DCF needs 93.45% from 2027, 0.65 percentage points above reported retention, with other inputs fixed. The price does not imply AI-driven churn. The long depends on peer valuation and improving retention, not a churn cushion.
 
 **Industry data points the same way.** Global market data spend rose 6.5% to $49.2bn in 2025 (Burton-Taylor) and is expected to grow another 7% in 2026 (Expand Research). A Coalition Greenwich and SIX study of 73 institutions, published this month, expects AI to push data spending up by more than 50% by 2027. Substantive Research found AI-related charges of $30k to $1m in 2026 vendor proposals, while research budgets rose only 0.4%. Money is moving from people and screens to data and licensing, which is where LSEG is growing: Data & Feeds +7.5% in Q3, Workflows +2.8%.
 
@@ -49,14 +51,16 @@ The market value of LSEG excluding Tradeweb has fallen about 12% since January 2
 | Consensus EPS (p) | | 480.6 | 550.9 | 615.5 |
 | Net debt / EBITDA | 1.7x | 1.8x | 2.2x | 2.1x |
 
-I use a beta of 0.85 against an observed 0.41 (Blume-adjusted 0.60), because a FTSE 100 heavy in energy, miners and banks understates LSEG's exposure to market activity. At 0.60 the DCF gives 13,290p; at 1.00, 8,420p. WACC is 8.3%, terminal growth 3.0%, and the Tradeweb minority is deducted at market value.
+I use a beta of 0.85 against an observed 0.41 (Blume-adjusted 0.60), because a FTSE 100 heavy in energy, miners and banks understates LSEG's exposure to market activity. At 0.60 the DCF gives 12,753p; at 1.00, 7,880p. WACC is 8.3%, terminal growth 3.0%, and the Tradeweb minority is deducted at market value.
 
 ## What would make me wrong
 
-- Retention falls below 91% or ASV growth drops under 5%.
+- Retention fails to improve towards 93.45% or ASV growth drops under 5%.
 - Markets volumes fall rather than flatten in 2027.
 - Tradeweb de-rates. The stub argument depends on its 28x multiple.
 - Another large acquisition before leverage comes back down from 2.2x.
+
+Prices and multiples are dated 20 to 23 October. Octus margin and close timing are assumptions. Reverse DCF varies retention alone and is not a forecast.
 
 Model, data pipeline and sources: github.com/Tobenna30/finance-models
 
