@@ -8,6 +8,10 @@ A portfolio of front-office finance models (IB, private markets, asset managemen
 
 Each project has **one anchor company or market**. Analyst tasks are added to it as modules. Every project cited on a CV must point to a module here. When a job description needs a task no module covers, build that module on the closest project before the CV goes out. Do not invent new projects outside the 16 in `docs/CV_PROJECT_MAP.md` (added in PR #7).
 
+## CV Autopilot handoffs
+
+Before running CV Autopilot handoffs, read `~/Documents/CV Autopilot/handoffs/CODEX.md` for the build, PR and results-handoff workflow. Follow its restrictions on the shared CV Autopilot folder.
+
 ## Workflow
 
 - Branch from `main`, one branch and PR per project or module. Tobenna reviews and merges. Never push to `main`.
@@ -49,7 +53,8 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 | 02 | Earnings & catalyst tracking | LSEG + coverage | Hiring and Tradeweb-stake trackers built |
 | 04 + 08 | Sell-side M&A + LBO | Darktrace (Thoma Bravo take-private) | **Next** |
 | 09 | Private credit underwriting | Vitamin Well / Vital Bidco | Built: 2026 public-information capacity, cash/debt, policy headroom and recovery. Final terms and audited accounts unverified. |
-| 03, 05, 06, 07, 10–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
+| 14 | Derivatives, hedging & commodities | Illustrative South African refinery | Built: Bachelier collars, Black-76 check, outage stress and USD/ZAR overlay. 80% cover; 10% crack-fall loss; 2.3% outage cost. |
+| 03, 05, 06, 07, 10–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
 ## Next task: Darktrace (projects 04 and 08)
 
