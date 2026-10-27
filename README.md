@@ -15,13 +15,13 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 05 | Strategic Merger Model (Accretion/Dilution) | IB | Excel | ⚪ Planned |
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |
 | 07 | Restructuring & Liability Management | Debt advisory | Excel | ⚪ Planned |
-| 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo) |
+| 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo; liquidity funding required) |
 | 09 | [Vitamin Well private-credit underwriting](projects/09-private-credit) | Private credit | Excel + Python | 🟢 Built (public-information credit model) |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |
 | 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python | ⚪ Planned |
 | 13 | Credit Relative Value (Banks, AT1, HY) | Credit | Hybrid | ⚪ Planned |
-| 14 | Derivatives & Hedging Engine | Derivatives / Commodities | Python | ⚪ Planned |
+| 14 | [Refinery derivatives & hedging](projects/14-derivatives-hedging) | Derivatives / Commodities | Excel + Python | 🟢 Built: refinery hedge (collars, outage, FX) |
 | 15 | [Wealth & Private Client: Fund Selection](projects/15-wealth-private-client) | Wealth / fund selection | Excel + Python | 🟢 Built (public-data case) |
 | 16 | [Institutional Client Coverage & Consultant Review](projects/16-markets-distribution) | Institutional distribution | Excel + Python | 🟢 Built (public-data case) |
 
