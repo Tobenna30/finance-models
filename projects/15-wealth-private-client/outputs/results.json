@@ -1,0 +1,10 @@
+{
+  "fee_gap_bp": 24.999999999999996,
+  "annual_fee_gap": 2499.9999999999995,
+  "i_end": 1527889.9485004898,
+  "r_end": 1491670.2751661534,
+  "i_eligible": false,
+  "r_minimum_met": true,
+  "shock_100bp": -0.0687,
+  "call": "PASS Class I for this retail family; retain Class R only for further suitability review"
+}
