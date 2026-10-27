@@ -112,10 +112,14 @@ def lbo(case="Base", debt_total=None, exit_multiple=None, price_usd=None):
                          sweep=sweep, tlb=tlb, sl=sl, cash=cash, net_debt=tlb + sl - cash,
                          lev=(tlb + sl) / ebitda, cover=ebitda * stub / interest))
         rev_prev = rev
+    min_cash = min(row["cash"] for row in rows)
+    cash_shortfall = max(0.0, A.MIN_CASH - min_cash)
     last = rows[-1]; exit_ev = exit_x * last["ebitda"]; exit_eq = exit_ev - last["net_debt"] - A.LEASES_EXIT
     sponsor_exit = exit_eq * (1 - A.MIP); moic = sponsor_exit / sponsor; irr = moic ** (1 / A.HOLD_YEARS) - 1
     return dict(rows=rows, eq_purchase=eq_purchase, ev_entry=ev_entry, oid=oid, fin_fees=fin_fees,
                 adv_fees=adv_fees, uses=uses, tlb0=tlb0, sl0=sl0, cash_used=cash_used, sponsor=sponsor,
+                min_cash=min_cash, cash_shortfall=cash_shortfall,
+                cash_breach_years=[row["year"] for row in rows if row["cash"] < A.MIN_CASH],
                 equity_pct=sponsor / uses, entry_lev_ltm=debt_total / A.DEAL["ltm_ebitda"],
                 entry_lev_arr=debt_total / A.HIST["ARR (cc)"][2024], exit_ev=exit_ev, exit_eq=exit_eq,
                 sponsor_exit=sponsor_exit, moic=moic, irr=irr, exit_x=exit_x)
@@ -173,7 +177,7 @@ def rival():
 def football():
     D = A.DEAL; g = dcf_grid(); c = comps(); p = precedents()
     return [
-        ("52-week trading (placing to 12m high)", D["placing_p"], D["high12m_p"]),
+        ("March placing to 12-month high", D["placing_p"], D["high12m_p"]),
         ("DCF (WACC +/-1%, g +/-0.5%)", g[4][1], g[0][3]),
         ("Trading comps EV/NTM revenue (Q1-Q3)", c["implied_p"]["q1"], c["implied_p"]["q3"]),
         ("Growth-adjusted comps (regression +/-1x)", c["reg_p"][0], c["reg_p"][1]),

@@ -47,17 +47,12 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 |---|---|---|---|
 | 01 | Equity research | LSEG | Built. **On hold.** Pitch PDF marked "under revision, do not send". PR #8 (DCF acquisition fix, Q3 2026 results module) open |
 | 02 | Earnings & catalyst tracking | LSEG + coverage | Hiring and Tradeweb-stake trackers built |
-| 04 + 08 | Sell-side M&A + LBO | Darktrace (Thoma Bravo take-private) | **Next** |
+| 04 + 08 | Sell-side M&A + LBO | Darktrace (Thoma Bravo take-private) | Built. Review adds liquidity shortfalls and conditional IC decision; final debt terms need verification. |
 | 03, 05, 06, 07, 09–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
-## Next task: Darktrace (projects 04 and 08)
+## Darktrace follow-up (projects 04 and 08)
 
-Folder: `projects/04-08-darktrace/`.
-
-- **04 Sell-side:** fairness view on the offer (DCF, trading comps, precedent take-privates), bid premium against the undisturbed price, football field, the board's defence case, and whether a rival bid made sense.
-- **08 LBO:** sources and uses, debt tranches and terms, five-year operating case, cash sweep, returns (IRR and MOIC) with an exit multiple by leverage grid, downside case, and a three-page IC memo.
-- Verify every deal fact (offer price, equity and enterprise value, financing, timetable) from the scheme document, Darktrace annual reports and announcements. Do not rely on memory.
-- When done, update `README.md` and the Built column in `docs/CV_PROJECT_MAP.md`.
+Built in `projects/04-08-darktrace/`. Follow the review record before extending the model. Primary confirmation of final syndicated debt terms, consistent precedent EV bridges and intra-year liquidity/covenant analysis remain open. Do not describe the model as an April 2024 information set or the debt as safe because year-end cash stays positive.
 
 ## LSEG items parked (do not act without being asked)
 

@@ -104,3 +104,31 @@ def test_value_bridge_sums(wb_values):
     wv, _ = wb_values
     cover = {r[0]: r[1] for r in wv["Cover"].iter_rows(min_row=5, values_only=True) if r[0]}
     assert abs(cover["Bridge check (should be 0)"]) < 1e-6
+
+
+def test_operating_cash_minimum_is_not_mistaken_for_solvency():
+    base, downside = E.lbo("Base"), E.lbo("Downside")
+    assert base["cash_breach_years"] == [2025]
+    assert downside["cash_breach_years"] == A.YEARS_LBO
+    assert base["cash_shortfall"] == pytest.approx(22.165, abs=0.01)
+    assert downside["cash_shortfall"] == pytest.approx(80.820, abs=0.01)
+    assert 0 < downside["min_cash"] < A.MIN_CASH
+
+
+def test_liquidity_summary_ties_to_recalculated_workbook(wb_values):
+    wv, wf = wb_values
+    values = {r[0]: r[1] for r in wv["Cover"].iter_rows(min_row=5, values_only=True) if r[0]}
+    formulas = {r[0]: r[1] for r in wf["Cover"].iter_rows(min_row=5, values_only=True) if r[0]}
+    for label, case in (("Base", "Base"), ("Downside", "Downside")):
+        r = E.lbo(case)
+        for suffix, key in (("liquidity low point ($m)", "min_cash"),
+                            ("shortfall to operating cash minimum ($m)", "cash_shortfall")):
+            name = f"{label} {suffix}"
+            assert values[name] == pytest.approx(r[key], abs=1e-6)
+            assert formulas[name].startswith("=")
+
+
+def test_exit_multiple_hurdle_claim():
+    # A 16x exit fails the 20% hurdle even on the full base operating plan.
+    assert E.lbo(exit_multiple=16)["irr"] < 0.20
+    assert E.lbo(exit_multiple=18)["irr"] > 0.20

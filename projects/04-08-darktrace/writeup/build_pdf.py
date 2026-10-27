@@ -38,9 +38,12 @@ def table(rows):
     t = d.add_table(rows=len(cells), cols=n)
     t.autofit = False
     for i, row in enumerate(cells):
+        trpr = t.rows[i]._tr.get_or_add_trPr()
+        trpr.append(OxmlElement("w:cantSplit"))
         for j, val in enumerate(row):
             c = t.cell(i, j); c.width = widths[j]
             p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+            p.paragraph_format.keep_with_next = i < len(cells) - 1
             if j: p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
             runs(p, val, size=8.5)
             if i == 0:
@@ -70,6 +73,7 @@ while i < len(lines):
     elif ln.startswith("## "):
         p = d.add_paragraph(); r = p.add_run(ln[3:]); r.bold = True; r.font.size = Pt(11); r.font.color.rgb = NAVY
         p.paragraph_format.space_before = Pt(6); p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.keep_with_next = True
     elif ln.startswith("- "):
         p = d.add_paragraph(style="List Bullet"); runs(p, ln[2:]); p.paragraph_format.space_after = Pt(2)
     elif ln.startswith("*") and ln.endswith("*") and not ln.startswith("**"):

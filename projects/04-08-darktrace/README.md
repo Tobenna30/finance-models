@@ -1,6 +1,6 @@
 # 04 + 08: Darktrace / Thoma Bravo take-private
 
-Thoma Bravo bought Darktrace plc for $7.75 a share in cash (620p at announcement), an equity value of $5.3bn and an enterprise value of $5.0bn. The offer was announced on 26 Apr 2024 and became effective on 1 Oct 2024. One model covers both sides of the deal:
+Thoma Bravo bought Darktrace plc for $7.75 a share in cash (620p at announcement), an equity value of $5.3bn and an enterprise value of $5.0bn. The offer was announced on 26 Apr 2024 and became effective on 1 Oct 2024. This is a retrospective model: April prices and July FY24 revenue are combined. It is not an information set available on the offer date. One model covers both sides of the deal:
 
 - **04 Sell-side:** was 620p fair? DCF, listed peers, precedent take-privates, bid premiums, football field, board defence case and a rival-bid screen.
 - **08 LBO:** the sponsor's case on the actual price and debt. Sources and uses, first and second-lien term loans, five-year operating case, cash sweep, IRR/MOIC, exit multiple x leverage grid, downside case and a value bridge.
@@ -31,8 +31,8 @@ Thoma Bravo bought Darktrace plc for $7.75 a share in cash (620p at announcement
 | IRR / MOIC (exit 30 Jun 2029) | 23% / 2.7x | -11% / 0.58x |
 | FY29 margin needed for a 20% IRR | 36.9% | |
 
-**Verdict (04):** fair but not full. 620p sits above intrinsic value and inside a sponsor's 20 to 25% IRR range, but well below peer and precedent multiples. No rival had room to pay more, and 14.7% of the shares were under irrevocables that stayed binding against a higher offer.
-**Verdict (08):** approve. The return is an operating return: Thoma Bravo paid 34x trailing EBITDA and exits at 18x, so EBITDA has to nearly quadruple. Debt is serviced in the downside; the equity is not protected.
+**Verdict (04):** fair but not full. 620p sits above intrinsic value and inside a sponsor's 20 to 25% IRR range, but well below peer and precedent multiples. The sponsor screen permits 661p at a 20% hurdle, and 14.7% of the shares were under irrevocables that stayed binding against a higher offer.
+**Verdict (08):** reject unconditional approval pending funded liquidity and verified final financing. The return is an operating return: Thoma Bravo paid 34x trailing EBITDA and exits at 18x, so EBITDA has to nearly quadruple. Base cash falls to $77.8m and downside cash to $19.2m, below the assumed $100m operating minimum. Maximum shortfalls are $22.2m and $80.8m respectively. Positive closing cash does not prove debt safety.
 
 ## How it is built
 Same standard as the LSEG model in project 01.
@@ -54,3 +54,7 @@ cd writeup && python3 build_pdf.py Darktrace_fairness_note.md && python3 build_p
 Rule 2.7 announcement (26 Apr 2024), scheme document publication (23 May 2024), meeting results (18 Jun 2024), regulatory and timetable update (16 Sep 2024), scheme effective (1 Oct 2024); Darktrace FY23 results, H1 FY24 results and Q4 FY24 trading update; Bloomberg Law and PitchBook LCD on the debt; peer 8-K releases and prices for the week ending 19 Apr 2024; precedent deal releases. Full list in the workbook's Sources sheet.
 
 **Limitations:** FY24 adjusted EBITDA margin (23%) is assumed because Darktrace stopped giving margin guidance after the offer. Closing cash uses the December 2023 balance. The revolver, if any, is not modelled. SOFR path and the operating cases are assumptions. Some precedent values are headline deal values, not computed EVs (KnowBe4's $4.6bn is equity value).
+
+## Review on 27 October 2026
+
+Added engine and live Excel liquidity diagnostics. Base cash breaches the operating minimum in FY25; downside breaches it in every forecast year. Existing DCF and return calculations are unchanged. The IC recommendation now rejects unconditional approval pending a funded liquidity plan and verified debt terms. A 16x exit produces 19.4% IRR on the base plan, not a 20% hurdle return. See [review record](review/2026-10-27-review.md).
