@@ -8,6 +8,10 @@ A portfolio of front-office finance models (IB, private markets, asset managemen
 
 Each project has **one anchor company or market**. Analyst tasks are added to it as modules. Every project cited on a CV must point to a module here. When a job description needs a task no module covers, build that module on the closest project before the CV goes out. Do not invent new projects outside the 16 in `docs/CV_PROJECT_MAP.md` (added in PR #7).
 
+## CV Autopilot handoffs
+
+Before running CV Autopilot handoffs, read `~/Documents/CV Autopilot/handoffs/CODEX.md` for the build, PR and results-handoff workflow. Follow its restrictions on the shared CV Autopilot folder.
+
 ## Workflow
 
 - Branch from `main`, one branch and PR per project or module. Tobenna reviews and merges. Never push to `main`.
