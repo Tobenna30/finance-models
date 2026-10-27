@@ -22,7 +22,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python | ⚪ Planned |
 | 13 | Credit Relative Value (Banks, AT1, HY) | Credit | Hybrid | ⚪ Planned |
 | 14 | Derivatives & Hedging Engine | Derivatives / Commodities | Python | ⚪ Planned |
-| 15 | Wealth & Private Client Portfolios | Wealth / private banking | Excel + Python | ⚪ Planned |
+| 15 | [Wealth & Private Client: Fund Selection](projects/15-wealth-private-client) | Wealth / fund selection | Excel + Python | 🟢 Built (public-data case) |
 | 16 | Markets Sales, Prime & Distribution | Sales / prime services / AM distribution | Excel + Python | ⚪ Planned |
 
 See [docs/CV_PROJECT_MAP.md](docs/CV_PROJECT_MAP.md) for how every CV project maps to these.
