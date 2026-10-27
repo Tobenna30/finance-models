@@ -49,11 +49,12 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 
 | # | Project | Anchor | Status |
 |---|---|---|---|
-| 01 | Equity research | LSEG | Built. **On hold.** Pitch PDF marked "under revision, do not send". PR #8 (DCF acquisition fix, Q3 2026 results module) open |
+| 01 | Equity research | LSEG | Built. Post-Octus pitch revised: long, 10,414p target; reverse DCF implies 93.45% retention. PR #8 merged. |
 | 02 | Earnings & catalyst tracking | LSEG + coverage | Hiring and Tradeweb-stake trackers built |
 | 04 + 08 | Sell-side M&A + LBO | Darktrace (Thoma Bravo take-private) | **Next** |
+| 09 | Private credit underwriting | Vitamin Well / Vital Bidco | Built: 2026 public-information capacity, cash/debt, policy headroom and recovery. Final terms and audited accounts unverified. |
 | 14 | Derivatives, hedging & commodities | Illustrative South African refinery | Built: Bachelier collars, Black-76 check, outage stress and USD/ZAR overlay. 80% cover; 10% crack-fall loss; 2.3% outage cost. |
-| 03, 05, 06, 07, 09–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
+| 03, 05, 06, 07, 10–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
 ## Next task: Darktrace (projects 04 and 08)
 

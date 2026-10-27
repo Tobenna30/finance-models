@@ -43,7 +43,7 @@ vals = [v * 100 for v in A.RETENTION_HISTORY.values()] + [implied * 100]
 fig, ax = plt.subplots(figsize=(3.6, 2.2), dpi=200)
 ax.bar(labs, vals, color=[NAVY] * 3 + [RED], width=0.6)
 for i, v in enumerate(vals): ax.text(i, v + 0.05, f"{v:.1f}%", ha="center", fontsize=7)
-ax.set_ylim(89, 93.6); ax.set_title("Revenue retention: reported vs priced in", fontsize=8, loc="left", color=NAVY, fontweight="bold")
+ax.set_ylim(89, 94.2); ax.set_title("Revenue retention: reported vs priced in", fontsize=8, loc="left", color=NAVY, fontweight="bold")
 fig.tight_layout(); fig.savefig(OUT / "retention.png"); plt.close(fig)
 print("charts written", sorted(p.name for p in OUT.iterdir()))
 
