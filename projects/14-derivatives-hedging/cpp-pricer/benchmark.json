@@ -1,0 +1,59 @@
+{
+  "paths": 20000,
+  "seed": 20261027,
+  "repeats": 7,
+  "python_kernel_median_seconds": 0.011707666009897366,
+  "cpp_kernel_median_seconds": 0.000603709,
+  "kernel_speedup": 19.39289626276462,
+  "cpp_cli_wall_seconds": 0.08019550000608433,
+  "original_python_seconds": 0.2432691250141943,
+  "python_kernel_results": [
+    -6.0816106376794745e-06,
+    -0.0002856158408179452,
+    -1.5566414664577892,
+    -0.351328293291558
+  ],
+  "cpp_results": [
+    -6.0816106362251875e-06,
+    -0.0002856158408175613,
+    -1.5566414664577892,
+    -0.3513282932915579
+  ],
+  "original_python_results": [
+    -6.0816106376794745e-06,
+    -0.0002856158408179452,
+    -1.5566414664577892,
+    -0.351328293291558
+  ],
+  "max_mc_difference": 1.454286960766906e-15,
+  "method": "Same pre-generated Python Random.gauss shocks, correlation and inputs; medians include pricing, sorting and means, exclude RNG, I/O, strike solving. CLI wall covers all repeats plus parsing. Hardware-specific, not a production latency claim.",
+  "max_abs_pricing_difference": 2.1316282072803006e-14,
+  "collar_rows": 48,
+  "python_version": "3.12.14",
+  "machine": "arm64",
+  "platform": "Darwin",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "refinery_hashes": {
+    "build_excel.py": "0b92b47452ca379d1f2a82a60e2483d98faa6d38e053eadf960360dbf3d02146",
+    "recalc.py": "0ebf74d2b9491cecc57eecf6eeaabf17e1f058d8fb0750d8088c6132469d871a",
+    "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "engine.py": "82be3fa94645b42c75a62058d4e7056af591a681b76fd122bb854fcb0dde963f",
+    "assumptions.py": "0be2d1e172173c8c8464577fee8a92c917354026ba7cc8a4500f5e126fb7974e"
+  },
+  "source_of_truth_summary": {
+    "Annual budget refining margin ($m)": 875.06122,
+    "Recommended cover": 0.8,
+    "30% fall, recommended cover": -0.09999999999999987,
+    "30% fall, unhedged": -0.2999999999999998,
+    "Outage cost on unbacked calls, recommended cover": 0.023013698630136973,
+    "Outage + spike total change, recommended cover": -0.049589041095890685,
+    "Diesel put strike ($/bbl)": 38.0,
+    "Diesel call strike, Bachelier ($/bbl)": 42.0,
+    "Diesel call strike Dec, Black-76 ($/bbl)": 45.67825878786891,
+    "Outage cost, Black-76 check": 0.015473073710677457,
+    "30% fall, Black-76 check": -0.09999999999999987
+  },
+  "new_pytest_tests": 57,
+  "native_ctest_cases": 1,
+  "native_assertions": 8
+}
