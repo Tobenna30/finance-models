@@ -14,7 +14,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 04 | [Darktrace / Thoma Bravo Sell-Side M&A Model](projects/04-08-darktrace) | IB advisory | Excel | 🟢 Built (fairness note) |
 | 05 | Strategic Merger Model (Accretion/Dilution) | IB | Excel + Python | ✅ [Built: EQT / Range merger](projects/05-strategic-merger/) |
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |
-| 07 | Restructuring & Liability Management | Debt advisory | Excel | ⚪ Planned |
+| 07 | Restructuring & Liability Management | Debt advisory | Excel + Python | 🟢 [Built: Thames Water liquidity and creditor case](projects/07-restructuring/) |
 | 08 | [LBO & Leveraged Finance Model: Darktrace](projects/04-08-darktrace) | PE / LevFin | Excel | 🟢 Built (IC memo; liquidity funding required) |
 | 09 | [Vitamin Well private-credit underwriting](projects/09-private-credit) | Private credit | Excel + Python | 🟢 Built (public-information credit model) |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |

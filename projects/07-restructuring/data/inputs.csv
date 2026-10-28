@@ -1,0 +1,23 @@
+key,label,value,tag,unit,source_or_reason
+drawn,"Super senior drawn, 15 Oct",2650.0,S,GBPm,"CONSENT: issuer-to-TWUL chain, not additional separate loans"
+facility,Existing super senior facility capacity,3000.0,S,GBPm,CONSENT: conditional capacity; undrawn is not free cash
+upsize,Proposed incremental capacity,2400.0,S,GBPm,"CONSENT: commitments to be sought in tranches, not fully committed"
+ss_rate,Existing super senior historical coupon,0.0975,S,%,AR26 pp139-140; A: also applied to illustrative new draws
+b_claim,Approximate Class B debt,1000.0,S,GBPm,"CLASSB: cGBP1bn, not an exact reconciled legal claim"
+b_recovery,Proposed Class B legacy recovery,0.059,S,%,"CLASSB: recovery rate, NOT 5.9% ownership of the whole equity"
+b_rights,Class B right to invest new equity,150.0,S,GBPm,"CLASSB: additional investment right, not a free GBP150m recovery"
+a_quote,Historical Class A trading reference,0.69,S,price/par,"AR26 p124: c69% at March 2026, not current or executable"
+historic_burn,FY26 cash outflow before other financing,1130.2,S,GBPm/year,"AR26 p39: excludes subsequent borrowings, leases and derivative settlements"
+cash,"Opening accessible cash proxy, 31 Oct",200.0,A,GBPm,Current accessible balance unavailable; not rolled forward from March cash
+burn,Monthly cash use before new-draw interest,200.0,A,GBPm/month,"Illustrative stress above FY26 GBP94.2m monthly outflow; includes all opening-debt interest and capex, no automatic financing plug"
+buffer,Minimum cash buffer,100.0,A,GBPm,"Analyst liquidity buffer, not a covenant or regulatory requirement"
+fee,Incremental upsize draw fee,0.02,A,%,2% fee on new GBP2.4bn only; no fee assumed on existing undrawn GBP350m
+funding_case,Funding case: 0 blocked / 1 existing / 2 upsize,2,A,index,2 assumes approvals and commitments for illustration; not current funded position
+maturity_case,March extension: 0 no / 1 yes,1,A,index,"Separate from liquidity approvals; base assumes extension, not an agreed outcome"
+march_claim,March 2027 senior principal stress,500.0,A,GBPm,Illustrative payable if extension fails; exact instrument amounts unavailable
+equity,Post-money plan equity value proxy,6000.0,A,GBPm,Unverified plan equity value; used only to translate legacy recovery into ownership
+equity_stress,Equity value multiplier,1.0,A,x,"Hold allocated shares fixed, vary realised equity value"
+ev,Illustrative distributable enterprise value,18000.0,A,GBPm,Not RCV or agreed plan value; independent recovery scenario
+cost,Value leakage / enforcement costs,0.05,A,%,5% illustrative cost before creditor distributions
+hedges,Priority hedge / other claim reserve,1500.0,A,GBPm,"Termination claims unverified; assume ahead of super senior, relation requires legal review"
+class_a,Class A claim proxy,16000.0,A,GBPm,"Unverified round claim amount, not a reconciliation of statutory or covenant net debt"
