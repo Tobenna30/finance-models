@@ -1,0 +1,568 @@
+{
+  "design": {
+    "months": 444,
+    "start": "1963-01",
+    "end": "1999-12",
+    "net_sharpe": 0.8380878370893319,
+    "annual_net_mean": 0.07925270270270271,
+    "annual_net_vol": 0.09456371897478706,
+    "net_cagr": 0.0773761774565942,
+    "annual_execution_drag": 0.012000000000000005,
+    "annual_borrow_drag": 0.009999999999999998,
+    "annual_total_cost_drag": 0.021999999999999995,
+    "factor_correlation": 0.9162679914143047
+  },
+  "evaluation": {
+    "months": 321,
+    "start": "2000-01",
+    "end": "2026-09",
+    "net_sharpe": 0.05032017544564235,
+    "annual_net_mean": 0.008110280373831779,
+    "annual_net_vol": 0.16117353133223458,
+    "net_cagr": -0.005382077649849881,
+    "annual_execution_drag": 0.012000000000000004,
+    "annual_borrow_drag": 0.009999999999999998,
+    "annual_total_cost_drag": 0.021999999999999992,
+    "factor_correlation": 0.8908437008534287
+  },
+  "full": {
+    "months": 765,
+    "start": "1963-01",
+    "end": "2026-09",
+    "net_sharpe": 0.3885088126569675,
+    "annual_net_mean": 0.04940078431372549,
+    "annual_net_vol": 0.12715486162560677,
+    "net_cagr": 0.04184310941139158,
+    "annual_execution_drag": 0.012000000000000004,
+    "annual_borrow_drag": 0.01,
+    "annual_total_cost_drag": 0.021999999999999995,
+    "factor_correlation": 0.8989229091365992
+  },
+  "worst_drawdown": {
+    "peak": "2009-02",
+    "trough": "2021-05",
+    "recovery": null,
+    "drawdown": -0.575999438823279
+  },
+  "drawdown_episodes": [
+    {
+      "peak": "2009-02",
+      "trough": "2021-05",
+      "recovery": null,
+      "drawdown": -0.575999438823279
+    },
+    {
+      "peak": "2002-09",
+      "trough": "2007-02",
+      "recovery": "2008-11",
+      "drawdown": -0.34825356883186454
+    },
+    {
+      "peak": "2000-12",
+      "trough": "2001-01",
+      "recovery": "2001-09",
+      "drawdown": -0.2110333333333333
+    },
+    {
+      "peak": "1980-11",
+      "trough": "1981-08",
+      "recovery": "1982-09",
+      "drawdown": -0.1667528798394733
+    },
+    {
+      "peak": "1999-02",
+      "trough": "1999-05",
+      "recovery": "1999-11",
+      "drawdown": -0.163436717740148
+    }
+  ],
+  "worst_years": [
+    {
+      "year": "2009",
+      "net_return": -0.449786637698919,
+      "months": 12
+    },
+    {
+      "year": "2021",
+      "net_return": -0.1884743158057287,
+      "months": 12
+    },
+    {
+      "year": "2016",
+      "net_return": -0.15308409573614967,
+      "months": 12
+    },
+    {
+      "year": "2003",
+      "net_return": -0.15271848612003258,
+      "months": 12
+    },
+    {
+      "year": "2023",
+      "net_return": -0.14062845935551627,
+      "months": 12
+    }
+  ],
+  "crash_2009": {
+    "net_return": -0.449786637698919,
+    "april_net": -0.22773333333333332,
+    "published_mom_2009": -0.5283057976197962
+  },
+  "correlation_full": 0.8989229091365992,
+  "oos_break_even_execution_bp": 16.75856697819315,
+  "walk_forward": [
+    {
+      "year": 2000,
+      "train_end": "1999-12",
+      "train_months": 444,
+      "train_sharpe": 0.8380878370893319,
+      "train_annual_vol": 0.09456371897478706,
+      "test_months": 12,
+      "test_return": 0.1928481321060389,
+      "test_annual_vol": 0.19749854487381097
+    },
+    {
+      "year": 2001,
+      "train_end": "2000-12",
+      "train_months": 456,
+      "train_sharpe": 0.8365482409357546,
+      "train_annual_vol": 0.09837731333819506,
+      "test_months": 12,
+      "test_return": -0.08512617448130055,
+      "test_annual_vol": 0.29420648902058255
+    },
+    {
+      "year": 2002,
+      "train_end": "2001-12",
+      "train_months": 468,
+      "train_sharpe": 0.7367704520239072,
+      "train_annual_vol": 0.10724907398347276,
+      "test_months": 12,
+      "test_return": 0.09690949393540937,
+      "test_annual_vol": 0.20766334370365372
+    },
+    {
+      "year": 2003,
+      "train_end": "2002-12",
+      "train_months": 480,
+      "train_sharpe": 0.7228715203818065,
+      "train_annual_vol": 0.11048470958963248,
+      "test_months": 12,
+      "test_return": -0.15271848612003258,
+      "test_annual_vol": 0.12362886817185759
+    },
+    {
+      "year": 2004,
+      "train_end": "2003-12",
+      "train_months": 492,
+      "train_sharpe": 0.6662636299292062,
+      "train_annual_vol": 0.11118795095081124,
+      "test_months": 12,
+      "test_return": -0.08144160628508368,
+      "test_annual_vol": 0.07904345611463008
+    },
+    {
+      "year": 2005,
+      "train_end": "2004-12",
+      "train_months": 504,
+      "train_sharpe": 0.6357595527479198,
+      "train_annual_vol": 0.1106868749216263,
+      "test_months": 12,
+      "test_return": 0.070616114096546,
+      "test_annual_vol": 0.047358408584288005
+    },
+    {
+      "year": 2006,
+      "train_end": "2005-12",
+      "train_months": 516,
+      "train_sharpe": 0.6418193454864068,
+      "train_annual_vol": 0.10960847114383564,
+      "test_months": 12,
+      "test_return": -0.09392799814443187,
+      "test_annual_vol": 0.06354141634327243
+    },
+    {
+      "year": 2007,
+      "train_end": "2006-12",
+      "train_months": 528,
+      "train_sharpe": 0.610766168674703,
+      "train_annual_vol": 0.10897824844679233,
+      "test_months": 12,
+      "test_return": 0.20731266319191244,
+      "test_annual_vol": 0.07179425147917169
+    },
+    {
+      "year": 2008,
+      "train_end": "2007-12",
+      "train_months": 540,
+      "train_sharpe": 0.6399135441318241,
+      "train_annual_vol": 0.1083774876437612,
+      "test_months": 12,
+      "test_return": 0.2789180223590375,
+      "test_annual_vol": 0.18582529123786234
+    },
+    {
+      "year": 2009,
+      "train_end": "2008-12",
+      "train_months": 552,
+      "train_sharpe": 0.6650091778125177,
+      "train_annual_vol": 0.11066535728566645,
+      "test_months": 12,
+      "test_return": -0.449786637698919,
+      "test_annual_vol": 0.35053769444565114
+    },
+    {
+      "year": 2010,
+      "train_end": "2009-12",
+      "train_months": 564,
+      "train_sharpe": 0.4975431839642641,
+      "train_annual_vol": 0.12248054775182009,
+      "test_months": 12,
+      "test_return": 0.004587894242609858,
+      "test_annual_vol": 0.09936646933081966
+    },
+    {
+      "year": 2011,
+      "train_end": "2010-12",
+      "train_months": 576,
+      "train_sharpe": 0.49069433748056757,
+      "train_annual_vol": 0.12199125217954496,
+      "test_months": 12,
+      "test_return": 0.10237098077448858,
+      "test_annual_vol": 0.05895084817031897
+    },
+    {
+      "year": 2012,
+      "train_end": "2011-12",
+      "train_months": 588,
+      "train_sharpe": 0.5013165648367317,
+      "train_annual_vol": 0.12101807840061538,
+      "test_months": 12,
+      "test_return": -0.028089139183513634,
+      "test_annual_vol": 0.10763124757497451
+    },
+    {
+      "year": 2013,
+      "train_end": "2012-12",
+      "train_months": 600,
+      "train_sharpe": 0.48864506046449585,
+      "train_annual_vol": 0.12073180468440749,
+      "test_months": 12,
+      "test_return": -0.028861350748298542,
+      "test_annual_vol": 0.05327838338729541
+    },
+    {
+      "year": 2014,
+      "train_end": "2013-12",
+      "train_months": 612,
+      "train_sharpe": 0.47819721520125463,
+      "train_annual_vol": 0.11980453724373981,
+      "test_months": 12,
+      "test_return": 0.008973594438107302,
+      "test_annual_vol": 0.06513063097275422
+    },
+    {
+      "year": 2015,
+      "train_end": "2014-12",
+      "train_months": 624,
+      "train_sharpe": 0.4740347049050171,
+      "train_annual_vol": 0.11897457367467948,
+      "test_months": 12,
+      "test_return": 0.20845711558430846,
+      "test_annual_vol": 0.15985246607134626
+    },
+    {
+      "year": 2016,
+      "train_end": "2015-12",
+      "train_months": 636,
+      "train_sharpe": 0.49357412671467343,
+      "train_annual_vol": 0.11984588937514232,
+      "test_months": 12,
+      "test_return": -0.15308409573614967,
+      "test_annual_vol": 0.12218433540426456
+    },
+    {
+      "year": 2017,
+      "train_end": "2016-12",
+      "train_months": 648,
+      "train_sharpe": 0.4590950318916773,
+      "train_annual_vol": 0.12009133077776793,
+      "test_months": 12,
+      "test_return": -0.005339708358611306,
+      "test_annual_vol": 0.08307690850815722
+    },
+    {
+      "year": 2018,
+      "train_end": "2017-12",
+      "train_months": 660,
+      "train_sharpe": 0.4526568344797528,
+      "train_annual_vol": 0.11949650368822293,
+      "test_months": 12,
+      "test_return": 0.10271152881244228,
+      "test_annual_vol": 0.09907273728290378
+    },
+    {
+      "year": 2019,
+      "train_end": "2018-12",
+      "train_months": 672,
+      "train_sharpe": 0.46137862856697565,
+      "train_annual_vol": 0.11911505963732572,
+      "test_months": 12,
+      "test_return": -0.02946062974945418,
+      "test_annual_vol": 0.1305926865208281
+    },
+    {
+      "year": 2020,
+      "train_end": "2019-12",
+      "train_months": 684,
+      "train_sharpe": 0.44948465822535294,
+      "train_annual_vol": 0.1192574317809914,
+      "test_months": 12,
+      "test_return": -0.07975764818747666,
+      "test_annual_vol": 0.27411431051164165
+    },
+    {
+      "year": 2021,
+      "train_end": "2020-12",
+      "train_months": 696,
+      "train_sharpe": 0.42107152498213857,
+      "train_annual_vol": 0.12320783350768792,
+      "test_months": 12,
+      "test_return": -0.1884743158057287,
+      "test_annual_vol": 0.15119008730733638
+    },
+    {
+      "year": 2022,
+      "train_end": "2021-12",
+      "train_months": 708,
+      "train_sharpe": 0.38464761494447736,
+      "train_annual_vol": 0.12395012159622991,
+      "test_months": 12,
+      "test_return": 0.20357436100872217,
+      "test_annual_vol": 0.08856805806322564
+    },
+    {
+      "year": 2023,
+      "train_end": "2022-12",
+      "train_months": 720,
+      "train_sharpe": 0.40525975630895295,
+      "train_annual_vol": 0.12351131808041528,
+      "test_months": 12,
+      "test_return": -0.14062845935551627,
+      "test_annual_vol": 0.1756385829428768
+    },
+    {
+      "year": 2024,
+      "train_end": "2023-12",
+      "train_months": 732,
+      "train_sharpe": 0.3773722385777719,
+      "train_annual_vol": 0.12456066689503105,
+      "test_months": 12,
+      "test_return": 0.1631977632889745,
+      "test_annual_vol": 0.13826659689954698
+    },
+    {
+      "year": 2025,
+      "train_end": "2024-12",
+      "train_months": 744,
+      "train_sharpe": 0.3915195967087518,
+      "train_annual_vol": 0.12475995621305158,
+      "test_months": 12,
+      "test_return": -0.085222078148254,
+      "test_annual_vol": 0.11239485894907213
+    },
+    {
+      "year": 2026,
+      "train_end": "2025-12",
+      "train_months": 756,
+      "train_sharpe": 0.3752423023822978,
+      "train_annual_vol": 0.12459674177762399,
+      "test_months": 9,
+      "test_return": 0.19374505355905747,
+      "test_annual_vol": 0.27254086543733824
+    }
+  ],
+  "cost_sensitivity": [
+    {
+      "turnover": 0.25,
+      "cost_bp": 0.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": 0.12477408795106383,
+      "annual_net_mean": 0.020110280373831786,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": 0.006638885788487814,
+      "annual_execution_drag": 0.0,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.009999999999999998,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.25,
+      "cost_bp": 10.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": 0.08754713169835311,
+      "annual_net_mean": 0.014110280373831783,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": 0.0006118603627933705,
+      "annual_execution_drag": 0.006000000000000002,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.016000000000000004,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.25,
+      "cost_bp": 25.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": 0.031706697319287,
+      "annual_net_mean": 0.0051102803738317815,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.008366690523258336,
+      "annual_execution_drag": 0.015,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.025,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.25,
+      "cost_bp": 50.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": -0.06136069331248984,
+      "annual_net_mean": -0.009889719626168218,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.023167015275088354,
+      "annual_execution_drag": 0.03,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.039999999999999994,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.5,
+      "cost_bp": 0.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": 0.12477408795106383,
+      "annual_net_mean": 0.020110280373831786,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": 0.006638885788487814,
+      "annual_execution_drag": 0.0,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.009999999999999998,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.5,
+      "cost_bp": 10.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": 0.05032017544564235,
+      "annual_net_mean": 0.008110280373831779,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.005382077649849881,
+      "annual_execution_drag": 0.012000000000000004,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.021999999999999992,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.5,
+      "cost_bp": 25.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": -0.06136069331248984,
+      "annual_net_mean": -0.009889719626168218,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.023167015275088354,
+      "annual_execution_drag": 0.03,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.039999999999999994,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 0.5,
+      "cost_bp": 50.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": -0.24749547457604354,
+      "annual_net_mean": -0.039889719626168225,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.052162101027117935,
+      "annual_execution_drag": 0.06,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.07,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 1.0,
+      "cost_bp": 0.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": 0.12477408795106383,
+      "annual_net_mean": 0.020110280373831786,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": 0.006638885788487814,
+      "annual_execution_drag": 0.0,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.009999999999999998,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 1.0,
+      "cost_bp": 10.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": -0.024133737059779125,
+      "annual_net_mean": -0.0038897196261682217,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.017271351403383983,
+      "annual_execution_drag": 0.024000000000000007,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.034,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 1.0,
+      "cost_bp": 25.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": -0.24749547457604354,
+      "annual_net_mean": -0.039889719626168225,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.052162101027117935,
+      "annual_execution_drag": 0.06,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.07,
+      "factor_correlation": 0.8908437008534287
+    },
+    {
+      "turnover": 1.0,
+      "cost_bp": 50.0,
+      "months": 321,
+      "start": "2000-01",
+      "end": "2026-09",
+      "net_sharpe": -0.6197650371031508,
+      "annual_net_mean": -0.09988971962616823,
+      "annual_net_vol": 0.16117353133223458,
+      "net_cagr": -0.10779976547013281,
+      "annual_execution_drag": 0.12,
+      "annual_borrow_drag": 0.009999999999999998,
+      "annual_total_cost_drag": 0.13,
+      "factor_correlation": 0.8908437008534287
+    }
+  ],
+  "verdict": "Reject a standalone momentum strategy under base costs; retain as a published-portfolio research benchmark, without a stock-level implementation claim."
+}

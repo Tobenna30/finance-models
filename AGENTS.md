@@ -56,7 +56,8 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 | 09 | Private credit underwriting | Vitamin Well / Vital Bidco | Built: 2026 public-information capacity, cash/debt, policy headroom and recovery. Final terms and audited accounts unverified. |
 | 14 | Derivatives, hedging & commodities | Illustrative South African refinery | Built: C++17 prices/Greeks and Monte Carlo parity extension; Bachelier collars, Black-76 check, outage stress and USD/ZAR overlay. 80% cover; 10% crack-fall loss; 2.3% outage cost. |
 | 12 | Rates & macro | UK gilts / GBP | Built: gilt policy path, curve trade and GBP repricing; 10.83bp 3m carry/roll, reject passive GBP carry. |
-| 03, 06, 07, 10–11, 13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
+| 03 | Systematic quant | US equities | Built: published monthly momentum-decile backtest, assumed execution/borrow costs, historical walk-forward. OOS net Sharpe 0.05; no stock-level point-in-time reconstruction. |
+| 06, 07, 10–11, 13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
 ## Darktrace follow-up (projects 04 and 08)
 
