@@ -1,0 +1,559 @@
+{
+  "curve": [
+    [
+      0.08333333,
+      3.899390333596757
+    ],
+    [
+      0.16666667,
+      3.95568591431698
+    ],
+    [
+      0.25,
+      4.009725980019304
+    ],
+    [
+      0.33333333,
+      4.066759098106091
+    ],
+    [
+      0.41666667,
+      4.126082723341562
+    ],
+    [
+      0.5,
+      4.185446472181798
+    ],
+    [
+      0.58333333,
+      4.242870313573435
+    ],
+    [
+      0.66666667,
+      4.297216901966562
+    ],
+    [
+      0.75,
+      4.347876632881497
+    ],
+    [
+      0.83333333,
+      4.394790154319073
+    ],
+    [
+      0.91666667,
+      4.438071936349777
+    ],
+    [
+      1,
+      4.477820724167701
+    ],
+    [
+      1.08333333,
+      4.514130158460529
+    ],
+    [
+      1.16666667,
+      4.547098316515709
+    ],
+    [
+      1.25,
+      4.576850688000296
+    ],
+    [
+      1.33333333,
+      4.603533957476314
+    ],
+    [
+      1.41666667,
+      4.6273097577277875
+    ],
+    [
+      1.5,
+      4.6483505316844775
+    ],
+    [
+      1.58333333,
+      4.666836470971837
+    ],
+    [
+      1.66666667,
+      4.68295206877658
+    ],
+    [
+      1.75,
+      4.696883357087044
+    ],
+    [
+      1.83333333,
+      4.708817467947683
+    ],
+    [
+      1.91666667,
+      4.718942383197418
+    ],
+    [
+      2.0,
+      4.727446764875961
+    ],
+    [
+      2.08333333,
+      4.734518768082999
+    ],
+    [
+      2.16666667,
+      4.740334378405631
+    ],
+    [
+      2.25,
+      4.745047361572945
+    ],
+    [
+      2.33333333,
+      4.748792083784372
+    ],
+    [
+      2.41666667,
+      4.751686850292098
+    ],
+    [
+      2.5,
+      4.753836584396758
+    ],
+    [
+      2.58333333,
+      4.755334975321166
+    ],
+    [
+      2.66666667,
+      4.756266253889472
+    ],
+    [
+      2.75,
+      4.756706605880183
+    ],
+    [
+      2.83333333,
+      4.756725364699682
+    ],
+    [
+      2.91666667,
+      4.756385988431568
+    ],
+    [
+      3.0,
+      4.755746874743967
+    ],
+    [
+      3.08333333,
+      4.75486196728604
+    ],
+    [
+      3.16666667,
+      4.753780137466641
+    ],
+    [
+      3.25,
+      4.752544402618061
+    ],
+    [
+      3.33333333,
+      4.7511924836980635
+    ],
+    [
+      3.41666667,
+      4.749757452152879
+    ],
+    [
+      3.5,
+      4.748268280897877
+    ],
+    [
+      3.58333333,
+      4.746750333259479
+    ],
+    [
+      3.66666667,
+      4.745225748980816
+    ],
+    [
+      3.75,
+      4.74371382603533
+    ],
+    [
+      3.83333333,
+      4.742231317952879
+    ],
+    [
+      3.91666667,
+      4.7407927067684055
+    ],
+    [
+      4.0,
+      4.739410437043194
+    ],
+    [
+      4.08333333,
+      4.738095143152238
+    ],
+    [
+      4.16666667,
+      4.736855892996191
+    ],
+    [
+      4.25,
+      4.735700465091298
+    ],
+    [
+      4.33333333,
+      4.734635471245125
+    ],
+    [
+      4.41666667,
+      4.733666468971756
+    ],
+    [
+      4.5,
+      4.732798057347285
+    ],
+    [
+      4.58333333,
+      4.7320339728015846
+    ],
+    [
+      4.66666667,
+      4.731377149127502
+    ],
+    [
+      4.75,
+      4.730829804601941
+    ],
+    [
+      4.83333333,
+      4.730393495455196
+    ],
+    [
+      4.91666667,
+      4.730069173591373
+    ],
+    [
+      5.0,
+      4.729857236575125
+    ],
+    [
+      5.5,
+      4.730917126285632
+    ],
+    [
+      6,
+      4.735760705383883
+    ],
+    [
+      6.5,
+      4.743921349471836
+    ],
+    [
+      7,
+      4.754847491313851
+    ],
+    [
+      7.5,
+      4.767999235297888
+    ],
+    [
+      8,
+      4.782878925878263
+    ],
+    [
+      8.5,
+      4.799047681109458
+    ],
+    [
+      9,
+      4.816128021227709
+    ],
+    [
+      9.5,
+      4.833804232593832
+    ],
+    [
+      10,
+      4.851813800831621
+    ],
+    [
+      10.5,
+      4.869940288711429
+    ],
+    [
+      11,
+      4.888004517525901
+    ],
+    [
+      11.5,
+      4.905857656318582
+    ],
+    [
+      12,
+      4.923375537103606
+    ],
+    [
+      12.5,
+      4.9404543776158345
+    ],
+    [
+      13,
+      4.957008291693855
+    ],
+    [
+      13.5,
+      4.972967354650155
+    ],
+    [
+      14,
+      4.988274879829496
+    ],
+    [
+      14.5,
+      5.002885216825954
+    ],
+    [
+      15,
+      5.0167628565219635
+    ],
+    [
+      15.5,
+      5.029881597070575
+    ],
+    [
+      16,
+      5.04222110328844
+    ],
+    [
+      16.5,
+      5.0537639375786885
+    ],
+    [
+      17,
+      5.064495640446063
+    ],
+    [
+      17.5,
+      5.074405029822451
+    ],
+    [
+      18,
+      5.083483814116631
+    ],
+    [
+      18.5,
+      5.091726201609312
+    ],
+    [
+      19,
+      5.099128571522607
+    ],
+    [
+      19.5,
+      5.105689195694221
+    ],
+    [
+      20,
+      5.111408002000495
+    ],
+    [
+      20.5,
+      5.116286442574908
+    ],
+    [
+      21,
+      5.12032815597389
+    ],
+    [
+      21.5,
+      5.123539608868232
+    ],
+    [
+      22,
+      5.125929863552655
+    ],
+    [
+      22.5,
+      5.127510289543312
+    ],
+    [
+      23,
+      5.128294312792853
+    ],
+    [
+      23.5,
+      5.128297196920584
+    ],
+    [
+      24,
+      5.127535851788852
+    ],
+    [
+      24.5,
+      5.126028665519075
+    ],
+    [
+      25,
+      5.123795356665818
+    ]
+  ],
+  "asof": "2026-10-27",
+  "inputs": {
+    "notional": [
+      100000000,
+      "A",
+      "Illustrative sizing, not a proposed allocation"
+    ],
+    "expiry": [
+      0.25,
+      "A",
+      "Synthetic quarter-year option expiry"
+    ],
+    "tenor": [
+      2,
+      "A",
+      "Annual fixed payments; whole years, 1 to 10"
+    ],
+    "width_bp": [
+      25,
+      "A",
+      "Sold receiver strike 25bp below ATM"
+    ],
+    "long_vol_bp": [
+      80,
+      "A",
+      "Sensitivity assumption, not an observed option quote"
+    ],
+    "short_vol_bp": [
+      80,
+      "A",
+      "Separate input permits skew sensitivity"
+    ],
+    "cost_bp": [
+      1,
+      "A",
+      "All-in incremental cost per strategy, rate bp; replace with quote-based costs"
+    ],
+    "forward_mode": [
+      0,
+      "A",
+      "0 curve-derived; 1 dealer forward"
+    ],
+    "dealer_forward": [
+      null,
+      "S",
+      "Enter decimal forward for the same underlying schedule"
+    ],
+    "vol_mode": [
+      0,
+      "A",
+      "0 assumed; 1 dealer strike-specific normal vols"
+    ],
+    "dealer_long_vol_bp": [
+      null,
+      "S",
+      "Missing; no public executable quote found"
+    ],
+    "dealer_short_vol_bp": [
+      null,
+      "S",
+      "Missing; no public executable quote found"
+    ],
+    "quote_time": [
+      "",
+      "S",
+      "Missing; timestamp and timezone required for dealer mode"
+    ],
+    "quote_source": [
+      "",
+      "S",
+      "Missing; source and quote side required for dealer mode"
+    ],
+    "curve_shock_bp": [
+      0,
+      "A",
+      "Parallel shock to all OIS zero rates"
+    ],
+    "scenario_shift_bp": [
+      -25,
+      "A",
+      "Expiry shift relative to selected forward, not a forecast"
+    ]
+  },
+  "sources": [
+    [
+      "S",
+      "BoE OIS continuous zero curve",
+      "2026-10-27",
+      "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/latest-yield-curve-data.zip?download=1",
+      "Downloaded 28 Oct 2026. Fitted and revisable; not dealer quotes."
+    ],
+    [
+      "S",
+      "BoE curve methodology",
+      "2026-10-28",
+      "https://www.bankofengland.co.uk/statistics/yield-curves",
+      "Rates percent continuous; publication normally following business day."
+    ],
+    [
+      "S",
+      "Budget 2026, section 8.3/Table A.1",
+      "2026-10-28",
+      "https://www.gov.uk/government/publications/budget-2026-document/budget-2026-html",
+      "April-to-Budget allocation comparison is not an announcement surprise."
+    ],
+    [
+      "S",
+      "ONS September CPI",
+      "2026-10-21",
+      "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/september2026",
+      "CPI 3.5%; does not establish an easing forecast."
+    ],
+    [
+      "S",
+      "September MPC",
+      "2026-09-17",
+      "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026",
+      "Bank Rate 3.75%; 6-3 hold; three preferred a hike."
+    ],
+    [
+      "S",
+      "Dealer option surface",
+      "Unavailable",
+      "",
+      "No executable OTC 3m2y SONIA strike vols obtained. Do not substitute futures-option or realised vol."
+    ]
+  ],
+  "expected": {
+    "asof": "2026-10-27",
+    "forward": 0.04952849703541012,
+    "curve_forward": 0.04952849703541012,
+    "annuity": 1.8431332675230507,
+    "pv01": 18431.332675230507,
+    "long_vol_bp": 80,
+    "short_vol_bp": 80,
+    "long_strike": 0.04952849703541012,
+    "short_strike": 0.047028497035410115,
+    "outright_bp": 15.957691216057308,
+    "spread_bp": 9.480890700259827,
+    "outright_debit": 312552.8482069864,
+    "spread_debit": 193176.7832292185,
+    "spread_max_profit": 267606.5336515442,
+    "spread_breakeven_bp": 10.480890700259827,
+    "crossover_bp": 31.476800515797482,
+    "outright_delta": -9215.666337615254,
+    "spread_delta": -4313.1985649214685,
+    "outright_vega": 3676.5189441469483,
+    "spread_vega": 652.29695295804,
+    "linear_pnl": 442351.9842055322,
+    "outright_pnl": 148230.46867377628,
+    "spread_pnl": 267606.5336515442,
+    "vertical_valid": true,
+    "limited_profit_positive": true,
+    "status": "ILLUSTRATIVE INPUTS"
+  }
+}

@@ -3,4 +3,7 @@ __pycache__/
 .venv/
 ~$*.xlsx
 .DS_Store
+node_modules
+projects/*/options/previews/
+*.xlsx.inspect.ndjson
 projects/*/writeup/*.docx
