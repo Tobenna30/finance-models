@@ -1,0 +1,19 @@
+name: C++ refinery pricer
+on:
+  push:
+  pull_request:
+jobs:
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: cmake -S projects/14-derivatives-hedging/cpp-pricer -B /tmp/cpp-pricer -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build /tmp/cpp-pricer --parallel 2
+      - run: ctest --test-dir /tmp/cpp-pricer --output-on-failure
+      - run: pytest tests/test_cpp_pricer.py tests/test_refinery_hedge.py -q
+        env:
+          REFINERY_PRICER: /tmp/cpp-pricer/refinery_pricer

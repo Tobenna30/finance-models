@@ -10,7 +10,7 @@ text=f'''# UK gilts / GBP: hold versus a hiking curve
 28 October 2026 | curves 27 October; FX and carry 23 October | Illustrative research
 
 ## Conditional 2s10s steepener; reject passive GBP carry
-The OIS 12-month instantaneous forward plus an assumed 5bp Bank Rate/SONIA basis implies {r['implied_bank_rate_12m_pct']:.4f}% Bank Rate. This is {abs(r['implied_cuts_bp']):.2f}bp of hikes against a 3.75% hold scenario. September CPI is 3.5%, above target. Holding rates is a contestable assumption, not a prediction from the data. The thesis needs inflation to subside enough to prevent the priced tightening. Assume 2y falls 50bp and 10y falls 10bp in that scenario; fiscal or inflation pressure that lifts the long end or forces more near-term hikes can break the view.
+The OIS 12-month instantaneous forward plus an assumed 5bp Bank Rate/SONIA basis implies {r['implied_bank_rate_12m_pct']:.4f}% Bank Rate. This is {abs(r['implied_cuts_bp']):.2f}bp of hikes against a 3.75% hold scenario. September CPI is 3.5%, above target. Holding rates is a contestable assumption, not a prediction from the data. The thesis needs inflation to subside enough to prevent the priced tightening. Assume 2y falls 50bp and 10y falls 10bp in that scenario; inflation pressure that forces front-end yields higher relative to the long end can break the view.
 
 | Trade log, entered 28 October 2026 | Value |
 |---|---:|

@@ -5,6 +5,8 @@
 - Refinery crack-margin collars, outage stress and USD/ZAR cost overlay for an illustrative 100,000 bbl/day South African refinery. This is not a real asset or an executable trade recommendation.
 - Bachelier pricing with Black-76 cross-check, live Excel formulas, scenario grid and Monte Carlo stress.
 
+- [C++17 pricer](cpp-pricer/README.md): Black-76/Bachelier prices and Greeks, full monthly parity and common-shock Monte Carlo benchmark.
+
 ## Results
 
 Hedge 80% of budgeted 2027 product barrels with monthly zero-cost collars. A 30% crack fall reduces annual refining margin by 10%, versus 30% unhedged. Six weeks of outage during a 30% crack spike creates unbacked call costs of 2.3% of annual budget margin; 90% cover exceeds the assumed 2.5% appetite.
@@ -20,6 +22,8 @@ Hedge 80% of budgeted 2027 product barrels with monthly zero-cost collars. A 30%
 Black-76 strikes lower the 80% outage cost to **1.6%**, with the crack-fall loss unchanged at **10%**. Annual budget refining margin is **$875m**.
 
 See [risk memo](writeup/Refinery_hedge_risk_memo.md), [PDF](writeup/Refinery_hedge_risk_memo.pdf) and [workbook](models/Refinery_Hedge.xlsx).
+
+C++ module: maximum pricing/strike difference 2.1316282072803006e-14; 19.39289626276462x stress-kernel speed-up at 20,000 common paths on the stated machine. 57 pytest cases and one CTest case. Timings exclude RNG/I/O; original model outputs are unchanged.
 
 ## How to run
 
