@@ -10,7 +10,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 |---|---|---|---|---|
 | 01 | [Long/Short Equity Pitch Kit — LSEG & Rolls-Royce](projects/01-equity-pitch-kit) | Hedge funds / AM / ER | Hybrid | 🟢 LSEG model and revised pitch built |
 | 02 | Earnings & Catalyst Tracker | Hedge funds | Hybrid | ⚪ Planned |
-| 03 | Factor & Portfolio Construction Toolkit | Systematic / AM | Python | ⚪ Planned |
+| 03 | Factor & Portfolio Construction Toolkit | Systematic / AM | Python / Excel | Built: monthly momentum portfolio backtest, costs and walk-forward review |
 | 04 | [Darktrace / Thoma Bravo Sell-Side M&A Model](projects/04-08-darktrace) | IB advisory | Excel | 🟢 Built (fairness note) |
 | 05 | Strategic Merger Model (Accretion/Dilution) | IB | Excel + Python | ✅ [Built: EQT / Range merger](projects/05-strategic-merger/) |
 | 06 | ECM / DCM Financing Case | Capital markets | Excel | ⚪ Planned |

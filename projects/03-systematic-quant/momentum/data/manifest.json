@@ -1,0 +1,22 @@
+[
+  {
+    "name": "10_Portfolios_Prior_12_2",
+    "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/10_Portfolios_Prior_12_2_CSV.zip",
+    "sha256": "688467caa28578a8dca70698537c4f03c406b246350b6f3e9c396e15e1e7964f",
+    "vintage": "202609 CRSP",
+    "retrieved": "2026-10-28",
+    "rows": 1197,
+    "first": "1927-01",
+    "last": "2026-09"
+  },
+  {
+    "name": "F-F_Momentum_Factor",
+    "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_CSV.zip",
+    "sha256": "27ed60e5b2caa9ea334a261cddfa864a9926f6bf45e9677c95dfd835c5abb315",
+    "vintage": "202609 CRSP",
+    "retrieved": "2026-10-28",
+    "rows": 1197,
+    "first": "1927-01",
+    "last": "2026-09"
+  }
+]

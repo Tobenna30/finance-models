@@ -55,7 +55,8 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 | 05 | Strategic merger, accretion/dilution | EQT / Range Resources | Built: announcement analysis, +1.3% year 3 recurring EPS, -7.4% year 1 including costs; USD344m value break-even synergy versus USD325m target. Closing shares, primary prices and PPA unverified. |
 | 09 | Private credit underwriting | Vitamin Well / Vital Bidco | Built: 2026 public-information capacity, cash/debt, policy headroom and recovery. Final terms and audited accounts unverified. |
 | 14 | Derivatives, hedging & commodities | Illustrative South African refinery | Built: C++17 prices/Greeks and Monte Carlo parity extension; Bachelier collars, Black-76 check, outage stress and USD/ZAR overlay. 80% cover; 10% crack-fall loss; 2.3% outage cost. |
-| 03, 06, 07, 10–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
+| 03 | Systematic quant | US equities | Built: published monthly momentum-decile backtest, assumed execution/borrow costs, historical walk-forward. OOS net Sharpe 0.05; no stock-level point-in-time reconstruction. |
+| 06, 07, 10–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
 ## Darktrace follow-up (projects 04 and 08)
 
