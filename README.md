@@ -19,7 +19,7 @@ Every model is **built in Python and exported to a live Excel workbook with real
 | 09 | [Vitamin Well private-credit underwriting](projects/09-private-credit) | Private credit | Excel + Python | 🟢 Built (public-information credit model) |
 | 10 | PE Fund & Secondaries Model | Private markets | Excel | ⚪ Planned |
 | 11 | Real Estate & Infrastructure Acquisition Models | Real assets | Excel | ⚪ Planned |
-| 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python | ⚪ Planned |
+| 12 | Rates & Macro Trading Toolkit | Macro / FICC | Python / Excel | Built: gilt policy path, DV01 curve trade and GBP repricing |
 | 13 | Credit Relative Value (Banks, AT1, HY) | Credit | Hybrid | ⚪ Planned |
 | 14 | [Refinery derivatives & hedging](projects/14-derivatives-hedging) | Derivatives / Commodities | Excel + Python | 🟢 Built: refinery hedge (collars, outage, FX) |
 | 15 | [Wealth & Private Client: Fund Selection](projects/15-wealth-private-client) | Wealth / fund selection | Excel + Python | 🟢 Built (public-data case) |
