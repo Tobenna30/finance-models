@@ -1,5 +1,11 @@
 # UK gilts / GBP
 
+## Receiver-options extension
+
+[Receiver-options module](options/README.md) adds a live [Excel comparison](models/Sterling_Receiver_Options.xlsx) of an outright receiver, a receiver spread and a linear swap. It uses a dated OIS curve, separate assumed or dealer strike vols, costs, curve shocks and expiry scenarios. Missing selected quotes block valuation. No executable option surface or post-Budget curve was obtained; default premiums are illustrative. Python/Excel parity and native input-change checks cover the extension. Existing gilt/GBP calculations are unchanged.
+
+Read the [companion research note](writeup/Receiver_options_note.md) and [two-page PDF](writeup/Receiver_options_note.pdf) alongside the model.
+
 ## Modules built
 
 1. **gilt-curve-policy-path**: BoE fitted nominal/OIS curves, approximate meeting path, a DV01-neutral cash-gilt steepener, carry/roll, stop and 2022 shock replay.
