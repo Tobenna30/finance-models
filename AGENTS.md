@@ -53,9 +53,10 @@ Sources: prefer primary documents (annual reports, scheme documents, prospectuse
 | 02 | Earnings & catalyst tracking | LSEG + coverage | Hiring and Tradeweb-stake trackers built |
 | 04 + 08 | Sell-side M&A + LBO | Darktrace (Thoma Bravo take-private) | Built. Review adds liquidity shortfalls and conditional IC decision; final debt terms need verification. |
 | 05 | Strategic merger, accretion/dilution | EQT / Range Resources | Built: announcement analysis, +1.3% year 3 recurring EPS, -7.4% year 1 including costs; USD344m value break-even synergy versus USD325m target. Closing shares, primary prices and PPA unverified. |
+| 07 | Restructuring & liability management | Thames Water | Built: conditional GBP2.4bn upsize, March maturity stress, illustrative waterfall and Class B economics. GBP59m legacy value at proposed 5.9% recovery; new equity rights require cash. Current cash, claims and final RP2 terms unverified. |
 | 09 | Private credit underwriting | Vitamin Well / Vital Bidco | Built: 2026 public-information capacity, cash/debt, policy headroom and recovery. Final terms and audited accounts unverified. |
 | 14 | Derivatives, hedging & commodities | Illustrative South African refinery | Built: Bachelier collars, Black-76 check, outage stress and USD/ZAR overlay. 80% cover; 10% crack-fall loss; 2.3% outage cost. |
-| 03, 06, 07, 10–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
+| 03, 06, 10–13, 15–16 | See `docs/CV_PROJECT_MAP.md` | | Not started |
 
 ## Darktrace follow-up (projects 04 and 08)
 

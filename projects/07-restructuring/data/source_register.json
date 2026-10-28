@@ -1,0 +1,179 @@
+{
+  "as_of": "2026-10-27",
+  "sources": {
+    "CONSENT": {
+      "locator": "TWUL, 15 Oct 2026, Sixteenth Consent Requests: facility draw, conditional upsize, pari passu proposal, vote 29 Oct",
+      "url": "https://www.thameswater.co.uk/news/2026/oct/twul-sixteenth-consent-requests-results"
+    },
+    "CLASSB": {
+      "locator": "TWUL, 16 Oct 2026, Class B TSA: proposed full debt write-off, c5.9% recovery, rights to invest; not completed",
+      "url": "https://www.thameswater.co.uk/news/2026/oct/class-b-creditors-update"
+    },
+    "AR26": {
+      "locator": "TWUL Group annual report 2025/26: p39 cash flow; pp139-140 loans/bonds; p124 hedging priority and historical c69% Class A trading level; pp108-109 March 2027 maturity extension",
+      "url": "https://www.thameswater.co.uk/media-library/2tad3w44/annual-report-2025-26.pdf"
+    }
+  },
+  "inputs": {
+    "drawn": {
+      "label": "Super senior drawn, 15 Oct",
+      "value": 2650.0,
+      "tag": "S",
+      "unit": "GBPm",
+      "source_or_reason": "CONSENT: issuer-to-TWUL chain, not additional separate loans"
+    },
+    "facility": {
+      "label": "Existing super senior facility capacity",
+      "value": 3000.0,
+      "tag": "S",
+      "unit": "GBPm",
+      "source_or_reason": "CONSENT: conditional capacity; undrawn is not free cash"
+    },
+    "upsize": {
+      "label": "Proposed incremental capacity",
+      "value": 2400.0,
+      "tag": "S",
+      "unit": "GBPm",
+      "source_or_reason": "CONSENT: commitments to be sought in tranches, not fully committed"
+    },
+    "ss_rate": {
+      "label": "Existing super senior historical coupon",
+      "value": 0.0975,
+      "tag": "S",
+      "unit": "%",
+      "source_or_reason": "AR26 pp139-140; A: also applied to illustrative new draws"
+    },
+    "b_claim": {
+      "label": "Approximate Class B debt",
+      "value": 1000.0,
+      "tag": "S",
+      "unit": "GBPm",
+      "source_or_reason": "CLASSB: cGBP1bn, not an exact reconciled legal claim"
+    },
+    "b_recovery": {
+      "label": "Proposed Class B legacy recovery",
+      "value": 0.059,
+      "tag": "S",
+      "unit": "%",
+      "source_or_reason": "CLASSB: recovery rate, NOT 5.9% ownership of the whole equity"
+    },
+    "b_rights": {
+      "label": "Class B right to invest new equity",
+      "value": 150.0,
+      "tag": "S",
+      "unit": "GBPm",
+      "source_or_reason": "CLASSB: additional investment right, not a free GBP150m recovery"
+    },
+    "a_quote": {
+      "label": "Historical Class A trading reference",
+      "value": 0.69,
+      "tag": "S",
+      "unit": "price/par",
+      "source_or_reason": "AR26 p124: c69% at March 2026, not current or executable"
+    },
+    "historic_burn": {
+      "label": "FY26 cash outflow before other financing",
+      "value": 1130.2,
+      "tag": "S",
+      "unit": "GBPm/year",
+      "source_or_reason": "AR26 p39: excludes subsequent borrowings, leases and derivative settlements"
+    },
+    "cash": {
+      "label": "Opening accessible cash proxy, 31 Oct",
+      "value": 200.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Current accessible balance unavailable; not rolled forward from March cash"
+    },
+    "burn": {
+      "label": "Monthly cash use before new-draw interest",
+      "value": 200.0,
+      "tag": "A",
+      "unit": "GBPm/month",
+      "source_or_reason": "Illustrative stress above FY26 GBP94.2m monthly outflow; includes all opening-debt interest and capex, no automatic financing plug"
+    },
+    "buffer": {
+      "label": "Minimum cash buffer",
+      "value": 100.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Analyst liquidity buffer, not a covenant or regulatory requirement"
+    },
+    "fee": {
+      "label": "Incremental upsize draw fee",
+      "value": 0.02,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "2% fee on new GBP2.4bn only; no fee assumed on existing undrawn GBP350m"
+    },
+    "funding_case": {
+      "label": "Funding case: 0 blocked / 1 existing / 2 upsize",
+      "value": 2,
+      "tag": "A",
+      "unit": "index",
+      "source_or_reason": "2 assumes approvals and commitments for illustration; not current funded position"
+    },
+    "maturity_case": {
+      "label": "March extension: 0 no / 1 yes",
+      "value": 1,
+      "tag": "A",
+      "unit": "index",
+      "source_or_reason": "Separate from liquidity approvals; base assumes extension, not an agreed outcome"
+    },
+    "march_claim": {
+      "label": "March 2027 senior principal stress",
+      "value": 500.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Illustrative payable if extension fails; exact instrument amounts unavailable"
+    },
+    "equity": {
+      "label": "Post-money plan equity value proxy",
+      "value": 6000.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Unverified plan equity value; used only to translate legacy recovery into ownership"
+    },
+    "equity_stress": {
+      "label": "Equity value multiplier",
+      "value": 1.0,
+      "tag": "A",
+      "unit": "x",
+      "source_or_reason": "Hold allocated shares fixed, vary realised equity value"
+    },
+    "ev": {
+      "label": "Illustrative distributable enterprise value",
+      "value": 18000.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Not RCV or agreed plan value; independent recovery scenario"
+    },
+    "cost": {
+      "label": "Value leakage / enforcement costs",
+      "value": 0.05,
+      "tag": "A",
+      "unit": "%",
+      "source_or_reason": "5% illustrative cost before creditor distributions"
+    },
+    "hedges": {
+      "label": "Priority hedge / other claim reserve",
+      "value": 1500.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Termination claims unverified; assume ahead of super senior, relation requires legal review"
+    },
+    "class_a": {
+      "label": "Class A claim proxy",
+      "value": 16000.0,
+      "tag": "A",
+      "unit": "GBPm",
+      "source_or_reason": "Unverified round claim amount, not a reconciliation of statutory or covenant net debt"
+    }
+  },
+  "scope": [
+    "TWUL funding chain counted once",
+    "No verified current accessible cash or complete legal claims",
+    "Waterfall, equity valuation and March principal amount are explicit assumptions",
+    "Class B 5.9% is recovery, not ownership; new investment is a cash outflow"
+  ]
+}
