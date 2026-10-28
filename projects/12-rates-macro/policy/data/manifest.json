@@ -1,0 +1,43 @@
+{
+  "retrieved": "2026-10-28",
+  "archives": [
+    {
+      "file": "glcnominalddata.zip",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/glcnominalddata.zip?download=1",
+      "sha256": "bde171363edafb02bfbeb4c0f58dcbd1d40011d422f6f2b6199334b11adc7c8c"
+    },
+    {
+      "file": "oisddata.zip",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/oisddata.zip?download=1",
+      "sha256": "1847f6d19fd6acfd2beddd51ac9ed16791b9e9b9dac2e9dd503b6b1b091b8bc7"
+    },
+    {
+      "file": "latest.zip",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/latest-yield-curve-data.zip?download=1",
+      "sha256": "83fb33cc4a2dc35fa45a2b5d80eca3e64625c85460dd6263fe41eae1af8dc14b"
+    }
+  ],
+  "extraction": "2016-24 and 2025-present archives, current-month overrides; date >=2020, <=2026-10-27; percent continuous rates; annual forward 1y and spot 2/10y; snapshot OIS monthly spots and gilt half-year spots",
+  "fred": [
+    {
+      "series": "DEXUSUK",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSUK&cosd=2020-01-01&coed=2026-10-27",
+      "sha256": "6250a1f043a3636a77a693e8815dcbb837def91caa2701d731af3628d83240dd"
+    },
+    {
+      "series": "DEXUSEU",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU&cosd=2020-01-01&coed=2026-10-27",
+      "sha256": "c0f1f6dbcd30cf7f982e6bd95e5b98837b76f69acd49565167d1ac78c0a7a1c5"
+    },
+    {
+      "series": "SOFR",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&cosd=2020-01-01&coed=2026-10-27",
+      "sha256": "93bbe71759a7c2acde5acb3c6a6f62deabdff73c8e3dd052d892bb0c58b581dc"
+    },
+    {
+      "series": "ECBESTRVOLWGTTRMDMNRT",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=ECBESTRVOLWGTTRMDMNRT&cosd=2020-01-01&coed=2026-10-27",
+      "sha256": "6c72648ee79fc0ec3808421444b95a388f97e70d67ed410540f0b6d519f5c02c"
+    }
+  ]
+}
